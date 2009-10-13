@@ -32,7 +32,7 @@ class api{
 		
 		if($redirect){
 			if($this->verifySign($domain,md5($user.$domain),$sign)){
-				$userinfo = authenticate();
+				$userinfo = authenticate();				
 				if($userinfo && $userinfo['user']==$user){
 					if(strpos($return,'?')!==false) {
 						$return .= '&ticket='.$userinfo['ticket'];
@@ -62,7 +62,7 @@ class api{
 				}else{
 					 $msg['s'] = 300; 
 					 $msg['m'] = "Not Login!"; 
-			   		 $msg['d'] = $GLOBALS ["gSiteInfo"]['www_site_url']."/index.php/passport/login"; 
+			   		 $msg['d'] = $GLOBALS ["gSiteInfo"]['www_site_url']."/index.php?action=passport&view=login"; 
 				}
 				
 			}else{
@@ -93,7 +93,7 @@ class api{
 			}else{
 				$msg['s'] = 300; 
 				$msg['m'] = "Please  Relogin!"; 
-		   		$msg['d'] = $GLOBALS ["gSiteInfo"]['www_site_url']."/index.php/passport/login";
+		   		$msg['d'] = $GLOBALS ["gSiteInfo"]['www_site_url']."/index.php?action=passport&view=login";
 			}
 			
 		}else{

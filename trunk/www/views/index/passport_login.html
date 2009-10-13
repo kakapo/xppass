@@ -25,7 +25,7 @@ function checkOnSubmit(formName, r) {
 		mini.ajax.post(url, function(r){
 			var r = eval('(' + r + ')');   
 			if(r.s==200){
-				window.location.href = r.d;
+				window.location.replace(r.d);
 			}
 			if(r.s==400){
 				if(r.m=='reload') window.location.reload();

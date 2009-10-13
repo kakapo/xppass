@@ -67,7 +67,10 @@ class passport {
 					// log
 					//curl_get_content($GLOBALS ['gSiteInfo'] ['stats_site_url']."/loginlog.php?user=".$user_email."&userid=".$user ['user_id']);
 					
+					
 					if(!empty($forward)){
+						$forward .= (strpos($forward,'?')!==false)?"&":"?";
+						$forward .= "ticket=".session_id();
 						$msg = array('s'=> 200,'m'=>"ok",'d'=>$forward);				
 						exit(json_output($msg));
 						
@@ -187,13 +190,21 @@ class passport {
 		goback();
 	}
 	function view_logout() {
-		
-		setcookie ( 'Xppass_INFO', '', time () - 3600, '/', COOKIE_DOMAIN );
-		setcookie ( 'Xppass_TOKEN', '', time () - 3600, '/', COOKIE_DOMAIN );
-		setcookie ( 'Xppass_STATE', '', time () - 3600, '/', COOKIE_DOMAIN );
-		setcookie ( 'Xppass_IC_CARD', '', time () - 3600, '/', COOKIE_DOMAIN );
-		session_unset();
-		session_destroy();
+		if(SSO_MODE=='cookie'){
+			setcookie ( 'Xppass_INFO', '', time () - 3600, '/', COOKIE_DOMAIN );
+			setcookie ( 'Xppass_TOKEN', '', time () - 3600, '/', COOKIE_DOMAIN );
+			setcookie ( 'Xppass_STATE', '', time () - 3600, '/', COOKIE_DOMAIN );
+			setcookie ( 'Xppass_IC_CARD', '', time () - 3600, '/', COOKIE_DOMAIN );
+		}
+		if(SSO_MODE=='session'){		
+			unset($_SESSION['_XppassOnlineUser']);		
+		}
+		if(SSO_MODE=='ticket'){
+			unset($_SESSION['_XppassOnlineUser']);
+			include_once("PassportModel.class.php");
+			$passmod = new PassportModel();
+			$passmod->deleteTicketById(session_id());
+		}
 		redirect("/index.php/passport/login");
 	}
 	
@@ -226,11 +237,11 @@ class passport {
 	
 			$enc_info = encrypt ( json_encode($user_arr), $key );
 	
-			setcookie ( 'Xppass_TOKEN', $token, 0, '/', COOKIE_DOMAIN );
-			setcookie ( 'Xppass_STATE', urlencode ( $time . '|' . $user ['user'] . '|' . $key . '|**|' . $rand_str ), 0, '/', COOKIE_DOMAIN );
-			setcookie ( 'Xppass_INFO', $enc_info, 0, '/', COOKIE_DOMAIN );
-			setcookie ( 'Xppass_USERNAME' ,$user ['user'], time () + 3600 * 24 * 365 * 10, '/', COOKIE_DOMAIN);
-			setcookie ( 'Xppass_NICKNAME' ,urlencode($user ['user_nickname']), time () + 3600 * 24 * 365 * 10, '/', COOKIE_DOMAIN);
+			setcookie ( 'XPPASS_TOKEN', $token, 0, '/', COOKIE_DOMAIN );
+			setcookie ( 'XPPASS_STATE', urlencode ( $time . '|' . $user ['user'] . '|' . $key . '|**|' . $rand_str ), 0, '/', COOKIE_DOMAIN );
+			setcookie ( 'XPPASS_INFO', $enc_info, 0, '/', COOKIE_DOMAIN );
+			setcookie ( 'XPPASS_USERNAME' ,$user ['user'], time () + 3600 * 24 * 365 * 10, '/', COOKIE_DOMAIN);
+			setcookie ( 'XPPASS_NICKNAME' ,urlencode($user ['user_nickname']), time () + 3600 * 24 * 365 * 10, '/', COOKIE_DOMAIN);
 			if ($user ['autologin'] == 1) {			
 				$this->set_iccard($user);
 			}

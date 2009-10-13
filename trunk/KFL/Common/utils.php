@@ -73,10 +73,10 @@ function decrypt($s, $key='key')
 function authenticate(){
 	if(!defined('SSO_MODE')) define('SSO_MODE','session');
 	if(SSO_MODE=='cookie'){
-		if(!empty($_COOKIE['XPASS_TOKEN']) && !empty($_COOKIE['XPASS_STATE']) && !empty($_COOKIE['XPASS_INFO'])){
-			$token = $_COOKIE['XPASS_TOKEN'];
-			$state_txt = urldecode($_COOKIE['XPASS_STATE']);
-			$enc_info = $_COOKIE['XPASS_INFO'];
+		if(!empty($_COOKIE['XPPASS_TOKEN']) && !empty($_COOKIE['XPPASS_STATE']) && !empty($_COOKIE['XPPASS_INFO'])){
+			$token = $_COOKIE['XPPASS_TOKEN'];
+			$state_txt = urldecode($_COOKIE['XPPASS_STATE']);
+			$enc_info = $_COOKIE['XPPASS_INFO'];
 			list($login_time,$user,$key,,$rand_str) = explode('|',$state_txt);
 			
 			if($key==md5($user.$token.$login_time.$rand_str)){	
@@ -90,8 +90,8 @@ function authenticate(){
 		}
 	}
 	if(SSO_MODE=='session' || SSO_MODE=='ticket'){
-		if(isset($_SESSION['_XpassOnlineUser'])) 
-			return $_SESSION['_XpassOnlineUser'];
+		if(isset($_SESSION['_XppassOnlineUser'])) 
+			return $_SESSION['_XppassOnlineUser'];
 		else 
 			return false;
 	}

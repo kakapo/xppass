@@ -2,7 +2,7 @@
 include("config.php");
 include("XPassClient.class.php");
 $xpc = new XPassClient($private_key);
-$res = $xpc->isLogin('kakapo',true);
+$res = $xpc->isLogin('kakapo',1);
 
 if($res['s']==200){
 	$ticket = $res['d'];
