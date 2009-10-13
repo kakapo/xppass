@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title><?=$web_title?></title>
+<LINK href="<?=$www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+<script src="<?=$www_site_url?>/public/js/yav2.0/yav.js"></script>
+<? if(APP_LANG=='cn'){?>
+<script src="<?=$www_site_url?>/public/js/yav2.0/yav-config-zh-CN.js"></script>
+<? }?>
+<? if(APP_LANG=='en'){?>
+<script src="<?=$www_site_url?>/public/js/yav2.0/yav-config.js"></script>
+<? }?>
+<script src="<?=$www_site_url?>/public/js/md5.js"></script>
+<script src="<?=$www_site_url?>/public/js/ajax.js"></script>
+<SCRIPT>
+//only for test purposes
+var _key = "<?=$_XpassSignKey?>";
+function checkOnSubmit(formName, r) {
+  
+    if (yav.performCheck(formName, r, 'inline')) {
+    	document.getElementById(formName).password.value = hex_md5(document.getElementById(formName).password.value);
+    	document.getElementById(formName).s.value = hex_hmac_md5(_key,document.getElementById(formName).password.value);
+    	
+		var url = "<?=$www_site_url?>/index.php";
+		var params = mini.form.serialize($(formName));
+		mini.ajax.post(url, function(r){
+			var r = eval('(' + r + ')');   
+			if(r.s==200){
+				window.location.href = r.d;
+			}
+			if(r.s==400){
+				if(r.m=='reload') window.location.reload();
+				else $('msg').innerHTML = r.m;			
+			}
+		}, params);
+    	
+    	return false;
+    } 
+    return false;
+}
+function changeCode() {
+	var num = 	new Date().getTime();
+	var rand = Math.round(Math.random() * 10000);
+	num = num + rand;
+	document.getElementById("codeimg").src = "/index.php/identifycode/generate/" + num;
+	return false;
+}
+var rules=new Array();
+
+rules[0]='user|required|<?=$lang_passport['helpmsg1']?>';
+rules[1]='password|required|<?=$lang_passport['helpmsg2']?>';
+<? if($show_code){?>
+rules[2]='code|required|<?=$lang_passport['coderule']?>';
+<? }?>
+
+
+yav.addHelp('user', '<?=$lang_passport['helpmsg1']?>');
+yav.addHelp('password', '<?=$lang_passport['helpmsg2']?>');
+
+
+</SCRIPT>
+
+</head>
+<body onload="yav.init('loginform', rules);">
+<h1> <img src="<?=$www_site_url?>/public/images/xppass.png"><?=$web_title?></h1>
+<div id="msg" style="color: red"></div>
+<FORM name="loginform" id="loginform" method="POST" onsubmit="return checkOnSubmit('loginform', rules);" >
+<input type="hidden" name="action" value="passport">
+<input type="hidden" name="op" value="dologin">
+<input type="hidden" name="forward" value="<?=$forward?>">
+<input type="hidden" name="s" id="s" value="">
+<TABLE valign=top>
+
+<TR><TD width="80px"><?=$lang_passport['user']?>:</TD>
+<TD><div id="errorsDiv_user"></div><INPUT class="textfield" type="text" name="user" value="<?=$lang_passport['emailorusername']?>" onfocus="this.value='';"/>&nbsp;&nbsp;</TD></TR>
+<TR><TD><?=$lang_passport['pwd']?>:</TD>
+<TD><div id="errorsDiv_password"></div><INPUT class="textfield" type="password" name="password" />&nbsp;&nbsp;</TD></TR>
+<? if($show_code>3){?>
+<TR><TD></TD><TD></TD></TR>
+<TR><TD><?=$lang_passport['validatecode']?>:</TD>
+<TD><div id="errorsDiv_code"></div><INPUT class="textfield" type="text" name="code" style="width:60px" /><img id="codeimg" src="<?=$www_site_url?>/index.php/identifycode/generate" align="absmiddle" title="<?=$lang_passport['anotherone']?>" onClick="changeCode();" style="cursor:pointer"> <span onClick="changeCode();" style="cursor:pointer"><?=$lang_passport['notclear']?></span></TD></TR>
+<? }?>
+<TR><TD>&nbsp;</TD><TD><INPUT  class="checkbox" type="checkbox" name="remember" value="1"/> <?=$lang_passport['autologin']?>&nbsp;&nbsp;<span id="errorsDiv_remember"></span></TD></TR>
+
+<TR><TD colspan="2"><INPUT class="button" type=submit value="<?=$lang_passport['signon']?>" /> 
+<INPUT class="button" type="button" value="<?=$lang_passport['signup']?>" onclick="window.location.href='/index.php/passport/reg'" /> 
+<INPUT class="button" type="button" value="<?=$lang_passport['forgetpwd']?>" onclick="window.location.href='/index.php/passport/forget'" /></TD><TD></TD></TR>
+</TABLE>
+</form>
+</body>
+</html>
