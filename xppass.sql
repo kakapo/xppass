@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2009 年 10 月 10 日 09:44
+-- 生成日期: 2009 年 10 月 13 日 09:24
 -- 服务器版本: 5.0.51
 -- PHP 版本: 5.2.5
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `forget_pwd` (
   `start_ts` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 -- --------------------------------------------------------
 
@@ -103,4 +103,4 @@ CREATE TABLE IF NOT EXISTS `user_index` (
   `user` varchar(64) NOT NULL,
   PRIMARY KEY  (`user_id`),
   KEY `user` (`user`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;

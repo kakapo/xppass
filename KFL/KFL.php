@@ -109,6 +109,7 @@ class KFL
 	private function _getPageCacheRule(){
 		$cur_action = !empty($GLOBALS['gDispatcher'])?$GLOBALS['gDispatcher']:$this->mDefaultController;
 		if(isset($GLOBALS['gPageCache'])){
+			$_GET['view'] = !empty($_GET['view'])?$_GET['view']:'defaults';
 			foreach($GLOBALS['gPageCache'] as $rule){
 				if(isset($rule['action']) && $rule['action']==$cur_action)	{
 					if(isset($rule['view']) && ($rule['view']=='*')){ 
@@ -394,10 +395,12 @@ class View{
 	 */
 	public static function assignLanguage(){
 		global $tpl;
-		$langfile = APP_LANG_DIR."/".APP_LANG."/globals.php";
+		$selected_lang = !empty($_COOKIE['_Selected_Language'])?$_COOKIE['_Selected_Language']:APP_LANG; 
+		$langfile = APP_LANG_DIR."/".$selected_lang."/globals.php";
 		if(file_exists($langfile)){
 			include_once($langfile);
 			$tpl->assign($GLOBALS['gLang']);
+			$tpl->assign('selected_lang',$selected_lang);
 		}
 
 	}

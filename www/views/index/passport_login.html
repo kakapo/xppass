@@ -5,17 +5,15 @@
 <title><?=$web_title?></title>
 <LINK href="<?=$www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
 <script src="<?=$www_site_url?>/public/js/yav2.0/yav.js"></script>
-<? if(APP_LANG=='cn'){?>
-<script src="<?=$www_site_url?>/public/js/yav2.0/yav-config-zh-CN.js"></script>
-<? }?>
-<? if(APP_LANG=='en'){?>
-<script src="<?=$www_site_url?>/public/js/yav2.0/yav-config.js"></script>
-<? }?>
+
+<script src="<?=$www_site_url?>/public/js/yav2.0/yav-config-<?=$selected_lang?>.js"></script>
+
+
 <script src="<?=$www_site_url?>/public/js/md5.js"></script>
 <script src="<?=$www_site_url?>/public/js/ajax.js"></script>
 <SCRIPT>
 //only for test purposes
-var _key = "<?=$_XpassSignKey?>";
+var _key = "<?=$_XppassSignKey?>";
 function checkOnSubmit(formName, r) {
   
     if (yav.performCheck(formName, r, 'inline')) {
@@ -63,7 +61,7 @@ yav.addHelp('password', '<?=$lang_passport['helpmsg2']?>');
 
 </head>
 <body onload="yav.init('loginform', rules);">
-<h1> <img src="<?=$www_site_url?>/public/images/xppass.png"><?=$web_title?></h1>
+<? include_once("header.html")?>
 <div id="msg" style="color: red"></div>
 <FORM name="loginform" id="loginform" method="POST" onsubmit="return checkOnSubmit('loginform', rules);" >
 <input type="hidden" name="action" value="passport">
@@ -88,5 +86,6 @@ yav.addHelp('password', '<?=$lang_passport['helpmsg2']?>');
 <INPUT class="button" type="button" value="<?=$lang_passport['forgetpwd']?>" onclick="window.location.href='/index.php/passport/forget'" /></TD><TD></TD></TR>
 </TABLE>
 </form>
+<? include_once("footer.html")?>
 </body>
 </html>

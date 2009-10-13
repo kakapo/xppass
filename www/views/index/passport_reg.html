@@ -5,12 +5,9 @@
 <title><?=$web_title?></title>
 <LINK href="<?=$www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
 <script src="<?=$www_site_url?>/public/js/yav2.0/yav.js"></script>
-<? if(APP_LANG=='cn'){?>
-<script src="<?=$www_site_url?>/public/js/yav2.0/yav-config-zh-CN.js"></script>
-<? }?>
-<? if(APP_LANG=='en'){?>
-<script src="<?=$www_site_url?>/public/js/yav2.0/yav-config.js"></script>
-<? }?>
+
+<script src="<?=$www_site_url?>/public/js/yav2.0/yav-config-<?=$selected_lang?>.js"></script>
+
 <script src="<?=$www_site_url?>/public/js/ajax.js"></script>
 <SCRIPT>
 //only for test purposes
@@ -105,7 +102,7 @@ function changeCode() {
 
 </head>
 <body onload="yav.init('registerform', rules);">
-<h1><?=$web_title?></h1>
+<? include_once("header.html")?>
 <div id="msg" style="color: red"></div>
 <FORM name="registerform" id="registerform" method="POST" onsubmit="return checkOnSubmit('registerform', rules);" >
 <input type="hidden" name="action" value="passport">
@@ -195,5 +192,6 @@ function changeCode() {
 <INPUT class="button" type="button" value="<?=$lang_passport['back']?>" onclick="history.go(-1)"/></TD></TR>
 </TABLE>
 </form>
+<? include_once("footer.html")?>
 </body>
 </html>

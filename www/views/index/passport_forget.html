@@ -5,12 +5,10 @@
 <title><?=$web_title?></title>
 <LINK href="<?=$www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
 <script src="<?=$www_site_url?>/public/js/yav2.0/yav.js"></script>
-<? if(APP_LANG=='cn'){?>
-<script src="<?=$www_site_url?>/public/js/yav2.0/yav-config-zh-CN.js"></script>
-<? }?>
-<? if(APP_LANG=='en'){?>
-<script src="<?=$www_site_url?>/public/js/yav2.0/yav-config.js"></script>
-<? }?>
+
+<script src="<?=$www_site_url?>/public/js/yav2.0/yav-config-<?=$selected_lang?>.js"></script>
+
+
 <SCRIPT>
 //only for test purposes
 function checkOnSubmit(formName, r) {
@@ -31,7 +29,7 @@ yav.addHelp('user', '<?=$lang_passport['helpmsg1']?>');
 
 </head>
 <body onload="yav.init('forgetpwdform', rules);">
-<h1> <?=$web_title?></h1>
+<? include_once("header.html")?>
 <FORM name="forgetpwdform" method="POST" onsubmit="return checkOnSubmit('forgetpwdform', rules);" >
 <input type="hidden" name="action" value="passport">
 <input type="hidden" name="op" value="emailpwd">
@@ -44,5 +42,6 @@ yav.addHelp('user', '<?=$lang_passport['helpmsg1']?>');
 <INPUT class="button" type="button" value="<?=$lang_passport['back']?>" onclick="history.go(-1)"/></TD><TD></TD></TR>
 </TABLE>
 </form>
+<? include_once("footer.html")?>
 </body>
 </html>

@@ -4,8 +4,8 @@
 //					Application	Settings			//
 //////////////////////////////////////////////////////
 	define("APP_STATUS", "dev");
-	define("KFL_DIR", "D:/Xpassp/KFL");
-	define("APP_LANG", "en");
+	define("KFL_DIR", "D:/xppass/KFL");
+	define("APP_LANG", "zh-cn");
 	define("APP_TEMP_DIR", APP_DIR."/tmp/");
 	define("SSO_MODE", "ticket");
 	
@@ -91,7 +91,7 @@
 	$GLOBALS ["gPageCache"] ["index"] ["cachetime"]=  60;
 	$GLOBALS ["gPageCache"] ["index"] ["compressed"]=  1;
 	$GLOBALS ["gPageCache"] ["index"] ["action"]=  "index";
-	$GLOBALS ["gPageCache"] ["index"] ["view"]=  "*";
+	$GLOBALS ["gPageCache"] ["index"] ["view"]=  "help";
 	
 //////////////////////////////////////////////////////
 //				Session   Settings	                //
