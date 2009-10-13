@@ -70,6 +70,14 @@ $GLOBALS['gLang']['lang_passport']['emailsubject'] = "Get Back Password";
 $GLOBALS['gLang']['lang_passport']['emailcontent'] = ' Dear &lt; %s &gt; ：<br>
 				  You had applied for getting back your password! Please click the url and reset your new password! The url will be disabled after 60 minutes.<br>%s<br>%s';
 
-
-
+$GLOBALS['gLang']['lang_global']['web-title'] = "Welcome to &quot;Xppass&quot; Single Sign-on System!";
+$GLOBALS['gLang']['lang_global']['menu1'] = 'Index';
+$GLOBALS['gLang']['lang_global']['menu2'] = 'Sign-on';
+$GLOBALS['gLang']['lang_global']['menu3'] = 'Sign-up';
+$GLOBALS['gLang']['lang_global']['menu4'] = 'Administrator';
+$GLOBALS['gLang']['lang_global']['menu5'] = 'Help';
+$GLOBALS['gLang']['lang_global']['selectlanguage'] = 'Select Language';
+$GLOBALS['gLang']['lang_global']['zh-cn'] = 'Chinese (Simplified)';
+$GLOBALS['gLang']['lang_global']['zh-tw'] = 'Chinese (Traditional)';
+$GLOBALS['gLang']['lang_global']['en'] = 'English';
 ?>
