@@ -167,9 +167,11 @@ class PassportModel extends Model {
 		return $this->db->execute("replace into onlineuser (`ticket`,`user`,`data`,`expiry`) values (?,?,?,(UNIX_TIMESTAMP()+1440))",array($arr['ticket'],$arr['user'],$arr['data']));
 	}
 	public function deleteExpiryTicket(){
-		$this->db->execute("delete from onlineuser where expiry<UNIX_TIMESTAMP()");
-		
+		$this->db->execute("delete from onlineuser where expiry<UNIX_TIMESTAMP()");	
        	$this->db->execute('OPTIMIZE TABLE onlineuser');
+	}
+	public function deleteTicketById($ticket){
+		$this->db->execute("delete from onlineuser where ticket='$ticket'");
 	}
 	public function getTicketByUser($user){
 //		/echo "select ticket from onlineuser where user='$user' and expiry>UNIX_TIMESTAMP()";

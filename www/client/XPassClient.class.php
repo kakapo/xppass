@@ -86,7 +86,9 @@ class XPassClient{
 		list($head,$body) = explode("\r\n\r\n",$res);
 		
 		$msg = json_decode($body,true);
-		
+		if($msg['s']==300) {
+			$msg['d'] .= '&forward='.urlencode(selfURL());
+		}
 		return $msg;
 	}
 	/**
@@ -112,6 +114,10 @@ class XPassClient{
 		if($msg['s']==200){
 			$msg['d'] = $this->_decryptToken($msg['d']);			
 		}
+		if($msg['s']==300) {
+			$url = urlencode(selfURL());
+			$msg['d'] .= '&forward='.$url;
+		}
 		return $msg;
 	}
 	
@@ -124,6 +130,7 @@ function selfURL() {
     $protocol = strtolower($_SERVER["SERVER_PROTOCOL"]);
     $protocol = substr($protocol, 0, strpos($protocol, "/")).$s;
     $port = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":".$_SERVER["SERVER_PORT"]);
+    $_SERVER['REQUEST_URI'] = preg_replace("/(.*?)(ticket=[0-9a-f&]+)/i","\\1",$_SERVER['REQUEST_URI']);
 	return $protocol."://".$_SERVER['SERVER_NAME'].$port.$_SERVER['REQUEST_URI'];
 } 
 function hmac($key, $data, $hash="md5") {

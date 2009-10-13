@@ -7,7 +7,7 @@
 	define("KFL_DIR", "D:/xppass/KFL");
 	define("APP_LANG", "zh-cn");
 	define("APP_TEMP_DIR", APP_DIR."/tmp/");
-	define("SSO_MODE", "ticket");
+	define("SSO_MODE", "ticket");//cookie or session or ticket
 	
 //////////////////////////////////////////////////////
 //				Website Settings	                //
