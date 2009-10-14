@@ -102,8 +102,8 @@ class PassportModel extends Model {
 	
 		
 		//user table
-		$this->db->execute ( "insert into user_$tb_prefix (user_id,user,user_password,user_email,user_nickname,user_realname,user_sex,user_state,user_reg_time,user_reg_ip,user_lastlogin_time,user_lastlogin_ip,user_question,user_answer)
-		values ('{$user_id}','{$user['user']}','" . $user ['user_password'] . "','{$user['user_email']}','{$user['user_nickname']}','{$user['user_realname']}','{$user['user_sex']}',1,UNIX_TIMESTAMP(),'{$user['user_reg_ip']}',UNIX_TIMESTAMP(),'{$user['user_reg_ip']}','{$user['user_question']}','{$user['user_answer']}')" );
+		$this->db->execute ( "insert into user_$tb_prefix (user_id,user,user_password,user_email,user_nickname,user_sex,user_state,user_reg_time,user_reg_ip,user_lastlogin_time,user_lastlogin_ip,user_question,user_answer)
+		values ('{$user_id}','{$user['user']}','" . $user ['user_password'] . "','{$user['user_email']}','{$user['user_nickname']}','{$user['user_sex']}',1,UNIX_TIMESTAMP(),'{$user['user_reg_ip']}',UNIX_TIMESTAMP(),'{$user['user_reg_ip']}','{$user['user_question']}','{$user['user_answer']}')" );
 			
 		return $user_id;
 		

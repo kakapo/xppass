@@ -130,7 +130,8 @@ function selfURL() {
     $protocol = strtolower($_SERVER["SERVER_PROTOCOL"]);
     $protocol = substr($protocol, 0, strpos($protocol, "/")).$s;
     $port = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":".$_SERVER["SERVER_PORT"]);
-    $_SERVER['REQUEST_URI'] = preg_replace("/(.*?)(ticket=[0-9a-f&]+)/i","\\1",$_SERVER['REQUEST_URI']);
+    $_SERVER['REQUEST_URI'] = preg_replace("/(.*?)(ticket=[0-9a-f]+)/i","\\1",$_SERVER['REQUEST_URI']);
+    
 	return $protocol."://".$_SERVER['SERVER_NAME'].$port.$_SERVER['REQUEST_URI'];
 } 
 function hmac($key, $data, $hash="md5") {

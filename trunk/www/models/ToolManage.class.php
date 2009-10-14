@@ -30,7 +30,7 @@ class ToolManage extends Model{
 		$this->db->execute($sql_index);
 		
 		// create tables user_xx
-		$sql ="CREATE TABLE `__tblname__` ( `user_id` int(11) NOT NULL ,`user` varchar(64) NOT NULL,`user_password` char(32) NOT NULL,`user_email` varchar(64) NOT NULL,`user_nickname` varchar(12) NOT NULL,`user_realname` varchar(9) NOT NULL,`user_sex` tinyint(1) NOT NULL,
+		$sql ="CREATE TABLE `__tblname__` ( `user_id` int(11) NOT NULL ,`user` varchar(64) NOT NULL,`user_password` char(32) NOT NULL,`user_email` varchar(64) NOT NULL,`user_nickname` varchar(12) NOT NULL,`user_sex` tinyint(1) NOT NULL,
 `user_state` tinyint(1) NOT NULL,`user_reg_time` int(11) NOT NULL,`user_reg_ip` varchar(16) NOT NULL,`user_lastlogin_time` int(11) NOT NULL,`user_lastlogin_ip` varchar(16) NOT NULL,`user_question` VARCHAR( 128 ) NOT NULL,`user_answer` VARCHAR( 30 ) NOT NULL, PRIMARY KEY  (`user_id`),UNIQUE KEY `user` (`user`)) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
 		foreach ($prefixs as $v){
 			$tbl_name = "user_".$v;
