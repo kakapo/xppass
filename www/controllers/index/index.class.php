@@ -10,6 +10,7 @@ class index{
 			$msg = "Welcome ".$user['user_nickname']."  <a href='/index.php/passport/logout'>Logout</a>";
 			
 		}
+		$tpl->assign('user',$user);
 		$tpl->assign("name","It's a demo.");
 		$tpl->assign("msg",$msg);
     }

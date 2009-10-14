@@ -81,5 +81,9 @@ $GLOBALS['gLang']['lang_global']['zh-cn'] = '简体中文';
 $GLOBALS['gLang']['lang_global']['zh-tw'] = '繁体中文';
 $GLOBALS['gLang']['lang_global']['en'] = '英文';
 
+$GLOBALS['gLang']['lang_install']['new_step'] = '下一步';
+$GLOBALS['gLang']['lang_install']['old_step'] = '上一步';
+$GLOBALS['gLang']['lang_install']['not_continue'] = '请将以上红叉部分修正再试';
+
 
 ?>

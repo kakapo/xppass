@@ -16,10 +16,11 @@
 <li>
   <a <? if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='passport' && $_GET['view']=='reg') echo "class='active'";?> href="/index.php/passport/reg"><?=$lang_global['menu3']?></a> 
 </li>
-
+<? if(isset($user['user'])&&$user['user']=='admin'){?>
 <li>    
   <a href="/index.php/index/help"><?=$lang_global['menu4']?></a>
 </li>
+<?}?>
 <li>    
   <a href="/index.php/index/help"><?=$lang_global['menu5']?></a>
 </li>

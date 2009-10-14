@@ -70,6 +70,7 @@ class passport {
 					
 					if(!empty($forward)){
 						$forward .= (strpos($forward,'?')!==false)?"&":"?";
+						$forward = preg_replace("/(.*?)(&+)/i","\\1&",$forward);
 						$forward .= "ticket=".session_id();
 						$msg = array('s'=> 200,'m'=>"ok",'d'=>$forward);				
 						exit(json_output($msg));
@@ -310,7 +311,7 @@ class passport {
 		$_SESSION ['username'] = ! isset ( $_SESSION ['username'] ) ? '' : $_SESSION ['username'];
 		$_SESSION ['email'] = ! isset ( $_SESSION ['email'] ) ? '' : $_SESSION ['email'];
 		$_SESSION ['nickname'] = ! isset ( $_SESSION ['nickname'] ) ? '' : $_SESSION ['nickname'];
-		$_SESSION ['realname'] = ! isset ( $_SESSION ['realname'] ) ? '' : $_SESSION ['realname'];
+		
 
 		$forward=$GLOBALS ['gSiteInfo'] ['www_site_url']."/index.php/passport/regok";
 		if(isset($_GET ['forward'])) {
@@ -321,7 +322,6 @@ class passport {
 		$tpl->assign ( 'email', $_SESSION ['email'] );
 		$tpl->assign ( 'nickname', $_SESSION ['nickname'] );
 		$tpl->assign ( 'select_sex', $_SESSION ['sex'] );
-		$tpl->assign ( 'realname', $_SESSION ['realname'] );
 
 		$tpl->assign ( 'sponsor', $sponsor );
 		$tpl->assign ( 'forward', $forward );
@@ -339,8 +339,7 @@ class passport {
 		$reg_type = !empty($_POST['reg_type'])?$_POST['reg_type']:'';
 		$forward = ! empty ( $_POST ['forward'] ) ? $_POST ['forward'] : '';
 		$_POST ['sex'] = (isset($_POST ['sex']))?$_POST ['sex']:0;		
-		$_SESSION ['nickname'] = $_POST ['nickname'];
-		$_SESSION ['realname'] = $_POST ['realname'];
+		$_SESSION ['nickname'] = $_POST ['nickname'];		
 		$_SESSION ['sex'] = $_POST ['sex'];
 		
 		$pattern = "/^[a-zA-Z][a-zA-Z0-9_]{1,13}[a-zA-Z0-9]$/i";
@@ -411,7 +410,6 @@ class passport {
 		$user['user_password'] = PassportModel::encryptpwd($_POST ['password'],$user['user']);
 		$user['user_nickname'] = htmlspecialchars ( $_POST ['nickname'] );
 		$user['user_sex'] = $_POST ['sex'];
-		$user['user_realname'] = $_POST['realname'];
 		$user['user_reg_ip'] = getip();
 		
 
@@ -427,7 +425,6 @@ class passport {
 			$_SESSION ['sex'] = '';
 			$_SESSION ['username'] = '';
 			$_SESSION ['email'] = '';
-			$_SESSION ['realname'] = '';
 			$_SESSION ['nickname'] = '';
 			$_SESSION ['autologin'] = 0;			
 
