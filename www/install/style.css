@@ -3,8 +3,9 @@
 */
 
 /* common */
+
 *{ word-wrap:break-word; }
-body{ padding:5px 0; background:#FFF; text-align:center; }
+body{ padding:5px 0; background:#FFF; }
 body, td, input, textarea, select, button{ color:#666; font:12px Verdana, Tahoma, Arial, sans-serif; }
 ul, dl, dd, p, h1, h2, h3, h4, h5, h6, form, fieldset { margin:0; padding:0; }
 h1, h2, h3, h4, h5, h6{ font-size:12px; }
@@ -12,8 +13,9 @@ a{ color:#2366A8; text-decoration:none; }
 	a:hover { text-decoration:underline; }
 	a img{ border:none; }
 em, cite, strong, th{ font-style:normal; font-weight:normal; }
-table{ border-collapse:collapse; }
-
+table{ border-collapse:collapse; border:1px solid #ccc}
+#header{background:#fcfcfc url(images/header_bg.png) 0 100% repeat-x;height:6.82em;min-width:75em;}
+#footer{background:#fcfcfc url(images/header_bg.png) 0 100% repeat-x;height:4em;text-align:center;}
 /* box */
 .container{ overflow:hidden; margin:0 auto; width:700px; height:auto !important;text-align:left; border:1px solid #B5CFD9; }
 .header{ height:194px; background:url(images/bg_repx.gif) repeat-x; }
@@ -44,26 +46,11 @@ table{ border-collapse:collapse; }
 .txt{ width:200px; }
 
 /* step num */
-.setup{ margin:46px 0 0 200px; padding-left:70px; }
-	.setup h2{ padding-top:0; *padding-top:6px; color:#6CA1B4; font-size:36px; }
+.setup{ margin:20px auto; padding-left:70px; }
+	.setup h2{ padding-top:0; *padding-top:6px; color:#6CA1B4; font-size:24px; }
 	.setup p{ margin-left:6px; color:#999; }
-.step1{ background:url(images/stepnum.gif) no-repeat 0 8px; }
-.step2{ background:url(images/stepnum.gif) no-repeat 0 -92px;  }
-.step3{ background:url(images/stepnum.gif) no-repeat 0 -192px; }
-.step4{ background:url(images/stepnum.gif) no-repeat 0 -292px; }
 
-/* step status */
-.stepstat{ position:relative; bottom:-15px; left:80px; *width:593px; height:30px; }
-	.stepstatbg{ position:absolute; top:18px; z-index:90; width:535px; height:9px; overflow:hidden; background:#81C6F0 url(images/bg_stepstatus.gif) no-repeat; }
-	.stepstat ul{ position:absolute; top:3px; left:-2px; z-index:100; list-style:none; width:600px; white-space:nowrap; overflow:hidden; }
-		.stepstat li{ float:left; text-indent:-9999px; width:175px; height:30px; background:url(images/bg_repno.gif) no-repeat 0 -38px; }
-		.stepstat .current{ background:url(images/bg_repno.gif) no-repeat 0 -71px; }
-		.stepstat .unactivated{ background:url(images/bg_repno.gif) no-repeat 0 -103px; }
-		.stepstat .last{ width:20px; }
-.stepstat1{ background-position:-750px 0; }
-.stepstat2{ background-position:-570px 0; }
-.stepstat3{ background-position:-390px 0; }
-.stepstat4{ background-position:-210px 0; }
+
 
 /* file status */
 .w{ background:url(images/bg_repno.gif) no-repeat 45px -148px;  }
