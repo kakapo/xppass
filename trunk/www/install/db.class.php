@@ -7,10 +7,6 @@
 	$Id: db.class.php 16698 2008-11-14 07:58:56Z cnteacher $
 */
 
-if(!defined('IN_COMSENZ')) {
-	exit('Access Denied');
-}
-
 class dbstuff {
 	var $querynum = 0;
 	var $link;
@@ -134,7 +130,7 @@ class dbstuff {
 	}
 
 	function halt($message = '', $sql = '') {
-		api_msg('run_sql_error', $message.'<br /><br />'.$sql.'<br /> '.mysql_error(), 0);
+		show_msg('run_sql_error', $message.'<br /><br />'.$sql.'<br /> '.mysql_error(), 0);
 	}
 }
 

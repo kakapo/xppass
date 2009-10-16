@@ -23,7 +23,7 @@ table{ border-collapse:collapse; border:1px solid #ccc}
 	.header span { float: right; padding-right: 10px; }
 .main{ padding:20px 20px 0; background:#F7FBFE url(images/bg_repx.gif) repeat-x 0 -194px; }
 	.main h3{ margin:10px auto; width:75%; color:#6CA1B4; font-weight:700; }
-.desc{ margin:0 auto; width:537px; line-height:180%; clear:both; }
+.desc{ margin:10px 80px; width:537px; line-height:180%; clear:both; }
 	.desc ul{ margin-left:20px; }
 .desc1{ margin:10px 0; width:100%; }
 	.desc1 ul{ margin-left:25px; }

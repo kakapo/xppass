@@ -1,13 +1,13 @@
 <?php
-	
+	include_once('install.config.php');
 //////////////////////////////////////////////////////
 //					Application	Settings			//
 //////////////////////////////////////////////////////
 	define("APP_STATUS", "dev");
-	define("KFL_DIR", "D:/xppass/KFL");
 	define("APP_LANG", "zh-cn");
+	define("KFL_DIR", "D:/xppass/KFL");
 	define("APP_TEMP_DIR", APP_DIR."/tmp/");
-	define("SSO_MODE", "ticket");//cookie or session or ticket
+
 	
 //////////////////////////////////////////////////////
 //				Website Settings	                //
@@ -34,25 +34,7 @@
 		
 	date_default_timezone_set("Asia/Shanghai");
 	
-//////////////////////////////////////////////////////
-//				Database   Settings	                //
-//////////////////////////////////////////////////////		
-		
-	$GLOBALS ["gDataBase"] ["db_kakapo"] = array (
-  'dbname' => 'kakapo',
-  'type' => 'mysql',
-  'host' => 'localhost',
-  'port' => '3306',
-  'user' => 'kakapo',
-  'passwd' => '123456',
-  'charset' => 'utf8',
-);
-	$GLOBALS ["gDataBase"] ["db_setting.db3"] = array (
-  'dbname' => 'setting.db3',
-  'type' => 'sqlite',
-  'path' => APP_DIR."/../Admin/config",
-);
-	
+
 //////////////////////////////////////////////////////
 //				Memcached  Settings	                //
 //////////////////////////////////////////////////////		
