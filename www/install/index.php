@@ -604,7 +604,7 @@ function db_init(){
 	$multitable = $_SESSION['multitable'];
 	$config = "<?php \r\ndefine('SSO_MODE', '{$_SESSION['sso_mode']}');\r\n";
 	$config .= "define('MULTI_TABLE', '{$_SESSION['multitable']}');\r\n";
-	$config .= '$GLOBALS ["gDataBase"] ["'.$dbname.'"] = array (
+	$config .= '$GLOBALS ["gDataBase"] ["db_'.$dbname.'"] = array (
   "dbname" => "'.$dbname.'",
   "type" => "mysql",
   "host" => "'.$dbinfo['dbhost'].'",

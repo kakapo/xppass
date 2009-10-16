@@ -1,7 +1,7 @@
 <?php 
 define('SSO_MODE', 'ticket');
 define('MULTI_TABLE', '0');
-$GLOBALS ["gDataBase"] ["xppass"] = array (
+$GLOBALS ["gDataBase"] ["db_xppass"] = array (
   "dbname" => "xppass",
   "type" => "mysql",
   "host" => "localhost",

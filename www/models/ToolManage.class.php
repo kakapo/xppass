@@ -1,7 +1,7 @@
 <?php
 class ToolManage extends Model{
 	public function __construct(){
-		$this->db = parent::dbConnect($GLOBALS ["gDataBase"] ["db_kakapo"]);
+		$this->db = parent::dbConnect($GLOBALS ["gDataBase"] ["db_xppass"]);
 	}
 	
 	private function _genPrefix(){
