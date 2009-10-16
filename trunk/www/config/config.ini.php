@@ -1,5 +1,5 @@
 <?php
-	include_once('install.config.php');
+	if(file_exists(dirname(__FILE__).'/install.ini.php')) include_once('install.ini.php'); else exit("Access Deny!");
 //////////////////////////////////////////////////////
 //					Application	Settings			//
 //////////////////////////////////////////////////////

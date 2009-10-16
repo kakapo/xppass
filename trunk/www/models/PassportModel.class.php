@@ -1,7 +1,7 @@
 <?php
 class PassportModel extends Model {
 	public function __construct(){
-		$this->db = parent::dbConnect($GLOBALS ["gDataBase"] ["db_kakapo"]);
+		$this->db = parent::dbConnect($GLOBALS ["gDataBase"] ["db_xppass"]);
 	}
 	static public function encryptpwd($pwd,$user,$pwd_had_md5=0){
 		if($pwd_had_md5) 
