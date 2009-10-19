@@ -76,6 +76,7 @@ $GLOBALS['gLang']['lang_global']['menu2'] = 'Sign-on';
 $GLOBALS['gLang']['lang_global']['menu3'] = 'Sign-up';
 $GLOBALS['gLang']['lang_global']['menu4'] = 'Administrator';
 $GLOBALS['gLang']['lang_global']['menu5'] = 'Help';
+$GLOBALS['gLang']['lang_global']['menu6'] = 'Sign-out';
 $GLOBALS['gLang']['lang_global']['selectlanguage'] = 'Select Language';
 $GLOBALS['gLang']['lang_global']['zh-cn'] = 'Chinese (Simplified)';
 $GLOBALS['gLang']['lang_global']['zh-tw'] = 'Chinese (Traditional)';

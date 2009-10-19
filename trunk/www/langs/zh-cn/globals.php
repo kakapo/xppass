@@ -76,6 +76,7 @@ $GLOBALS['gLang']['lang_global']['menu2'] = '登录';
 $GLOBALS['gLang']['lang_global']['menu3'] = '注册新用户';
 $GLOBALS['gLang']['lang_global']['menu4'] = '系统管理';
 $GLOBALS['gLang']['lang_global']['menu5'] = '帮助';
+$GLOBALS['gLang']['lang_global']['menu6'] = '退出';
 $GLOBALS['gLang']['lang_global']['selectlanguage'] = '选择语言';
 $GLOBALS['gLang']['lang_global']['zh-cn'] = '简体中文';
 $GLOBALS['gLang']['lang_global']['zh-tw'] = '繁体中文';
@@ -89,7 +90,7 @@ $GLOBALS['gLang']['lang_install'] = array(
 	'EN_ISO' => 'ENGLISH ISO8859',
 	'EN_UTF8' => 'ENGLIST UTF-8',
 
-	'title_install' => SOFT_NAME.' 安装向导',
+	'title_install' => ' 安装向导',
 	'agreement_yes' => '我同意',
 	'agreement_no' => '我不同意',
 	'notset' => '不限制',
@@ -142,11 +143,11 @@ $GLOBALS['gLang']['lang_install'] = array(
 	'tips_dbinfo' => '填写数据库信息',
 	'tips_dbinfo_comment' => '',
 	'tips_admininfo' => '填写管理员信息',
-	'step_ext_info_title' => '安装成功',
-	'step_ext_info_comment' => '点击进入登陆',
+	'step_install_check_title' => '安装成功',
+	'step_install_check_desc' => '点击进入登陆',
 
 	'ext_info_succ' => '安装成功',
-	'install_locked' => '安装锁定，已经安装过了，如果您确定要重新安装，请到服务器上删除<br /> '.str_replace(ROOT_PATH, '', $lockfile),
+	'install_locked' => '安装锁定，已经安装过了，如果您确定要重新安装，请到服务器上删除<br />/config/install.lock ',
 	'error_quit_msg' => '您必须解决以上问题，安装才可以继续',
 
 	'step_set_params_title' => '设置运行环境',
@@ -183,8 +184,8 @@ $GLOBALS['gLang']['lang_install'] = array(
 	'sso_mode' => '解决方案',
 	'ssomode_label' => '在线用户数据存储和共享方式',
 	'ssomode_invalid' => '选择一种方案，可修改。',
-	'multitable' => '用户分表',
-	'multitable_label' => '将用户数据分散存储，默认数256',
+	'multitable' => '是否分表',
+	'multitable_label' => '将用户数据分散存储，默认数256个',
 	'multitable_invalid' => '',
 
 	'dbinfo_dbhost_invalid' => '数据库服务器为空，或者格式错误，请检查',
@@ -241,14 +242,13 @@ $GLOBALS['gLang']['lang_install'] = array(
 	'init_link_note' => '提供最新 XPpass 产品新闻、软件下载与技术交流',
 
 	'license' => '<div class="license">
-	<h1>BSD许可证</h1>
+	<h1>XPpass 安装许可证</h1>
 
 <h3>感谢您选择 XPpass 单点登录系统。</h3>
 
 <p>Copyright (c) 2009 著作权由wuzhongshen (kakapowu@gmail.com)所有。著作权人保留一切权利。</p>
 
-<p>这份授权条款，在使用者符合以下三条件的情形下，授予使用者使用及再散播本
-软件包装原始码及二进位可执行形式的权利，无论此包装是否经改作皆然：<p>
+<p>这份授权条款，在使用者符合以下三条件的情形下，授予使用者使用及再散播本软件原代码及二进位代码的权利，无论此包装是否经改作皆然：<p>
 <ol>
 <li> 对于本软件源代码的再散播，必须保留上述的版权宣告、此三条件表列，以及下述的免责声明。</li>
 <li> 对于本套件二进位可执行形式的再散播，必须连带以文件以及／或者其他附于散播包装中的媒介方式，重制上述之版权宣告、此三条件表列，以及下述的免责声明。</li>

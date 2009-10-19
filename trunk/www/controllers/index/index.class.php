@@ -7,8 +7,7 @@ class index{
 		$user = authenticate();	
 		$msg = '';	
 		if($user){
-			$msg = "Welcome ".$user['user_nickname']."  <a href='/index.php/passport/logout'>Logout</a>";
-			
+			$msg = "Welcome ".$user['user_nickname']."";
 		}
 		$tpl->assign('user',$user);
 		$tpl->assign("name","It's a demo.");

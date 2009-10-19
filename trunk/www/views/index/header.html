@@ -24,5 +24,10 @@
 <li>    
   <a href="/index.php/index/help"><?=$lang_global['menu5']?></a>
 </li>
+<? if(isset($user) && $user['user']){?>
+<li>    
+  <a href="/index.php/passport/logout"><?=$lang_global['menu6']?></a>
+</li>
+<? }?>
 </ul>  
 </div>
