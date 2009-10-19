@@ -12,14 +12,30 @@ define('VIEW_OFF', $view_off ? TRUE : FALSE);
 include_once(ROOT_PATH.'/langs/'.LANG.'/globals.php');
 include_once(ROOT_PATH.'/install/db.class.php');
 $sqlfile = ROOT_PATH.'./install/xppass.sql';
+$lockfile = ROOT_PATH.'./config/install.lock';
+$allow_method = array('show_license', 'env_check', 'set_params', 'db_init','install_check');
 
-$allow_method = array('show_license', 'env_check', 'set_params', 'db_init');
+$step = intval(getgpc('step', 'R')) ? intval(getgpc('step', 'R')) : 0;
+$method = getgpc('method');
+
+if(empty($method) || !in_array($method, $allow_method)) {
+	$method = isset($allow_method[$step]) ? $allow_method[$step] : '';
+}
+
+if(empty($method)) {
+	show_msg('method_undefined', $method, 0);
+}
+
+
 
 if(!ini_get('short_open_tag')) {
+	show_header();
 	show_msg('short_open_tag_invalid', '', 0);
 } elseif(file_exists($lockfile)) {
+	show_header();
 	show_msg('install_locked', '', 0);
 } elseif(!class_exists('dbstuff')) {
+	show_header();
 	show_msg('database_nonexistence', '', 0);
 }
 
@@ -30,14 +46,7 @@ define('INSTALL_LOCKED', 3);
 define('DATABASE_NONEXISTENCE', 4);
 define('PHP_VERSION_TOO_LOW', 5);
 define('MYSQL_VERSION_TOO_LOW', 6);
-define('UC_URL_INVALID', 7);
-define('UC_DNS_ERROR', 8);
-define('UC_URL_UNREACHABLE', 9);
-define('UC_VERSION_INCORRECT', 10);
-define('UC_DBCHARSET_INCORRECT', 11);
-define('UC_API_ADD_APP_ERROR', 12);
-define('UC_ADMIN_INVALID', 13);
-define('UC_DATA_INVALID', 14);
+
 define('DBNAME_INVALID', 15);
 define('DATABASE_ERRNO_2003', 16);
 define('DATABASE_ERRNO_1044', 17);
@@ -370,7 +379,7 @@ function show_msg($error_no, $error_msg = 'ok', $success = 1, $quit = TRUE) {
 		if($step > 0) {
 			echo "<div class=\"desc\"><b>$title</b><ul>$comment</ul>";
 		} else {
-			echo "</div><div class=\"main\" style=\"margin-top: -123px;\"><b>$title</b><ul style=\"line-height: 200%; margin-left: 30px;\">$comment</ul>";
+			echo "<div class=\"main\" ><b>$title</b><ul style=\"line-height: 200%; margin-left: 30px;\">$comment</ul>";
 		}
 
 		if($quit) {
@@ -380,8 +389,7 @@ function show_msg($error_no, $error_msg = 'ok', $success = 1, $quit = TRUE) {
 		echo '<input type="button" onclick="history.back()" value="'.lang('click_to_back').'" /><br /><br /><br />';
 
 		echo '</div>';
-
-		$quit;
+		$quit && show_footer();
 	}
 }
 function runquery($sql) {
@@ -513,6 +521,7 @@ EOT;
 	}
 }
 function set_params(){
+	global $ssomode;
 	$error_msg = array();
 	$submit = getgpc('submitname','p');
 	if($submit){
@@ -537,12 +546,16 @@ function set_params(){
 				$error = mysql_error();
 				if($errno == 1045) {
 					show_msg('database_errno_1045', $error, 0);
+					die;
 				} elseif($errno == 2003) {
 					show_msg('database_errno_2003', $error, 0);
+					die;
 				} else {
 					show_msg('database_connect_error', $error, 0);
+					die;
 				}
 			}
+			
 			if(mysql_get_server_info() > '4.1') {
 				mysql_query("CREATE DATABASE IF NOT EXISTS `$dbname` DEFAULT CHARACTER SET UTF8");
 			} else {
@@ -551,6 +564,7 @@ function set_params(){
 
 			if(mysql_errno()) {
 				show_msg('database_errno_1044', mysql_error(), 0);
+				die;
 			}
 			mysql_close();
 			
@@ -596,7 +610,7 @@ function createNewUser($user) {
 
 	}
 function db_init(){
-	global $sqlfile,$db,$multitable;;
+	global $sqlfile,$db,$multitable,$step,$lockfile;
 	if(!isset($_SESSION['dbinfo'])) header("location: index.php?step=2");
 	$dbname = $_SESSION['dbinfo']['dbname'];
 	$dbinfo = $_SESSION['dbinfo'];
@@ -642,12 +656,63 @@ function db_init(){
 		
 		VIEW_OFF && show_msg('initdbresult_succ');
 
+		$step++;
+		
 		if(!VIEW_OFF) {
 			echo '<script type="text/javascript">document.getElementById("laststep").disabled=false;document.getElementById("laststep").value = \''.lang('install_succeed').'\';</script>'."\r\n";
 			
 		}
 }
-
+function check_db($dbhost, $dbuser, $dbpw, $dbname,$multitable) {
+	if(!function_exists('mysql_connect')) {
+		show_msg('undefine_func', 'mysql_connect', 0);
+	}
+	if(!@mysql_connect($dbhost, $dbuser, $dbpw)) {
+		$errno = mysql_errno();
+		$error = mysql_error();
+		if($errno == 1045) {
+			show_msg('database_errno_1045', $error, 0);
+		} elseif($errno == 2003) {
+			show_msg('database_errno_2003', $error, 0);
+		} else {
+			show_msg('database_connect_error', $error, 0);
+		}
+	} else {
+		if($query = mysql_query("SHOW TABLES FROM $dbname")) {
+			$i =0;
+			while($row = mysql_fetch_row($query)) {
+				$i++;
+//				if(preg_match("/^$tablepre/", $row[0])) {
+//					return false;
+//				}
+			}
+			
+			if($multitable && $i!=261) return false;
+			if(!$multitable && $i!=6) return false;
+		}
+	}
+	return true;
+}
+function install_check(){
+	global $lockfile;
+	@touch($lockfile);
+	
+	$dbname = $_SESSION['dbinfo']['dbname'];
+	$dbinfo = $_SESSION['dbinfo'];
+	$multitable = $_SESSION['multitable'];
+	extract($dbinfo);
+	session_destroy();
+	if(check_db($dbhost, $dbuser, $dbpw, $dbname,$multitable)) {
+		show_msg('tablepre_not_exists', 0);
+	} else {
+		echo '<script>window.location.href="/index.php";</script>';
+	}
+		
+	
+	
+	
+}
+function show_header(){
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -664,25 +729,15 @@ function db_init(){
 <img src="/public/images/xppass.png"><span style="font-size:16px"><b><?=lang('install_wizard')?></b></span> 
 
 </div>
+<?}?>
+
+
 
 <?php
-$step = intval(getgpc('step', 'R')) ? intval(getgpc('step', 'R')) : 0;
-$method = getgpc('method');
 
-if(empty($method) || !in_array($method, $allow_method)) {
-	$method = isset($allow_method[$step]) ? $allow_method[$step] : '';
-}
 
-if(empty($method)) {
-	show_msg('method_undefined', $method, 0);
-}
-
+show_header();
 $step > 0 && show_step($step);
-?>
-
-<?php
-
-
 switch ($step){
 	case 0:
 		show_license();
@@ -701,7 +756,7 @@ switch ($step){
 		db_init();
 		break;
 	case 4:
-		ok();
+		install_check();
 	
 }
 
@@ -719,9 +774,9 @@ switch ($step){
 		<?=lang('sso_mode')?>:
 		</th>
 		<td>
-		<label><input type="radio" name="ssomode" value="cookie"> Cookie</label>
-		<label><input type="radio" name="ssomode" value="session"> Session</label>
-		<label><input type="radio" name="ssomode" value="ticket"> Ticket</label>
+		<label><input type="radio" name="ssomode" value="cookie" <? if($ssomode=='cookie') echo 'checked';?>> Cookie</label>
+		<label><input type="radio" name="ssomode" value="session" <? if($ssomode=='session') echo 'checked';?>> Session</label>
+		<label><input type="radio" name="ssomode" value="ticket" <? if($ssomode=='ticket') echo 'checked';?>> Ticket</label>
 		</td>
 		<td>
 		<?=lang('ssomode_label')?>
@@ -785,6 +840,9 @@ switch ($step){
 </form>
 <? }?>
 <?php
+
+show_footer();
+
 function show_install() {
 	if(VIEW_OFF) return;
 ?>
@@ -793,7 +851,7 @@ function showmessage(message) {
 	document.getElementById('notice').value += message + "\r\n";
 }
 function initinput() {
-	window.location='<?php echo 'index.php?step='.($GLOBALS['step']);?>';
+	window.location='<?php echo 'index.php?step='.($GLOBALS['step']+1);?>';
 }
 </script>
 	<div class="main">
@@ -802,8 +860,13 @@ function initinput() {
 	<input type="button" name="submit" value="<?=lang('install_in_processed')?>" disabled style="height: 25" id="laststep" onclick="initinput()">
 	</div>
 <?php
-}?>
+}
+function show_footer(){
+?>
+
+
 <p>&nbsp;</p>
 <div id="footer">Powered by <a href="http://kfl.googlecode.com" target="_blank">KFL Framework</a> <br>Since 2009.10</div>
 </body>
 </html>
+<? exit();}?>

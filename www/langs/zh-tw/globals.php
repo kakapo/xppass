@@ -76,6 +76,7 @@ $GLOBALS['gLang']['lang_global']['menu2'] = '登錄';
 $GLOBALS['gLang']['lang_global']['menu3'] = '注冊新用戶';
 $GLOBALS['gLang']['lang_global']['menu4'] = '系統管理';
 $GLOBALS['gLang']['lang_global']['menu5'] = '幫助';
+$GLOBALS['gLang']['lang_global']['menu6'] = '退出';
 $GLOBALS['gLang']['lang_global']['selectlanguage'] = '選擇語言';
 $GLOBALS['gLang']['lang_global']['zh-cn'] = '簡體中文';
 $GLOBALS['gLang']['lang_global']['zh-tw'] = '繁體中文';
