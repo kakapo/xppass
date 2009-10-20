@@ -21,15 +21,15 @@
 <p>4、实现安全登录技术，采用密码MD5加密传输和hmac身份验证。</p>
 <p>5、提供自动安装程序。</p>
 <p>6、支持多语言版本。</p>
-<TABLE width="90%" border=0 cellspacing="1" bgcolor="#ccc" cellpadding="2" style="font-size:12px">
-  <TR bgcolor="#eee">
+<TABLE width="90%" border=0 cellspacing="1" cellpadding="2" style="border:1px #ccc solid">
+  <TR>
 	<TD height="30px"></TD>
 	<TD>非跨域名Cookie方案</TD>
 	<TD>非跨域名Session方案</TD>
 	<TD>跨域名Ticket方案</TD>
   </TR>
-  <TR bgcolor="#fff" valign="top">
-	<TD width="50px" bgcolor="#eee">思路</TD>
+  <TR valign="top">
+	<TD width="50px">思路</TD>
 	<TD ><ul><li>采用浏览器客户端的cookie存储在线用户信息数据</li>
 <li>用户信息数据加密存储和传输</li>
 <li>子域名应用程序共享解密方法和密码</li>
@@ -57,14 +57,14 @@
 <ul>
 </TD>
   </TR>
-  <TR bgcolor="#fff" valign="top">
-	<TD bgcolor="#eee">优点</TD>
+  <TR valign="top">
+	<TD >优点</TD>
 	<TD>机制简单，避免了webserver集群造成的会话数据同步问题。有一定的安全性。</TD>
 	<TD>安全性高。能解决webserver集群的会话数据共享问题。</TD>
 	<TD>实现跨域，安全性高</TD>
   </TR>
-  <TR bgcolor="#fff" valign="top">
-	<TD bgcolor="#eee">缺点</TD>
+  <TR valign="top">
+	<TD>缺点</TD>
 	<TD>cookie存取的数据量有限。无法跨域。</TD>
 	<TD>无法跨域。稍微复杂，采用数据库有瓶颈问题要解决，采用memcached需要部署memcached服务器。</TD>
 	<TD>复杂，需要开发客户端插件。</TD>

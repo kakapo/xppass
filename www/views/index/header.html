@@ -1,5 +1,5 @@
 <div id="header">
-<img src="<?=$www_site_url?>/public/images/xppass.png"><?=$lang_global['web-title']?>
+<img src="<?=$www_site_url?>/public/images/xppass.gif"><?=$lang_global['web-title']?>
 <div id="language"><?=$lang_global['selectlanguage']?>:<select name="select_lang" onchange="window.location.href='<?=$www_site_url?>/index.php/index/setlang/'+this.options[this.selectedIndex].value">
 <option value="zh-cn" <?if($selected_lang=='zh-cn') echo "selected"; ?>><?=$lang_global['zh-cn']?></option>
 <option value="zh-tw" <?if($selected_lang=='zh-tw') echo "selected"; ?>><?=$lang_global['zh-tw']?></option>
@@ -18,7 +18,7 @@
 </li>
 <? if(isset($user['user_id'])&&$user['user_id']=='1'){?>
 <li>    
-  <a href="/index.php/index/help"><?=$lang_global['menu4']?></a>
+  <a href="/admin.php"><?=$lang_global['menu4']?></a>
 </li>
 <?}?>
 <li>    
