@@ -13,7 +13,7 @@ a{ color:#2366A8; text-decoration:none; }
 	a:hover { text-decoration:underline; }
 	a img{ border:none; }
 em, cite, strong, th{ font-style:normal; font-weight:normal; }
-table{ border-collapse:collapse; border:1px solid #ccc}
+table{ border-collapse:collapse;}
 #header{background:#fcfcfc url(images/header_bg.png) 0 100% repeat-x;height:6.82em;min-width:75em;}
 #footer{background:#fcfcfc url(images/header_bg.png) 0 100% repeat-x;height:4em;text-align:center;}
 /* box */
