@@ -1,0 +1,14 @@
+<div id="header">
+<img src="<?=$www_site_url?>/public/images/xppass.gif"><?=$lang_global['web-title']?>
+<div id="language">
+<span>Hello! <?=$user['user_nickname']?>. [<a href="/index.php/passport/logout"><?=$lang_global['menu6']?></a>]</span>
+<?=$lang_global['selectlanguage']?>:<select name="select_lang" onchange="window.location.href='<?=$www_site_url?>/index.php/index/setlang/'+this.options[this.selectedIndex].value">
+<option value="zh-cn" <?if($selected_lang=='zh-cn') echo "selected"; ?>><?=$lang_global['zh-cn']?></option>
+<option value="zh-tw" <?if($selected_lang=='zh-tw') echo "selected"; ?>><?=$lang_global['zh-tw']?></option>
+<option value="en" <?if($selected_lang=='en') echo "selected"; ?>><?=$lang_global['en']?></option>
+</select>
+
+</div>
+
+</div>
+

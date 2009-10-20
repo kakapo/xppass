@@ -332,7 +332,7 @@ class passport {
 	function view_regok() {
 		
 		show_message($GLOBALS['gLang']['lang_passport']['registered']);
-		redirect("index.php");
+		redirect($GLOBALS ['gSiteInfo'] ['www_site_url']. '/index.php');
 	}
 	function op_saveuser() {
 		$msg = '';
@@ -566,7 +566,8 @@ class passport {
 		if ($row) {		
 			if (false!=$passmod->updatePassByUser ( $row['user'], PassportModel::encryptpwd( $new1,$row['user']) )) {
 				$passmod->updateForgetPwd($row['user']);
-				show_message_goback($GLOBALS['gLang']['lang_passport']['pwdreset']);;
+				show_message($GLOBALS['gLang']['lang_passport']['pwdreset']);
+				redirect ( $GLOBALS ['gSiteInfo'] ['www_site_url'].'/index.php/passport/login' );
 			} else {
 				show_message_goback($GLOBALS['gLang']['lang_passport']['failture']);
 			}
