@@ -15,11 +15,12 @@
 
 
 <p>主要特点:</p>
-<p>1、提供三种解决方案，根据需求任选其一。</p>
+<p>1、提供三种解决方案Cookie方案、Session方案和Ticket方案，根据需求任选其一。</p>
 <p>2、可采用哈希分表设计，支持亿万级别用户数据量存储。</p>
 <p>3、提供用户名和电子邮箱两种互补注册方式。</p>
 <p>4、实现安全登录技术，采用密码MD5加密传输和hmac身份验证。</p>
-<p>5、支持多语言版本。</p>
+<p>5、提供自动安装程序。</p>
+<p>6、支持多语言版本。</p>
 <TABLE width="90%" border=0 cellspacing="1" bgcolor="#ccc" cellpadding="2" style="font-size:12px">
   <TR bgcolor="#eee">
 	<TD height="30px"></TD>
@@ -51,7 +52,6 @@
 <li>应用服务通过SSO client 插件,再次带上ticket，domain和signature(此时signature由 ticket加密得到)访问 SSO Server，SSO Server先进行授权判断，然后返回加密的用户token数据。
 </li>
 <li>用户信息数据是加密传输，SSO client 插件通过private key解密token数据。
-  （景点需要安装解密系统）
 </li>
 <li>如果用户已经在步骤 3 登录过了，则跳过此步骤。</li>
 <ul>
