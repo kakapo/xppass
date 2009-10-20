@@ -1,7 +1,7 @@
 <?php
 class PassportModel extends Model {
 	public function __construct(){
-		$this->db = parent::dbConnect($GLOBALS ["gDataBase"] ["db_xppass"]);
+		$this->db = parent::dbConnect($GLOBALS ["gDataBase"] ["db"]);
 	}
 	static public function encryptpwd($pwd,$user,$pwd_had_md5=0){
 		if($pwd_had_md5) 
@@ -27,8 +27,8 @@ class PassportModel extends Model {
 	}
 
 	private function _getTblPrefix($user){
-		$tb_prefix = '00';
-		if(isset($multi_tbl) && $multi_tbl==true) $tb_prefix = substr(md5($user),0,2);
+		$tb_prefix = '';
+		if(MULTI_TABLE==1) $tb_prefix = "_".substr(md5($user),0,2);
 		return $tb_prefix;
 	}
 
@@ -38,16 +38,15 @@ class PassportModel extends Model {
 
 	public function updateUser($item,$user_id,$user){
 		$tb_prefix = $this->_getTblPrefix($user);	
-		$this->db->update($item,"user_".$tb_prefix," user_id=".$user_id);
+		$this->db->update($item,"user".$tb_prefix," user_id=".$user_id);
 	}
 	
 	public function getUserById($user_id,$user){
 		$tb_prefix = $this->_getTblPrefix($user);
 		
-		return $this->db->getRow("select * from user_$tb_prefix where user_id='$user_id'");
+		return $this->db->getRow("select * from user$tb_prefix where user_id='$user_id'");
 	}
 	public function getUser($user){
-		$tb_prefix = $this->_getTblPrefix($user);
 		return $this->db->getRow("select * from user_index where user='$user'");
 	}
 	
@@ -92,7 +91,7 @@ class PassportModel extends Model {
 	 */
 	public function createNewUser($user) {
 	
-		$res = $this->db->execute("insert into user_index (`user`) values ('{$user['user']}')");
+		$res = $this->db->execute("insert into user_index (`user`,`user_nickname`,`user_reg_time`) values ('{$user['user']}','{$user['user_nickname']}',UNIX_TIMESTAMP())");
 		if(!$res) return false;
 
 		$user_id = $this->db->getOne("select last_insert_id() from user_index");
@@ -102,7 +101,7 @@ class PassportModel extends Model {
 	
 		
 		//user table
-		$this->db->execute ( "insert into user_$tb_prefix (user_id,user,user_password,user_email,user_nickname,user_sex,user_state,user_reg_time,user_reg_ip,user_lastlogin_time,user_lastlogin_ip,user_question,user_answer)
+		$this->db->execute ( "insert into user$tb_prefix (user_id,user,user_password,user_email,user_nickname,user_sex,user_state,user_reg_time,user_reg_ip,user_lastlogin_time,user_lastlogin_ip,user_question,user_answer)
 		values ('{$user_id}','{$user['user']}','" . $user ['user_password'] . "','{$user['user_email']}','{$user['user_nickname']}','{$user['user_sex']}',1,UNIX_TIMESTAMP(),'{$user['user_reg_ip']}',UNIX_TIMESTAMP(),'{$user['user_reg_ip']}','{$user['user_question']}','{$user['user_answer']}')" );
 			
 		return $user_id;
@@ -154,7 +153,7 @@ class PassportModel extends Model {
 	}
 	public function updatePassByUser($user,$pwd){
 		$tb_prefix = $this->_getTblPrefix($user);
-		$sql = "Update  `user_$tb_prefix` set user_password='$pwd' WHERE user='$user' ";
+		$sql = "Update  `user$tb_prefix` set user_password='$pwd' WHERE user='$user' ";
 		
 		return $this->db->execute ( $sql );
 	}

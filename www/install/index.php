@@ -12,7 +12,7 @@ define('VIEW_OFF', $view_off ? TRUE : FALSE);
 include_once(ROOT_PATH.'/langs/'.LANG.'/globals.php');
 include_once(ROOT_PATH.'/install/db.class.php');
 $sqlfile = ROOT_PATH.'./install/xppass.sql';
-$lockfile = ROOT_PATH.'./config/install.lock';
+$lockfile = ROOT_PATH.'./tmp/install.lock';
 $allow_method = array('show_license', 'env_check', 'set_params', 'db_init','install_check');
 
 $step = intval(getgpc('step', 'R')) ? intval(getgpc('step', 'R')) : 0;
@@ -416,10 +416,19 @@ function runquery($sql) {
 
 			if(substr($query, 0, 12) == 'CREATE TABLE') {
 				if(false!==strpos($query,'__tblname__')){
-					$prefixs = array('00');
-					if($multitable>0) $prefixs = genPrefix();
-					foreach ($prefixs as $v){
-						$name = "user_".$v;
+					
+					if($multitable>0) {
+						$prefixs = array();
+						$prefixs = genPrefix();
+						foreach ($prefixs as $v){
+							$name = "user_".$v;
+							$new_sql = str_replace("__tblname__",$name,$query);		
+							showjsmessage(lang('create_table').' '.$name.' ... '.lang('succeed'));
+							$db->query("DROP TABLE IF EXISTS `$name`;");
+							$db->query(createtable($new_sql));
+						}
+					}else{
+						$name = "user";
 						$new_sql = str_replace("__tblname__",$name,$query);		
 						showjsmessage(lang('create_table').' '.$name.' ... '.lang('succeed'));
 						$db->query("DROP TABLE IF EXISTS `$name`;");
@@ -521,7 +530,7 @@ EOT;
 	}
 }
 function set_params(){
-	global $ssomode;
+	global $ssomode,$admininfo;
 	$error_msg = array();
 	$submit = getgpc('submitname','p');
 	if($submit){
@@ -535,9 +544,12 @@ function set_params(){
 		if(!$dbinfo['dbhost']) $error_msg[] = lang('dbinfo_dbhost_invalid');
 		if(!$dbinfo['dbname']) $error_msg[] = lang('dbinfo_dbname_invalid');
 		if(!$dbinfo['dbuser']) $error_msg[] = lang('dbinfo_dbuser_invalid');
-
-		if(!$admininfo['founderpw']) $error_msg[] = lang('admininfo_founderpw_invalid');
+	
+		if(!$admininfo['founderemail'] || !preg_match("/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/",$admininfo['founderemail'])) $error_msg[] = lang('admininfo_founderemail_invalid');
+		if(!$admininfo['founderpw'] || strlen($admininfo['founderpw'])<6) $error_msg[] = lang('admininfo_founderpw_invalid');
 		if($admininfo['founderpw']!=$admininfo['founderpw2']) $error_msg[] = lang('admininfo_founderpw2_invalid');
+		
+		
 		if(!$error_msg){
 			$step = $step + 1;
 			$dbname =$dbinfo['dbname'];
@@ -546,13 +558,13 @@ function set_params(){
 				$error = mysql_error();
 				if($errno == 1045) {
 					show_msg('database_errno_1045', $error, 0);
-					die;
+					
 				} elseif($errno == 2003) {
 					show_msg('database_errno_2003', $error, 0);
-					die;
+					
 				} else {
 					show_msg('database_connect_error', $error, 0);
-					die;
+					
 				}
 			}
 			
@@ -564,7 +576,7 @@ function set_params(){
 
 			if(mysql_errno()) {
 				show_msg('database_errno_1044', mysql_error(), 0);
-				die;
+				
 			}
 			mysql_close();
 			
@@ -572,12 +584,13 @@ function set_params(){
 			$_SESSION['multitable'] = $multitable;
 			$_SESSION['dbinfo'] = $dbinfo;
 			$_SESSION['adminpwd'] = $admininfo['founderpw'];
+			$_SESSION['founderemail'] = $admininfo['founderemail'];
 			
 			echo("<script language=\"JavaScript\" type=\"text/javascript\"> window.location.href = \"index.php?step=3\"; </script>");
 			die;
 			
 		}else{
-			show_msg('',$error_msg);
+			show_msg('',$error_msg,0,0);
 		}
 		
 	}
@@ -586,23 +599,23 @@ function set_params(){
 	
 }
 function getTblPrefix($user){
-	$tb_prefix = '00';
-	if(isset($multi_tbl) && $multi_tbl==true) $tb_prefix = substr(md5($user),0,2);
+	global $multitable;
+	$tb_prefix = '';
+	if(isset($multitable) && $multitable==1) $tb_prefix = "_".substr(md5($user),0,2);
 	return $tb_prefix;
 }
 function createNewUser($user) {
 		global $db;
-		$res = $db->query("insert into user_index (`user`) values ('{$user['user']}')");
+		$res = $db->query("insert into user_index (`user`,`user_nickname`,`user_reg_time`) values ('{$user['user']}','{$user['user_nickname']}',UNIX_TIMESTAMP())");
 		if(!$res) return false;
 
 		$user_id = $db->insert_id();
 		if(!$user_id) return false;
 		
 		$tb_prefix = getTblPrefix($user['user']);
-	
 		
 		//user table
-		$db->query ( "insert into user_$tb_prefix (user_id,user,user_password,user_email,user_nickname,user_sex,user_state,user_reg_time,user_reg_ip,user_lastlogin_time,user_lastlogin_ip,user_question,user_answer)
+		$db->query ( "insert into user$tb_prefix (user_id,user,user_password,user_email,user_nickname,user_sex,user_state,user_reg_time,user_reg_ip,user_lastlogin_time,user_lastlogin_ip,user_question,user_answer)
 		values ('{$user_id}','{$user['user']}','" . $user ['user_password'] . "','{$user['user_email']}','{$user['user_nickname']}','{$user['user_sex']}',1,UNIX_TIMESTAMP(),'{$user['user_reg_ip']}',UNIX_TIMESTAMP(),'{$user['user_reg_ip']}','{$user['user_question']}','{$user['user_answer']}')" );
 			
 		return $user_id;
@@ -615,10 +628,11 @@ function db_init(){
 	$dbname = $_SESSION['dbinfo']['dbname'];
 	$dbinfo = $_SESSION['dbinfo'];
 	$adminpwd = $_SESSION['adminpwd'];
+	$adminemail = $_SESSION['founderemail'];
 	$multitable = $_SESSION['multitable'];
 	$config = "<?php \r\ndefine('SSO_MODE', '{$_SESSION['sso_mode']}');\r\n";
 	$config .= "define('MULTI_TABLE', '{$_SESSION['multitable']}');\r\n";
-	$config .= '$GLOBALS ["gDataBase"] ["db_'.$dbname.'"] = array (
+	$config .= '$GLOBALS ["gDataBase"] ["db"] = array (
   "dbname" => "'.$dbname.'",
   "type" => "mysql",
   "host" => "'.$dbinfo['dbhost'].'",
@@ -644,8 +658,8 @@ function db_init(){
 
 		runquery($sql);
 		
-		$user['user'] = 'admin';
-		$user['user_email'] = '';
+		$user['user'] = $adminemail;
+		$user['user_email'] = $adminemail;
 		$user['user_question'] = '';
 		$user['user_answer'] = '';
 		$user['user_password'] = md5(md5($adminpwd).$user['user']);
@@ -679,32 +693,37 @@ function check_db($dbhost, $dbuser, $dbpw, $dbname,$multitable) {
 		}
 	} else {
 		if($query = mysql_query("SHOW TABLES FROM $dbname")) {
-			$i =0;
+			$i=$j=0;
 			while($row = mysql_fetch_row($query)) {
-				$i++;
-//				if(preg_match("/^$tablepre/", $row[0])) {
-//					return false;
-//				}
+				
+				if($multitable && preg_match("/^user_[0-9a-f]{2}/", $row[0])) {
+					$i++;
+				}
+				if(!$multitable && preg_match("/^user/", $row[0])){
+					$j=1;
+				}
 			}
+			if($multitable && $i==256) return true;
+			if(!$multitable && $j==1) return true;
 			
-			if($multitable && $i!=261) return false;
-			if(!$multitable && $i!=6) return false;
 		}
 	}
-	return true;
+	return false;
 }
 function install_check(){
 	global $lockfile;
-	@touch($lockfile);
+	
 	
 	$dbname = $_SESSION['dbinfo']['dbname'];
 	$dbinfo = $_SESSION['dbinfo'];
 	$multitable = $_SESSION['multitable'];
 	extract($dbinfo);
-	session_destroy();
-	if(check_db($dbhost, $dbuser, $dbpw, $dbname,$multitable)) {
+	
+	if(!check_db($dbhost, $dbuser, $dbpw, $dbname,$multitable)) {
 		show_msg('tablepre_not_exists', 0);
 	} else {
+		@touch($lockfile);
+		session_destroy();
 		echo '<script>window.location.href="/index.php";</script>';
 	}
 		
@@ -821,6 +840,10 @@ switch ($step){
 </table>
 <div class="desc"><b><?=lang('tips_admininfo')?></b></div>
 <table class="tb2">
+<tr><th class="tbopt">&nbsp;<?=lang('founderemail')?>:</th>
+<td><input type="text" name="admininfo[founderemail]" value="<?=$admininfo['founderemail']?>" size="64" class="txt"></td>
+<td>&nbsp;</td>
+</tr>
 <tr><th class="tbopt">&nbsp;<?=lang('founderpw')?>:</th>
 <td><input type="password" name="admininfo[founderpw]" value="" size="35" class="txt"></td>
 <td>&nbsp;</td>

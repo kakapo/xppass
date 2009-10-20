@@ -206,7 +206,7 @@ class passport {
 			$passmod = new PassportModel();
 			$passmod->deleteTicketById(session_id());
 		}
-		redirect("/index.php/passport/login");
+		redirect($GLOBALS ['gSiteInfo'] ['www_site_url']."/index.php/passport/login");
 	}
 	
 	function save_online_user($user) {
@@ -330,9 +330,9 @@ class passport {
 
 	}
 	function view_regok() {
-		print_r(authenticate());
-		show_message($GLOBALS['gLang']['lang_passport']['registered']);
 		
+		show_message($GLOBALS['gLang']['lang_passport']['registered']);
+		redirect("index.php");
 	}
 	function op_saveuser() {
 		$msg = '';

@@ -117,7 +117,7 @@ $GLOBALS['gLang']['lang_install'] = array(
 	'dbpriv_delete' => '没有DELETE权限，无法继续安装',
 	'dbpriv_droptable' => '没有DROP TABLE权限，无法安装',
 
-	'db_not_null' => '数据库中已经安装过 XPpass, 继续安装会清空原有数据。',
+	'db_not_null' => '数据库中已经安装过 Xppass, 继续安装会清空原有数据。',
 	'db_drop_table_confirm' => '继续安装会清空全部原有数据，您确定要继续吗?',
 
 	'writeable' => '可写',
@@ -151,21 +151,13 @@ $GLOBALS['gLang']['lang_install'] = array(
 	'error_quit_msg' => '您必须解决以上问题，安装才可以继续',
 
 	'step_set_params_title' => '设置运行环境',
-	'step_set_params_desc' => '设置 XPpass',
-	'tips_XPpass' => '请填写 XPpass 相关信息',
-	'tips_XPpass_comment' => 'XPpass 是 Comsenz 公司产品的核心服务程序，XPpass Board 的安装和运行依赖此程序。如果您已经安装了 XPpass，请填写以下信息。否则，请到 <a href="http://www.discuz.com/" target="blank">Comsenz 产品中心</a> 下载并且安装，然后再继续。',
+	'step_set_params_desc' => '设置 Xppass',
 
 	'advice_mysql_connect' => '请检查 mysql 模块是否正确加载',
 	'advice_fsockopen' => '该函数需要 php.ini 中 allow_url_fopen 选项开启。请联系空间商，确定开启了此项功能',
 	'advice_gethostbyname' => '是否php配置中禁止了gethostbyname函数。请联系空间商，确定开启了此项功能',
 	'advice_file_get_contents' => '该函数需要 php.ini 中 allow_url_fopen 选项开启。请联系空间商，确定开启了此项功能',
 	'advice_xml_parser_create' => '该函数需要 PHP 支持 XML。请联系空间商，确定开启了此项功能',
-
-	'ucurl' => 'XPpass 的 URL',
-	'ucpw' => 'XPpass 创始人密码',
-	'ucip' => 'XPpass 的IP地址',
-	'XPpass_ucip_invalid' => '格式错误，请填写正确的 IP 地址',
-	'ucip_comment' => '绝大多数情况下您可以不填',
 
 	'tips_siteinfo' => '请填写站点信息',
 	'sitename' => '站点名称',
@@ -213,40 +205,27 @@ $GLOBALS['gLang']['lang_install'] = array(
 	'admin_email_invalid' => 'Email 地址错误，此邮件地址已经被使用或者格式无效，请更换为其他地址',
 	'admin_invalid' => '您的信息管理员信息没有填写完整，请仔细填写每个项目',
 	'admin_exist_password_error' => '该用户已经存在，如果您要设置此用户为论坛的管理员，请正确输入该用户的密码，或者请更换论坛管理员的名字',
-	'admininfo_founderpw_invalid' => '管理员密码为空，请填写',
+	'admininfo_founderpw_invalid' => '管理员密码不能为空，并且不能少于6位',
 	'admininfo_founderpw2_invalid' => '两次密码不一致，请检查',
+	'admininfo_founderemail_invalid' => '创始人邮箱地址格式错误，请检查',
 	'tagtemplates_subject' => '标题',
 	'tagtemplates_uid' => '用户 ID',
 	'tagtemplates_username' => '发帖者',
 	'tagtemplates_dateline' => '日期',
 	'tagtemplates_url' => '主题地址',
 
-	'uc_version_incorrect' => '您的 XPpass 服务端版本过低，请升级 XPpass 服务端到最新版本，并且升级，下载地址：http://www.comsenz.com/ 。',
+	'uc_version_incorrect' => '您的 Xppass 服务端版本过低，请升级 Xppass 服务端到最新版本，并且升级，下载地址：http://www.comsenz.com/ 。',
 	'config_unwriteable' => '安装向导无法写入配置文件, 请设置 config.inc.php 程序属性为可写状态(777)',
 
 	'install_in_processed' => '正在安装...',
 	'install_succeed' => '安装成功，点击进入',
 
-
-	'init_qihoo_searchboxtxt' =>'输入关键词,快速搜索本论坛',
-	'init_threadsticky' =>'全局置顶,分类置顶,本版置顶',
-
-	'init_default_style' => '默认风格',
-	'init_default_forum' => '默认版块',
-	'init_default_template' => '默认模板套系',
-	'init_default_template_copyright' => '康盛创想（北京）科技有限公司',
-
-	'init_dataformat' => 'Y-n-j',
-	'init_modreasons' => '广告/SPAM\r\n恶意灌水\r\n违规内容\r\n文不对题\r\n重复发帖\r\n\r\n我很赞同\r\n精品文章\r\n原创内容',
-	'init_link' => 'XPpass 官方论坛',
-	'init_link_note' => '提供最新 XPpass 产品新闻、软件下载与技术交流',
-
 	'license' => '<div class="license">
-	<h1>XPpass 安装许可证</h1>
+	<h1>Xppass 安装许可证</h1>
 
-<h3>感谢您选择 XPpass 单点登录系统。</h3>
+<h3>感谢您选择 Xppass 单点登录系统。</h3>
 
-<p>Copyright (c) 2009 著作权由wuzhongshen (kakapowu@gmail.com)所有。著作权人保留一切权利。</p>
+<p>Copyright (c) 2009 著作权由吴仲深(kakapowu@gmail.com)所有。著作权人保留一切权利。</p>
 
 <p>这份授权条款，在使用者符合以下三条件的情形下，授予使用者使用及再散播本软件原代码及二进位代码的权利，无论此包装是否经改作皆然：<p>
 <ol>
@@ -255,25 +234,18 @@ $GLOBALS['gLang']['lang_install'] = array(
 <li> 未获事前取得书面许可，不得使用柏克莱加州大学或本软件贡献者之名称，来为本软件之衍生物做任何表示支持、认可或推广、促销之行为。</li>
 </ol>
 <p>
-免责声明：本软件是由本软件之贡献者以现状（"as is"）提供，
-本软件包装不负任何明示或默示之担保责任，包括但不限于就适售性以及特定目
- 的的适用性为默示性担保。加州大学董事会及本软件之贡献者，无论任何条件、
- 无论成因或任何责任主义、无论此责任为因合约关系、无过失责任主义或因非违
-约之侵权（包括过失或其他原因等）而起，对于任何因使用本软件包装所产生的
-任何直接性、间接性、偶发性、特殊性、惩罚性或任何结果的损害（包括但不限
-于替代商品或劳务之购用、使用损失、资料损失、利益损失、业务中断等等），
-不负任何责任，即在该种使用已获事前告知可能会造成此类损害的情形下亦然。
+免责声明：本软件是由本软件之贡献者以现状（"as is"）提供，本软件包装不负任何明示或默示之担保责任，包括但不限于就适售性以及特定目的的适用性为默示性担保。本软件之贡献者，无论任何条件、无论成因或任何责任、无论此责任为因合约关系、无过失责任或因非违约之侵权（包括过失或其他原因等）而起，对于任何因使用本软件包装所产生的任何直接性、间接性、偶发性、特殊性、惩罚性或任何结果的损害（包括但不限于替代商品或劳务之购用、使用损失、资料损失、利益损失、业务中断等等），不负任何责任，即在该种使用已获事前告知可能会造成此类损害的情形下亦然。
 </p>
 </div>',
 
-	'uc_installed' => '您已经安装过 XPpass，如果需要重新安装，请删除 data/install.lock 文件',
+	'uc_installed' => '您已经安装过 Xppass，如果需要重新安装，请删除 data/install.lock 文件',
 	'i_agree' => '我已仔细阅读，并同意上述条款中的所有内容',
 	'supportted' => '支持',
 	'unsupportted' => '不支持',
 	'max_size' => '支持/最大尺寸',
 	'project' => '项目',
-	'XPpass_required' => 'XPpass 所需配置',
-	'XPpass_best' => 'XPpass 最佳',
+	'XPpass_required' => 'Xppass 所需配置',
+	'XPpass_best' => 'Xppass 最佳',
 	'curr_server' => '当前服务器',
 	'env_check' => '环境检查',
 	'os' => '操作系统',
@@ -307,6 +279,7 @@ $GLOBALS['gLang']['lang_install'] = array(
 	'dbname' => '数据库名',
 	'tablepre' => '数据表前缀',
 
+	'founderemail' => '创始人电子邮箱',
 	'founderpw' => '创始人密码',
 	'founderpw2' => '重复创始人密码',
 

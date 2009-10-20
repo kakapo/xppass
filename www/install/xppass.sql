@@ -43,8 +43,11 @@ DROP TABLE IF EXISTS `user_index`;
 CREATE TABLE IF NOT EXISTS `user_index` (
   `user_id` int(11) NOT NULL auto_increment,
   `user` varchar(64) NOT NULL,
+  `user_nickname` varchar(16) NOT NULL,
+  `user_reg_time` int(11) unsigned NOT NULL,
   PRIMARY KEY  (`user_id`),
-  KEY `user` (`user`)
+  KEY `user` (`user`),
+  KEY `user_reg_time` (`user_reg_time`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE `__tblname__` ( 
@@ -52,7 +55,7 @@ CREATE TABLE `__tblname__` (
 `user` varchar(64) NOT NULL,
 `user_password` char(32) NOT NULL,
 `user_email` varchar(64) NOT NULL,
-`user_nickname` varchar(24) NOT NULL,
+`user_nickname` varchar(16) NOT NULL,
 `user_sex` tinyint(1) NOT NULL,
 `user_state` tinyint(1) NOT NULL,
 `user_reg_time` int(11) unsigned NOT NULL,
