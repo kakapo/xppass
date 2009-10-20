@@ -17,11 +17,9 @@ $allow_method = array('show_license', 'env_check', 'set_params', 'db_init','inst
 
 $step = intval(getgpc('step', 'R')) ? intval(getgpc('step', 'R')) : 0;
 $method = getgpc('method');
-
 if(empty($method) || !in_array($method, $allow_method)) {
 	$method = isset($allow_method[$step]) ? $allow_method[$step] : '';
 }
-
 if(empty($method)) {
 	show_msg('method_undefined', $method, 0);
 }
@@ -39,31 +37,18 @@ if(!ini_get('short_open_tag')) {
 	show_msg('database_nonexistence', '', 0);
 }
 
-define('ENV_CHECK_RIGHT', 0);
-define('ERROR_CONFIG_VARS', 1);
+//error code
 define('SHORT_OPEN_TAG_INVALID', 2);
 define('INSTALL_LOCKED', 3);
 define('DATABASE_NONEXISTENCE', 4);
 define('PHP_VERSION_TOO_LOW', 5);
-define('MYSQL_VERSION_TOO_LOW', 6);
-
-define('DBNAME_INVALID', 15);
 define('DATABASE_ERRNO_2003', 16);
 define('DATABASE_ERRNO_1044', 17);
 define('DATABASE_ERRNO_1045', 18);
 define('DATABASE_CONNECT_ERROR', 19);
-define('TABLEPRE_INVALID', 20);
-define('CONFIG_UNWRITEABLE', 21);
-define('ADMIN_USERNAME_INVALID', 22);
-define('ADMIN_EMAIL_INVALID', 25);
-define('ADMIN_EXIST_PASSWORD_ERROR', 26);
-define('ADMININFO_INVALID', 27);
-define('LOCKFILE_NO_EXISTS', 28);
-define('TABLEPRE_EXISTS', 29);
 define('ERROR_UNKNOW_TYPE', 30);
 define('ENV_CHECK_ERROR', 31);
 define('UNDEFINE_FUNC', 32);
-define('MISSING_PARAMETER', 33);
 define('LOCK_FILE_NOT_TOUCH', 34);
 $func_items = array( 'fopen','fsockopen', 'file_put_contents', 'file_get_contents', 'pdo','pdo_mysql','json','mbstring','memcache');
 
@@ -77,7 +62,7 @@ $env_items = array
 
 $dirfile_items = array
 (
-	'config' => array('type' => 'file', 'path' => './config/config.inc.php'),
+	'config' => array('type' => 'dir', 'path' => './config'),
 	'tmp' => array('type' => 'dir', 'path' => './tmp')
 );
 
@@ -724,7 +709,8 @@ function install_check(){
 	} else {
 		@touch($lockfile);
 		session_destroy();
-		echo '<script>window.location.href="/index.php";</script>';
+		echo '<div class="btnbox marginbot"><input type="button" name="submit" value="'.lang('step_install_check_desc').'" style="height: 25" onclick="window.location.href=\'/index.php/passport/login\'"></div>';
+		//echo '<script>window.location.href="/index.php";</script>';
 	}
 		
 	
@@ -748,13 +734,10 @@ function show_header(){
 <img src="/public/images/xppass.png"><span style="font-size:16px"><b><?=lang('install_wizard')?></b></span> 
 
 </div>
-<?}?>
-
-
-
+<?php 
+} //end of show_header
+?>
 <?php
-
-
 show_header();
 $step > 0 && show_step($step);
 switch ($step){
@@ -770,6 +753,7 @@ switch ($step){
 		break;
 	case 2:		
 		set_params();
+		show_param_table();
 		break;
 	case 3:
 		db_init();
@@ -778,11 +762,10 @@ switch ($step){
 		install_check();
 	
 }
+show_footer();
 
 
-?>
-
-<?php if($step==2){?>
+function show_param_table(){?>
 <form action="index.php" method="POST">
 <input type="hidden" name="step" value="<?=$step?>">
 <div class="desc"><b>系统选项</b></div>
@@ -861,11 +844,7 @@ switch ($step){
 </tr>
 </table>
 </form>
-<? }?>
-<?php
-
-show_footer();
-
+<?php }
 function show_install() {
 	if(VIEW_OFF) return;
 ?>
@@ -877,19 +856,17 @@ function initinput() {
 	window.location='<?php echo 'index.php?step='.($GLOBALS['step']+1);?>';
 }
 </script>
-	<div class="main">
+	
 		<div class="btnbox"><textarea name="notice" style="width: 80%;"  readonly="readonly" id="notice"></textarea></div>
 		<div class="btnbox marginbot">
-	<input type="button" name="submit" value="<?=lang('install_in_processed')?>" disabled style="height: 25" id="laststep" onclick="initinput()">
-	</div>
+			<input type="button" name="submit" value="<?=lang('install_in_processed')?>" disabled style="height: 25" id="laststep" onclick="initinput()">
+		</div>
 <?php
 }
 function show_footer(){
 ?>
-
-
 <p>&nbsp;</p>
-<div id="footer">Powered by <a href="http://kfl.googlecode.com" target="_blank">KFL Framework</a> <br>Since 2009.10</div>
+<div id="footer">Powered by <a href="http://kfl.googlecode.com" target="_blank">KFL Framework</a>, <a href="http://www.comsenz.com">Comsenz</a> UCenter Installation <br>Since 2009-10</div>
 </body>
 </html>
 <? exit();}?>
