@@ -38,6 +38,7 @@ class PassportModel extends Model {
 
 	public function updateUser($item,$user_id,$user){
 		$tb_prefix = $this->_getTblPrefix($user);	
+		if(isset($item['user_nickname']) && !empty($item['user_nickname'])) $this->db->execute("update user_index set user_nickname=? where user_id=?",array($item['user_nickname'],$user_id));
 		$this->db->update($item,"user".$tb_prefix," user_id=".$user_id);
 	}
 	
@@ -109,6 +110,22 @@ class PassportModel extends Model {
 
 	}
 	
+	public function deleteUser($user){		
+		$u = $this->getUser($user);
+		if($u['user_id']==1) return false;
+		if($u){
+			$tb_prefix = $this->_getTblPrefix($user);
+			
+			$res = $this->db->execute("delete from user_index where user_id='{$u['user_id']}'");
+			
+			if($res) {
+				return $this->db->execute("delete from user$tb_prefix where user_id='{$u['user_id']}'");
+			}
+		}
+		return false;
+		
+		
+	}
 	public function addForgetPwd($user) {
 
 		$validSec = 3600;

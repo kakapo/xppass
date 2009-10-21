@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `user_index` (
   `user_nickname` varchar(16) NOT NULL,
   `user_reg_time` int(11) unsigned NOT NULL,
   PRIMARY KEY  (`user_id`),
-  KEY `user` (`user`),
+  UNIQUE `user` (`user`),
   KEY `user_reg_time` (`user_reg_time`)
 ) ENGINE=MyISAM;
 

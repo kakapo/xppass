@@ -84,20 +84,6 @@ CREATE TABLE IF NOT EXISTS `user_blockword` (
 		return;
 	}
 	
-	public function generateKey(){
-		$tmp = array_merge(range(0, 9), range('A', 'Z'));
-	    $key = '';
-	    for ($i = 0; $i < 16; $i++) {
-	        $key .= $tmp[mt_rand(0, 35)];
-	    }
-	    return md5($key);    
-	}
-	
-	public function addNewClient($arr){
-		$sql = "insert into `client` (`domain`, `private_key`) values (?,?)";
-		return $this->db->execute($sql,array($arr['domain'],$arr['key']));
-	}
-	
 	public function getClientByDomain($domain){
 		return $this->db->getRow("select * from client where domain='$domain'");
 	}

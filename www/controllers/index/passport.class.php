@@ -369,7 +369,7 @@ class passport {
 		}
 		$_POST ['nickname'] = trim ( $_POST ['nickname'] );
 		$nickname_len = mb_strlen ( $_POST ['nickname'], "UTF-8");
-		if (empty ( $_POST ['nickname'] ) || $nickname_len < 2 || $nickname_len > 12) {
+		if (empty ( $_POST ['nickname'] ) || $nickname_len < 2 || $nickname_len > 16) {
 			$msg = array('s'=> 400,'m'=>lang('nicknamerule'),'d'=>'');				
 			exit(json_output($msg));
 		}

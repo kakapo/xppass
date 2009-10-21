@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Xppass Administrator's Control Panel</title>
+<LINK href="<?=$www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+<script src="<?=$www_site_url?>/public/js/ajax.js" type="text/javascript"></script>
+<script>
+function checkOnSubmit(formName) {
+  	
+	var url = "<?=$www_site_url?>/admin.php";
+	var params = mini.form.serialize($(formName));
+	mini.ajax.post(url, function(r){
+		var r = eval('(' + r + ')');   
+		if(r.s==200){
+			$('msg').innerHTML = r.m;
+		}
+		if(r.s==400){
+			$('msg').innerHTML = r.m;			
+		}
+	}, params);
+	
+	return false;
+       
+}
+</script>
+</head>
+<body>
+<div id="msg" style="color:red;text-align:center"></div>
+	<div class="container">
+		<h3>编辑用户资料
+							
+					</h3>
+					<div class="note"><p class="i">密码留空，保持不变。</p></div>
+				<div class="mainbox">
+			<form id="edituserform" name="edituserform" action="admin.php" method="post" onsubmit="return checkOnSubmit('edituserform')">
+
+			<input type="hidden" name="action" value="user">
+			<input type="hidden" name="op" value="updateuser">
+			<input type="hidden" name="reg_type" value="email">
+			<input type="hidden" name="user_id" value="<?=$userinfo['user_id']?>"/>
+			<input type="hidden" name="user" value="<?=$userinfo['user']?>" />
+				<table class="opt">
+					<tr>
+						<th>帐号:</th>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" name="newusername" value="<?=$userinfo['user']?>" class="textfield" readonly/>	Read Only						
+						</td>
+					</tr>
+					<tr>
+						<th>密　码:</th>
+					</tr>
+					<tr>
+						<td>
+							<input type="password" name="password" value="" class="textfield" />
+						</td>
+					</tr>
+				
+					<tr>
+						<th>Email:</th>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" name="email" value="<?=$userinfo['user_email']?>" class="textfield" />
+						</td>
+					</tr>					<tr>
+						<th>昵称:</th>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" name="nickname" value="<?=$userinfo['user_nickname']?>" class="textfield" />
+						</td>
+					</tr>					
+					<tr>
+						<th>性别:</th>
+					</tr>
+					<tr>
+						<td>
+							<input type="radio" name="sex" value="1" <? if($userinfo['user_sex']==1) echo 'checked';?>/>男 &nbsp;&nbsp;<input type="radio" name="sex" value="2" <? if($userinfo['user_sex']==2) echo 'checked';?>/>女
+						</td>
+					</tr>
+				</table>
+
+				<div class="opt"><input type="submit" name="submit" value=" 提 交 " class="button"/> <input type="button" class="button" onclick="javascript:history.back(-1)" value="返回用户列表"></div>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

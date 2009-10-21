@@ -163,7 +163,7 @@ function function_check(&$func_items) {
 	}
 }
 function lang($lang_key, $force = true) {
-	return isset($GLOBALS['gLang']['lang_install'][$lang_key]) ? $GLOBALS['gLang']['lang_install'][$lang_key] : ($force ? $lang_key : '');
+	return isset($GLOBALS['gLang'][$lang_key]) ? $GLOBALS['gLang'][$lang_key] : ($force ? $lang_key : '');
 }
 function show_next_step($step, $error_code) {
 	
