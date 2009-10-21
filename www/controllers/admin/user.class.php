@@ -27,7 +27,7 @@ class user{
 		$this->tpl->assign('users',$users);
 		$this->tpl->assign('con',$con);
     }   
-     function view_menu(){
+    function view_menu(){
 		global $tpl;	
 		
 

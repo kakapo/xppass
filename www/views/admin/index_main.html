@@ -1,1 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><?=$web_title?></title>
+<LINK href="<?=$www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+</head>
+<body>
+<div class="container">
+	
+	<h3>系统信息</h3>
 
+	<ul class="memlist">
+		<li><em>操作系统及 PHP:</em><?=$serverinfo?></li>
+		<li><em>服务器软件:</em><?=$_SERVER['SERVER_SOFTWARE']?></li>
+		<li><em>MySQL 版本:</em><?=$dbversion?></li>
+
+		<li><em>上传许可:</em><?=$fileupload?></li>
+		<li><em>当前数据库尺寸:</em><?=$dbsize?></li>		
+		<li><em>主机名:</em><?=$_SERVER['SERVER_NAME'].' ('.$_SERVER['SERVER_ADDR'].':'.$_SERVER['SERVER_PORT'].')'?></li>
+		<li><em>magic_quote_gpc:</em><?=$magic_quote_gpc?></li>
+		<li><em>allow_url_fopen:</em><?=$allow_url_fopen?></li>		
+	</ul>
+
+</div>
+
+
+</body>
+</html>

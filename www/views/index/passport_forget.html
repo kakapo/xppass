@@ -21,9 +21,9 @@ function checkOnSubmit(formName, r) {
 
 var rules=new Array();
 
-rules[0]='user|required|<?=$lang_passport['helpmsg1']?>';
+rules[0]='user|required|<?=lang('helpmsg1')?>';
 
-yav.addHelp('user', '<?=$lang_passport['helpmsg1']?>');
+yav.addHelp('user', '<?=lang('helpmsg1')?>');
 
 </SCRIPT>
 
@@ -35,11 +35,11 @@ yav.addHelp('user', '<?=$lang_passport['helpmsg1']?>');
 <input type="hidden" name="op" value="emailpwd">
 <TABLE valign=top>
 
-<TR><TD><?=$lang_passport['user']?>:</TD><TD><INPUT class="textfield" type=text name="user" />&nbsp;&nbsp;<span id="errorsDiv_user"></span></TD></TR>
+<TR><TD><?=lang('user')?>:</TD><TD><INPUT class="textfield" type=text name="user" />&nbsp;&nbsp;<span id="errorsDiv_user"></span></TD></TR>
 
 
-<TR><TD colspan="2"><INPUT class="button" type=submit value="<?=$lang_passport['submit']?>" /> 
-<INPUT class="button" type="button" value="<?=$lang_passport['back']?>" onclick="history.go(-1)"/></TD><TD></TD></TR>
+<TR><TD colspan="2"><INPUT class="button" type=submit value="<?=lang('submit')?>" /> 
+<INPUT class="button" type="button" value="<?=lang('back')?>" onclick="history.go(-1)"/></TD><TD></TD></TR>
 </TABLE>
 </form>
 <? include_once("footer.html")?>

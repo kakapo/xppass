@@ -46,10 +46,10 @@ function changeCode() {
 }
 var rules=new Array();
 
-rules[0]='user|required|<?=$lang_passport['helpmsg1']?>';
-rules[1]='password|required|<?=$lang_passport['helpmsg2']?>';
+rules[0]='user|required|<?=lang('helpmsg1')?>';
+rules[1]='password|required|<?=lang('helpmsg2')?>';
 <? if($show_code){?>
-rules[2]='code|required|<?=$lang_passport['coderule']?>';
+rules[2]='code|required|<?=lang('coderule')?>';
 <? }?>
 
 
@@ -70,20 +70,20 @@ yav.addHelp('password', '');
 <input type="hidden" name="s" id="s" value="">
 <TABLE valign=top>
 
-<TR><TD width="80px"><?=$lang_passport['user']?>:</TD>
-<TD><div id="errorsDiv_user"></div><INPUT class="textfield" type="text" name="user" value="<?=$lang_passport['emailorusername']?>" onfocus="this.value='';"/>&nbsp;&nbsp;</TD></TR>
-<TR><TD><?=$lang_passport['pwd']?>:</TD>
+<TR><TD width="80px"><?=lang('user')?>:</TD>
+<TD><div id="errorsDiv_user"></div><INPUT class="textfield" type="text" name="user" value="<?=lang('emailorusername')?>" onfocus="this.value='';"/>&nbsp;&nbsp;</TD></TR>
+<TR><TD><?=lang('pwd')?>:</TD>
 <TD><div id="errorsDiv_password"></div><INPUT class="textfield" type="password" name="password" />&nbsp;&nbsp;</TD></TR>
 <? if($show_code>3){?>
 <TR><TD></TD><TD></TD></TR>
-<TR><TD><?=$lang_passport['validatecode']?>:</TD>
-<TD><div id="errorsDiv_code"></div><INPUT class="textfield" type="text" name="code" style="width:60px" /><img id="codeimg" src="<?=$www_site_url?>/index.php/identifycode/generate" align="absmiddle" title="<?=$lang_passport['anotherone']?>" onClick="changeCode();" style="cursor:pointer"> <span onClick="changeCode();" style="cursor:pointer"><?=$lang_passport['notclear']?></span></TD></TR>
+<TR><TD><?=lang('validatecode')?>:</TD>
+<TD><div id="errorsDiv_code"></div><INPUT class="textfield" type="text" name="code" style="width:60px" /><img id="codeimg" src="<?=$www_site_url?>/index.php/identifycode/generate" align="absmiddle" title="<?=lang('anotherone')?>" onClick="changeCode();" style="cursor:pointer"> <span onClick="changeCode();" style="cursor:pointer"><?=lang('notclear')?></span></TD></TR>
 <? }?>
-<TR><TD>&nbsp;</TD><TD><INPUT  class="checkbox" type="checkbox" name="remember" value="1"/> <?=$lang_passport['autologin']?>&nbsp;&nbsp;<span id="errorsDiv_remember"></span></TD></TR>
+<TR><TD>&nbsp;</TD><TD><INPUT  class="checkbox" type="checkbox" name="remember" value="1"/> <?=lang('autologin')?>&nbsp;&nbsp;<span id="errorsDiv_remember"></span></TD></TR>
 
-<TR><TD colspan="2"><INPUT class="button" type=submit value="<?=$lang_passport['signon']?>" /> 
-<INPUT class="button" type="button" value="<?=$lang_passport['signup']?>" onclick="window.location.href='/index.php/passport/reg'" /> 
-<INPUT class="button" type="button" value="<?=$lang_passport['forgetpwd']?>" onclick="window.location.href='/index.php/passport/forget'" /></TD><TD></TD></TR>
+<TR><TD colspan="2"><INPUT class="button" type=submit value="<?=lang('signon')?>" /> 
+<INPUT class="button" type="button" value="<?=lang('signup')?>" onclick="window.location.href='/index.php/passport/reg'" /> 
+<INPUT class="button" type="button" value="<?=lang('forgetpwd')?>" onclick="window.location.href='/index.php/passport/forget'" /></TD><TD></TD></TR>
 </TABLE>
 </form>
 <? include_once("footer.html")?>

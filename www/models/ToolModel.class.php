@@ -1,5 +1,5 @@
 <?php
-class ToolManage extends Model{
+class ToolModel extends Model{
 	public function __construct(){
 		$this->db = parent::dbConnect($GLOBALS ["gDataBase"] ["db"]);
 	}

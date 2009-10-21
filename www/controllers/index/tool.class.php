@@ -1,10 +1,10 @@
 <?php
-include("ToolManage.class.php");
+include("ToolModel.class.php");
 class tool {
 	function view_createtbls(){
 		
-		$toolManage = new ToolManage();
-		$toolManage->createTbl(1);
+		$ToolModel = new ToolModel();
+		$ToolModel->createTbl(1);
 		
 	}
 	
@@ -12,11 +12,11 @@ class tool {
 		
 		$arr['domain'] = $_GET['domain'];
 		
-		$toolManage = new ToolManage();
+		$ToolModel = new ToolModel();
 		
-		$arr['key'] = $toolManage->generateKey();
+		$arr['key'] = $ToolModel->generateKey();
 		
-		$toolManage->addNewClient($arr);
+		$ToolModel->addNewClient($arr);
 	}
 	
 	

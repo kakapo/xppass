@@ -21,15 +21,15 @@ function checkOnSubmit(formName, r) {
 
 var rules=new Array();
 
-rules[0]='answer|required|<?=$lang_passport['insertyouranswer']?>';
-rules[1]='newpwd1|required|<?=$lang_passport['insertpwd']?>';
-rules[2]='newpwd1|minlength|6|<?=$lang_passport['pwdrule']?>';
-rules[3]='newpwd2|equal|$newpwd1|<?=$lang_passport['pwdnotsame']?>';
+rules[0]='answer|required|<?=lang('insertyouranswer')?>';
+rules[1]='newpwd1|required|<?=lang('insertpwd')?>';
+rules[2]='newpwd1|minlength|6|<?=lang('pwdrule')?>';
+rules[3]='newpwd2|equal|$newpwd1|<?=lang('pwdnotsame')?>';
 
 
 
 
-yav.addHelp('answer', '<?=$lang_passport['insertyouranswer']?>');
+yav.addHelp('answer', '<?=lang('insertyouranswer')?>');
 
 
 
@@ -45,13 +45,13 @@ yav.addHelp('answer', '<?=$lang_passport['insertyouranswer']?>');
 <input type="hidden" name="user" value="<?=$arr['user']?>">
 <TABLE valign=top>
 
-<TR><TD><?=$lang_passport['yourquestion']?>:</TD><TD><?=$arr['user_question']?></TD></TR>
-<TR><TD><?=$lang_passport['youranswer']?>:</TD><TD><INPUT class="textfield" type=text name="answer" />&nbsp;&nbsp;<span id="errorsDiv_answer"></span></TD></TR>
-<TR><TD><?=$lang_passport['newpwd']?>:</TD><TD><INPUT class="textfield" type="password" name=newpwd1 />&nbsp;&nbsp;<span id="errorsDiv_newpwd1"></span></TD></TR>
-<TR><TD><?=$lang_passport['newpwd2']?>:</TD><TD><INPUT class="textfield" type="password" name=newpwd2 />&nbsp;&nbsp;<span id="errorsDiv_newpwd2"></span></TD></TR>
+<TR><TD><?=lang('yourquestion')?>:</TD><TD><?=$arr['user_question']?></TD></TR>
+<TR><TD><?=lang('youranswer')?>:</TD><TD><INPUT class="textfield" type=text name="answer" />&nbsp;&nbsp;<span id="errorsDiv_answer"></span></TD></TR>
+<TR><TD><?=lang('newpwd')?>:</TD><TD><INPUT class="textfield" type="password" name=newpwd1 />&nbsp;&nbsp;<span id="errorsDiv_newpwd1"></span></TD></TR>
+<TR><TD><?=lang('newpwd2')?>:</TD><TD><INPUT class="textfield" type="password" name=newpwd2 />&nbsp;&nbsp;<span id="errorsDiv_newpwd2"></span></TD></TR>
 
-<TR><TD colspan="2"><INPUT class="button" type=submit value="<?=$lang_passport['submit']?>" /> 
-<INPUT class="button" type="button" value="<?=$lang_passport['back']?>" onclick="history.go(-1)"/><br></TD><TD></TD></TR>
+<TR><TD colspan="2"><INPUT class="button" type=submit value="<?=lang('submit')?>" /> 
+<INPUT class="button" type="button" value="<?=lang('back')?>" onclick="history.go(-1)"/><br></TD><TD></TD></TR>
 </TABLE>
 </form>
 <? include_once("footer.html")?>
