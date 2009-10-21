@@ -36,28 +36,28 @@ function checkOnSubmit(formName, r) {
 }
 
 var rules=new Array();
-rules[0]='username|required|<?=$lang_passport['usernamerule']?>';
-rules[1]='username|regexp|^[a-zA-Z][a-zA-Z0-9_]{1,13}[a-zA-Z0-9]$|<?=$lang_passport['usernamerule']?>';
-rules[2]='email|required|<?=$lang_passport['insertemail']?>';
-rules[3]='email|email|<?=$lang_passport['insertemail']?>';
-rules[4]='password|required|<?=$lang_passport['insertpwd']?>';
-rules[5]='password|minlength|6|<?=$lang_passport['pwdrule']?>';
-rules[6]='comfirmpwd|equal|$password|<?=$lang_passport['pwdnotsame']?>';
+rules[0]='username|required|<?=lang('usernamerule')?>';
+rules[1]='username|regexp|^[a-zA-Z][a-zA-Z0-9_]{1,13}[a-zA-Z0-9]$|<?=lang('usernamerule')?>';
+rules[2]='email|required|<?=lang('insertemail')?>';
+rules[3]='email|email|<?=lang('insertemail')?>';
+rules[4]='password|required|<?=lang('insertpwd')?>';
+rules[5]='password|minlength|6|<?=lang('pwdrule')?>';
+rules[6]='comfirmpwd|equal|$password|<?=lang('pwdnotsame')?>';
 
-rules[7]='sex|required|<?=$lang_passport['sexrule']?>';
-rules[8]='code|required|<?=$lang_passport['coderule']?>';
-rules[9]='nickname|required|<?=$lang_passport['nicknamerule']?>';
+rules[7]='sex|required|<?=lang('sexrule')?>';
+rules[8]='code|required|<?=lang('coderule')?>';
+rules[9]='nickname|required|<?=lang('nicknamerule')?>';
 
-rules[10]='nickname|minlength|2|<?=$lang_passport['nicknamerule']?>';
-rules[11]='nickname|maxlength|12|<?=$lang_passport['nicknamerule']?>';
-rules[12]='question|required|<?=$lang_passport['selectaquestion']?>';
-rules[13]='answer|required|<?=$lang_passport['youranswer']?>';
+rules[10]='nickname|minlength|2|<?=lang('nicknamerule')?>';
+rules[11]='nickname|maxlength|12|<?=lang('nicknamerule')?>';
+rules[12]='question|required|<?=lang('selectaquestion')?>';
+rules[13]='answer|required|<?=lang('youranswer')?>';
 
 
-yav.addHelp('username', '<?=$lang_passport['usernamerule']?>');
+yav.addHelp('username', '<?=lang('usernamerule')?>');
 yav.addHelp('password', '');
 yav.addHelp('comfirmpwd', '');
-yav.addHelp('email', '<?=$lang_passport['insertemail']?>');
+yav.addHelp('email', '<?=lang('insertemail')?>');
 yav.addHelp('question', '');
 yav.addHelp('answer', '');
 yav.addHelp('nickname', '');
@@ -77,11 +77,11 @@ function ajaxCall(s) {
 	mini.ajax.get("<?=$www_site_url?>/index.php/passport/checkuser/user/" + escape(document.getElementById(s).value), function(r){
 	    captchaOK = r;  
 	    if(captchaOK != 1) {              
-	      	yav.displayMsg(account, '<?=$lang_passport['userexist']?>', yav_config.innererror);
+	      	yav.displayMsg(account, '<?=lang('userexist')?>', yav_config.innererror);
 	      	document.registerform.registerbtn.disabled=true;
 	      	return false;
 	      } else {
-	          yav.displayMsg(account, '<?=$lang_passport['userisok']?>', yav_config.innerhelp);      
+	          yav.displayMsg(account, '<?=lang('userisok')?>', yav_config.innerhelp);      
 	          document.registerform.registerbtn.disabled=false;
 	          return true;
 	      }
@@ -110,81 +110,81 @@ function changeCode() {
 <TABLE valign="top" cellspacing="5" border="0" width="600px">
 <TR>
 <TD colspan="2">
-<? if($reg_type=='email') {?><INPUT class="button" type="button" value="<?=$lang_passport['regbyusername']?>" onclick="window.location.href='<?=$www_site_url?>/index.php/passport/reg/username'"/><? } ?>
-<? if($reg_type=='username') {?> <INPUT class="button" type="button" value="<?=$lang_passport['regbyemail']?>" onclick="history.go(-1);"/><? }?>
+<? if($reg_type=='email') {?><INPUT class="button" type="button" value="<?=lang('regbyusername')?>" onclick="window.location.href='<?=$www_site_url?>/index.php/passport/reg/username'"/><? } ?>
+<? if($reg_type=='username') {?> <INPUT class="button" type="button" value="<?=lang('regbyemail')?>" onclick="history.go(-1);"/><? }?>
 </TD>
 </TR>
 <? if($reg_type=='email') {?>
 <TR>
-<TD width="120px"><?=$lang_passport['email']?>:</TD>
+<TD width="120px"><?=lang('email')?>:</TD>
 <TD><div id="errorsDiv_email"></div><INPUT class="textfield" type="text" name="email" value="<?=$email?>" id="email" /></TD>
 </TR><? } ?>
 <? if($reg_type=='username') {?><TR>
-<TD width="120px"><?=$lang_passport['username']?>:</TD>
+<TD width="120px"><?=lang('username')?>:</TD>
 <TD><div id="errorsDiv_username"></div><INPUT class="textfield" type="text" name="username"  value="<?=$username?>" id="username"/>
 </TD>
 </TR><? } ?>
-<TR><TD><?=$lang_passport['pwd']?>:</TD>
+<TR><TD><?=lang('pwd')?>:</TD>
 <TD><div id="errorsDiv_password"></div><INPUT class="textfield" type="password" name="password"  /></TD>
 </TR>
 <TR>
-<TD><?=$lang_passport['comfirmpwd']?>:</TD>
+<TD><?=lang('comfirmpwd')?>:</TD>
 <TD><div id="errorsDiv_comfirmpwd"></div><INPUT class="textfield" type="password" name="comfirmpwd"  /></TD>
 </TR>
 <? if($reg_type=='username') {?>
 <TR>
-<TD><?=$lang_passport['pwdquestion']?>:</TD>
-<TD><div id="errorsDiv_question"></div><select class="textfield" id="question" name="question" title="<?=$lang_passport['pwdquestion']?>">
+<TD><?=lang('pwdquestion')?>:</TD>
+<TD><div id="errorsDiv_question"></div><select class="textfield" id="question" name="question" title="<?=lang('pwdquestion')?>">
 
-			<option value="" selected="selected" ><?=$lang_passport['selectaquestion']?></option>
+			<option value="" selected="selected" ><?=lang('selectaquestion')?></option>
 
-			<option value="<?=$lang_passport['q1']?>" ><?=$lang_passport['q1']?></option>			
+			<option value="<?=lang('q1')?>" ><?=lang('q1')?></option>			
 
-			<option value="<?=$lang_passport['q2']?>" ><?=$lang_passport['q2']?></option>
+			<option value="<?=lang('q2')?>" ><?=lang('q2')?></option>
 
-			<option value="<?=$lang_passport['q3']?>" ><?=$lang_passport['q3']?></option>
+			<option value="<?=lang('q3')?>" ><?=lang('q3')?></option>
 
-			<option value="<?=$lang_passport['q4']?>" ><?=$lang_passport['q4']?></option>
+			<option value="<?=lang('q4')?>" ><?=lang('q4')?></option>
 
-			<option value="<?=$lang_passport['q5']?>" ><?=$lang_passport['q5']?></option>
+			<option value="<?=lang('q5')?>" ><?=lang('q5')?></option>
 
-			<option value="<?=$lang_passport['q6']?>" ><?=$lang_passport['q6']?></option>			
+			<option value="<?=lang('q6')?>" ><?=lang('q6')?></option>			
 
-			<option value="<?=$lang_passport['q7']?>" ><?=$lang_passport['q7']?></option>
+			<option value="<?=lang('q7')?>" ><?=lang('q7')?></option>
 
-			<option value="<?=$lang_passport['q8']?>" ><?=$lang_passport['q8']?></option>
+			<option value="<?=lang('q8')?>" ><?=lang('q8')?></option>
 
-			<option value="<?=$lang_passport['q9']?>" ><?=$lang_passport['q9']?></option>
+			<option value="<?=lang('q9')?>" ><?=lang('q9')?></option>
 
-			<option value="<?=$lang_passport['q10']?>" ><?=$lang_passport['q10']?></option>
+			<option value="<?=lang('q10')?>" ><?=lang('q10')?></option>
 			
 		</select></TD>
 		</TR>
 <TR>
-<TD><?=$lang_passport['youranswer']?>:</TD>
+<TD><?=lang('youranswer')?>:</TD>
 <TD><div id="errorsDiv_answer"></div><INPUT class="textfield" type="text" name="answer" /></TD>
 </TR>
 <?}?>
 
 <TR>
-<TD><?=$lang_passport['nickname']?>:</TD>
+<TD><?=lang('nickname')?>:</TD>
 <TD><div id="errorsDiv_nickname"></div><INPUT class="textfield" type="text" name="nickname" value="<?=$nickname?>" /></TD>
 </TR>
 <TR>
-<TD><?=$lang_passport['sex']?>:</TD>
-<TD><div id="errorsDiv_sex"></div><INPUT type="radio" name="sex" value="1" <? if($select_sex==1) echo 'checked';?> /><?=$lang_passport['boy']?> <INPUT type="radio" name="sex" value="2" <? if($select_sex==2) echo 'checked';?>/><?=$lang_passport['girl']?>&nbsp;&nbsp;</TD>
+<TD><?=lang('sex')?>:</TD>
+<TD><div id="errorsDiv_sex"></div><INPUT type="radio" name="sex" value="1" <? if($select_sex==1) echo 'checked';?> /><?=lang('boy')?> <INPUT type="radio" name="sex" value="2" <? if($select_sex==2) echo 'checked';?>/><?=lang('girl')?>&nbsp;&nbsp;</TD>
 </TR>
 
 
 <TR>
-<TD><?=$lang_passport['validatecode']?>:</TD>
-<TD><div id="errorsDiv_code"></div><INPUT type="text" name="code" class="textfield" style="width:60px"/><img id="codeimg" src="<?=$www_site_url?>/index.php/identifycode/generate" align="absmiddle" title="<?=$lang_passport['anotherone']?>" onClick="changeCode();" style="cursor:pointer"></TD>
+<TD><?=lang('validatecode')?>:</TD>
+<TD><div id="errorsDiv_code"></div><INPUT type="text" name="code" class="textfield" style="width:60px"/><img id="codeimg" src="<?=$www_site_url?>/index.php/identifycode/generate" align="absmiddle" title="<?=lang('anotherone')?>" onClick="changeCode();" style="cursor:pointer"></TD>
 </TR>
 
 <TR><TD>&nbsp;</TD><TD></TD></TR>
-<TR><TD colspan="2"><INPUT class="button" type="submit" value="<?=$lang_passport['signup']?>" name="registerbtn"/> 
-<INPUT class="button" type=reset value="<?=$lang_passport['reset']?>"/> 
-<INPUT class="button" type="button" value="<?=$lang_passport['back']?>" onclick="history.go(-1)"/></TD></TR>
+<TR><TD colspan="2"><INPUT class="button" type="submit" value="<?=lang('signup')?>" name="registerbtn"/> 
+<INPUT class="button" type=reset value="<?=lang('reset')?>"/> 
+<INPUT class="button" type="button" value="<?=lang('back')?>" onclick="history.go(-1)"/></TD></TR>
 </TABLE>
 </form>
 <? include_once("footer.html")?>

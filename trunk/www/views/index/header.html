@@ -1,32 +1,32 @@
 <div id="header">
-<img src="<?=$www_site_url?>/public/images/xppass.gif"><?=$lang_global['web-title']?>
-<div id="language"><?=$lang_global['selectlanguage']?>:<select name="select_lang" onchange="window.location.href='<?=$www_site_url?>/index.php/index/setlang/'+this.options[this.selectedIndex].value">
-<option value="zh-cn" <?if($selected_lang=='zh-cn') echo "selected"; ?>><?=$lang_global['zh-cn']?></option>
-<option value="zh-tw" <?if($selected_lang=='zh-tw') echo "selected"; ?>><?=$lang_global['zh-tw']?></option>
-<option value="en" <?if($selected_lang=='en') echo "selected"; ?>><?=$lang_global['en']?></option>
+<img src="<?=$www_site_url?>/public/images/xppass.gif"><?=lang('web-title')?>
+<div id="language"><?=lang('selectlanguage')?>:<select name="select_lang" onchange="window.location.href='<?=$www_site_url?>/index.php/index/setlang/'+this.options[this.selectedIndex].value">
+<option value="zh-cn" <?if($selected_lang=='zh-cn') echo "selected"; ?>><?=lang('zh-cn')?></option>
+<option value="zh-tw" <?if($selected_lang=='zh-tw') echo "selected"; ?>><?=lang('zh-tw')?></option>
+<option value="en" <?if($selected_lang=='en') echo "selected"; ?>><?=lang('en')?></option>
 </select></div>
 </div>
 <div id="menu"> 
 <ul>
 <li>
-  <a <? if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='index' && ($_GET['view']=='defaults' or $_GET['view']=='')) echo "class='active'";?> href="/index.php/index"><?=$lang_global['menu1']?></a>
+  <a <? if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='index' && ($_GET['view']=='defaults' or $_GET['view']=='')) echo "class='active'";?> href="/index.php/index"><?=lang('menu1')?></a>
 </li><li>
-  <a <? if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='passport' && $_GET['view']=='login') echo "class='active'";?> href="/index.php/passport/login"><?=$lang_global['menu2']?></a>
+  <a <? if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='passport' && $_GET['view']=='login') echo "class='active'";?> href="/index.php/passport/login"><?=lang('menu2')?></a>
 </li>
 <li>
-  <a <? if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='passport' && $_GET['view']=='reg') echo "class='active'";?> href="/index.php/passport/reg"><?=$lang_global['menu3']?></a> 
+  <a <? if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='passport' && $_GET['view']=='reg') echo "class='active'";?> href="/index.php/passport/reg"><?=lang('menu3')?></a> 
 </li>
 <? if(isset($user['user_id'])&&$user['user_id']=='1'){?>
 <li>    
-  <a href="/admin.php"><?=$lang_global['menu4']?></a>
+  <a href="/admin.php"><?=lang('menu4')?></a>
 </li>
 <?}?>
 <li>    
-  <a href="/index.php/index/help"><?=$lang_global['menu5']?></a>
+  <a href="/index.php/index/help"><?=lang('menu5')?></a>
 </li>
 <? if(isset($user) && $user['user']){?>
 <li>    
-  <a href="/index.php/passport/logout"><?=$lang_global['menu6']?></a>
+  <a href="/index.php/passport/logout"><?=lang('menu6')?></a>
 </li>
 <? }?>
 </ul>  

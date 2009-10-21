@@ -21,12 +21,12 @@ function checkOnSubmit(formName, r) {
 
 var rules=new Array();
 
-rules[0]='newpwd1|required|<?=$lang_passport['insertpwd']?>';
-rules[1]='newpwd1|minlength|6|<?=$lang_passport['pwdrule']?>';
-rules[2]='newpwd2|equal|$newpwd1|<?=$lang_passport['pwdnotsame']?>';
+rules[0]='newpwd1|required|<?=lang('insertpwd')?>';
+rules[1]='newpwd1|minlength|6|<?=lang('pwdrule')?>';
+rules[2]='newpwd2|equal|$newpwd1|<?=lang('pwdnotsame')?>';
 
 
-yav.addHelp('new1', '<?=$lang_passport['insertyouranswer']?>');
+yav.addHelp('new1', '<?=lang('insertyouranswer')?>');
 
 
 
@@ -42,11 +42,11 @@ yav.addHelp('new1', '<?=$lang_passport['insertyouranswer']?>');
 <input type="hidden" name="code" value="<?=$code?>">
 <TABLE valign=top>
 
-<TR><TD><?=$lang_passport['newpwd']?>:</TD><TD><INPUT class="textfield" type="password" name=newpwd1 />&nbsp;&nbsp;<span id=errorsDiv_newpwd1></span></TD></TR>
-<TR><TD><?=$lang_passport['newpwd2']?>:</TD><TD><INPUT class="textfield" type="password" name=newpwd2 />&nbsp;&nbsp;<span id=errorsDiv_newpwd2></span></TD></TR>
+<TR><TD><?=lang('newpwd')?>:</TD><TD><INPUT class="textfield" type="password" name=newpwd1 />&nbsp;&nbsp;<span id=errorsDiv_newpwd1></span></TD></TR>
+<TR><TD><?=lang('newpwd2')?>:</TD><TD><INPUT class="textfield" type="password" name=newpwd2 />&nbsp;&nbsp;<span id=errorsDiv_newpwd2></span></TD></TR>
 
 
-<TR><TD colspan="2"><INPUT class="button" type=submit value="<?=$lang_passport['submit']?>" /> <br></TD><TD></TD></TR>
+<TR><TD colspan="2"><INPUT class="button" type=submit value="<?=lang('submit')?>" /> <br></TD><TD></TD></TR>
 </TABLE>
 </form>
 

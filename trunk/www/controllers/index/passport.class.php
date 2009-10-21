@@ -31,14 +31,14 @@ class passport {
 		if(isset($_SESSION['pwd_error']) && isset($_POST ['code'])){
 			$vcode		 =strtolower($_POST ['code']);
 			if($vcode!=strtolower($_SESSION['validatecode'])){
-				$msg = array('s'=> 400,'m'=>$GLOBALS['gLang']['lang_passport']['codeinvalid'],'d'=>'');				
+				$msg = array('s'=> 400,'m'=>lang('codeinvalid'),'d'=>'');				
 				exit(json_output($msg));
 			}
 		}
 		
 		//signature
 		if($sign!=hmac($_SESSION['_XppassSignKey'],$user_passwd)){
-			$msg = array('s'=> 400,'m'=>$GLOBALS['gLang']['lang_passport']['illegalsignon'],'d'=>'');				
+			$msg = array('s'=> 400,'m'=>lang('illegalsignon'),'d'=>'');				
 			exit(json_output($msg));
 		}
 		
@@ -81,7 +81,7 @@ class passport {
 					}
 									
 				} else {
-					$msg = $GLOBALS['gLang']['lang_passport']['userforbidden'];
+					$msg = lang('userforbidden');
 				}
 				
 			} else {
@@ -93,7 +93,7 @@ class passport {
 				if($_SESSION['pwd_error']>3){
 					$msg = "reload";
 				}else{
-					$msg = $GLOBALS['gLang']['lang_passport']['pwdwrong'];
+					$msg = lang('pwdwrong');
 				}
 			}
 		} else {
@@ -105,7 +105,7 @@ class passport {
 				if($_SESSION['pwd_error']>3){
 					$msg = "reload";
 				}else{
-					$msg = $GLOBALS['gLang']['lang_passport']['usernotexist'];
+					$msg = lang('usernotexist');
 				}
 		}
 		$msg = array('s'=> 400,'m'=>$msg,'d'=>'');				
@@ -169,22 +169,22 @@ class passport {
 								}
 
 							} else {
-								$msg = $GLOBALS['gLang']['lang_passport']['userforbidden'];
+								$msg = lang('userforbidden');
 							}
 						} else {
-							$msg = $GLOBALS['gLang']['lang_passport']['pwdwrong'];
+							$msg = lang('pwdwrong');
 						}
 					} else {
-						$msg = $GLOBALS['gLang']['lang_passport']['usernotexist'];
+						$msg = lang('usernotexist');
 					}
 				} else {
-					$msg = $GLOBALS['gLang']['lang_passport']['invalidurl'];
+					$msg = lang('invalidurl');
 				}
 			}else{
-				$msg = $GLOBALS['gLang']['lang_passport']['illegalsignon'];
+				$msg = lang('illegalsignon');
 			}
 		}else{
-			$msg = $GLOBALS['gLang']['lang_passport']['illegalsignon'];
+			$msg = lang('illegalsignon');
 		}
 		show_message ( $msg );
 		
@@ -331,7 +331,7 @@ class passport {
 	}
 	function view_regok() {
 		
-		show_message($GLOBALS['gLang']['lang_passport']['registered']);
+		show_message(lang('registered'));
 		redirect($GLOBALS ['gSiteInfo'] ['www_site_url']. '/index.php');
 	}
 	function op_saveuser() {
@@ -345,37 +345,37 @@ class passport {
 		$pattern = "/^[a-zA-Z][a-zA-Z0-9_]{1,13}[a-zA-Z0-9]$/i";
 		$pattern2 = "/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/";
 		if (!isset($_SESSION['validatecode']) || ($_POST['code']!='back' && strtolower($_POST['code'])!=strtolower($_SESSION['validatecode']))) {
-			$msg = array('s'=> 400,'m'=>$GLOBALS['gLang']['lang_passport']['codeinvalid'],'d'=>'');				
+			$msg = array('s'=> 400,'m'=>lang('codeinvalid'),'d'=>'');				
 			exit(json_output($msg));
 		}
 		if($reg_type=='username'){
 			$_POST ['username'] = trim ( $_POST ['username'] );
 			if (empty ( $_POST ['username'] ) || ! preg_match ( $pattern, $_POST ['username'] )) {
-				$msg = array('s'=> 400,'m'=>$GLOBALS['gLang']['lang_passport']['usernamerule'],'d'=>'');				
+				$msg = array('s'=> 400,'m'=>lang('usernamerule'),'d'=>'');				
 				exit(json_output($msg));
 			}
 			$_SESSION ['username'] = $_POST ['username'];
 		}
 		if($reg_type=='email'){
 			if (empty ( $_POST ['email'] ) || ! preg_match ( $pattern2, $_POST ['email'] )) {
-				$msg = array('s'=> 400,'m'=>$GLOBALS['gLang']['lang_passport']['insertemail'],'d'=>'');				
+				$msg = array('s'=> 400,'m'=>lang('insertemail'),'d'=>'');				
 				exit(json_output($msg));
 			}
 			$_SESSION ['email'] =    $_POST ['email'];
 		}
 		if ($_POST ['password'] != $_POST ['comfirmpwd']) {
-			$msg = array('s'=> 400,'m'=>$GLOBALS['gLang']['lang_passport']['pwdnotsame'],'d'=>'');				
+			$msg = array('s'=> 400,'m'=>lang('pwdnotsame'),'d'=>'');				
 			exit(json_output($msg));
 		}
 		$_POST ['nickname'] = trim ( $_POST ['nickname'] );
 		$nickname_len = mb_strlen ( $_POST ['nickname'], "UTF-8");
 		if (empty ( $_POST ['nickname'] ) || $nickname_len < 2 || $nickname_len > 12) {
-			$msg = array('s'=> 400,'m'=>$GLOBALS['gLang']['lang_passport']['nicknamerule'],'d'=>'');				
+			$msg = array('s'=> 400,'m'=>lang('nicknamerule'),'d'=>'');				
 			exit(json_output($msg));
 		}
 		$_POST ['sex'] = intval($_POST ['sex']);
 		if (empty($_POST ['sex'])) {
-			$msg = array('s'=> 400,'m'=>$GLOBALS['gLang']['lang_passport']['sexrule'],'d'=>'');				
+			$msg = array('s'=> 400,'m'=>lang('sexrule'),'d'=>'');				
 			exit(json_output($msg));
 		}
 
@@ -385,7 +385,7 @@ class passport {
 
 		if($reg_type=='username' ) {
 			if($passmod->checkUser ( $_POST ['username'] )){
-				$msg = array('s'=> 400,'m'=>$GLOBALS['gLang']['lang_passport']['userexist'],'d'=>'');				
+				$msg = array('s'=> 400,'m'=>lang('userexist'),'d'=>'');				
 				exit(json_output($msg));
 			}
 			
@@ -396,8 +396,8 @@ class passport {
 		}		
 		if($reg_type=='email'){
 			 if($passmod->checkUser ( $_POST ['email'] )) {
-				$msg = $GLOBALS['gLang']['lang_passport']['userexist'];
-				$msg = array('s'=> 400,'m'=>$GLOBALS['gLang']['lang_passport']['userexist'],'d'=>'');				
+				$msg = lang('userexist');
+				$msg = array('s'=> 400,'m'=>lang('userexist'),'d'=>'');				
 				exit(json_output($msg));
 			}
 			$user['user_email'] = $_POST ['email'];
@@ -459,17 +459,17 @@ class passport {
 		$user = $_POST['user'];
 		$answer = $_POST['answer'];
 		if (empty ( $_POST ['newpwd1'] ) or empty ( $_POST ['newpwd2'] )) {
-			show_message_goback($GLOBALS['gLang']['lang_passport']['insertpwd']);
+			show_message_goback(lang('insertpwd'));
 		}
 
 		$new1 = $_POST ['newpwd1'];
 		$new2 = $_POST ['newpwd2'];
 		if (strlen ( $new1 ) < 6 or strlen ( $new2 ) < 6) {
-			show_message_goback($GLOBALS['gLang']['lang_passport']['pwdrule']);
+			show_message_goback(lang('pwdrule'));
 		}
 
 		if (trim ( $new1 ) != trim ( $new2 )) {
-			show_message_goback($GLOBALS['gLang']['lang_passport']['pwdnotsame']);;
+			show_message_goback(lang('pwdnotsame'));;
 		}
 		
 		include_once("PassportModel.class.php");
@@ -479,25 +479,25 @@ class passport {
 		if($answer == $user_arr['user_answer']){
 			if (false!=$passmod->updatePassByUser( $user_arr['user'], PassportModel::encryptpwd( $new1,$user) )) {
 				$passmod->updateForgetPwd($user_arr['user']);
-				show_message_goback($GLOBALS['gLang']['lang_passport']['pwdreset']);;
+				show_message_goback(lang('pwdreset'));;
 			} else {
-				show_message_goback($GLOBALS['gLang']['lang_passport']['failture']);
+				show_message_goback(lang('failture'));
 			}
 		}else{
-			show_message_goback($GLOBALS['gLang']['lang_passport']['answerwrong']);
+			show_message_goback(lang('answerwrong'));
 		}
 	}
 	function op_emailpwd() {
 		$flag = 0;
 		if (empty ( $_POST ['user'] )) {
-			show_message_goback($GLOBALS['gLang']['lang_passport']['helpmsg1']);
+			show_message_goback(lang('helpmsg1'));
 		}
 		$user = trim ( $_POST ['user'] );
 		include_once("PassportModel.class.php");
 		$passmod = new PassportModel();
 		$userindex = $passmod->getUser ($user );
 		if (false==$userindex) {
-			show_message_goback($GLOBALS['gLang']['lang_passport']['usernotexist']);
+			show_message_goback(lang('usernotexist'));
 		}
 		
 		if(false===strpos($user,'@')){		
@@ -506,17 +506,17 @@ class passport {
 		}
 		$code = $passmod->addForgetPwd ( $user );
 		if ($code == 5) {
-			show_message_goback($GLOBALS['gLang']['lang_passport']['emailsent']);
+			show_message_goback(lang('emailsent'));
 		}
 
 		$userinfo = $passmod->getUserById($userindex['user_id'],$user);
 		$link = "<a href='" . $GLOBALS ['gSiteInfo'] ['www_site_url'] . "/index.php/passport/resetpwd/code/" . $code . "'>" . $GLOBALS ['gSiteInfo'] ['www_site_url'] . "/index.php/passport/resetpwd/code/" . $code . "</a><br />";
 		
-		$content = $GLOBALS['gLang']['lang_passport']['emailcontent'] ;
+		$content = lang('emailcontent') ;
 		$content = sprintf($content,$userinfo['user_nickname'],$link, $GLOBALS ["gSiteInfo"] ["web_description"]);
 
-		$flag = send_email( $GLOBALS ["gEmail"] ["smtp_account"],$user, $GLOBALS['gLang']['lang_passport']['emailsubject'], $content );
-		if($flag==1) show_message_goback($GLOBALS['gLang']['lang_passport']['emailsendok']);
+		$flag = send_email( $GLOBALS ["gEmail"] ["smtp_account"],$user, lang('emailsubject'), $content );
+		if($flag==1) show_message_goback(lang('emailsendok'));
 		
 	}
 	function view_resetpwd() {
@@ -531,8 +531,8 @@ class passport {
 		$flag = "0";
 		$row = $passmod->checkForget ( $code );
 		if (!$row) {			
-			show_message($GLOBALS['gLang']['lang_passport']['invalidurl']);
-			echo "<script> alert('".$GLOBALS['gLang']['lang_passport']['invalidurl']."')</script>";	
+			show_message(lang('invalidurl'));
+			echo "<script> alert('".lang('invalidurl')."')</script>";	
 			redirect ($GLOBALS ['gSiteInfo'] ['www_site_url']. '/index.php/passport/login' );		
 		}
 		$tpl->assign ( "code", $code );
@@ -540,21 +540,21 @@ class passport {
 	}
 	function op_resetpwd() {
 		if (empty ( $_POST ['code'] )) {
-		 	show_message_goback($GLOBALS['gLang']['lang_passport']['invalidurl']);
+		 	show_message_goback(lang('invalidurl'));
 		}
 
 		if (empty ( $_POST ['newpwd1'] ) or empty ( $_POST ['newpwd2'] )) {
-			show_message_goback($GLOBALS['gLang']['lang_passport']['insertpwd']);
+			show_message_goback(lang('insertpwd'));
 		}
 
 		$new1 = $_POST ['newpwd1'];
 		$new2 = $_POST ['newpwd2'];
 		if (strlen ( $new1 ) < 6 or strlen ( $new2 ) < 6) {
-			show_message_goback($GLOBALS['gLang']['lang_passport']['pwdrule']);
+			show_message_goback(lang('pwdrule'));
 		}
 
 		if (trim ( $new1 ) != trim ( $new2 )) {
-			show_message_goback($GLOBALS['gLang']['lang_passport']['pwdnotsame']);;
+			show_message_goback(lang('pwdnotsame'));;
 		}
 
 		$code = $_POST ['code'];
@@ -566,14 +566,14 @@ class passport {
 		if ($row) {		
 			if (false!=$passmod->updatePassByUser ( $row['user'], PassportModel::encryptpwd( $new1,$row['user']) )) {
 				$passmod->updateForgetPwd($row['user']);
-				show_message($GLOBALS['gLang']['lang_passport']['pwdreset']);
+				show_message(lang('pwdreset'));
 				redirect ( $GLOBALS ['gSiteInfo'] ['www_site_url'].'/index.php/passport/login' );
 			} else {
-				show_message_goback($GLOBALS['gLang']['lang_passport']['failture']);
+				show_message_goback(lang('failture'));
 			}
 		} else { 
-			show_message($GLOBALS['gLang']['lang_passport']['invalidurl']);
-			echo "<script> alert('".$GLOBALS['gLang']['lang_passport']['invalidurl']."')</script>";
+			show_message(lang('invalidurl'));
+			echo "<script> alert('".lang('invalidurl')."')</script>";
 			redirect ( $GLOBALS ['gSiteInfo'] ['www_site_url'].'/index.php/passport/login' );
 		}
 	}

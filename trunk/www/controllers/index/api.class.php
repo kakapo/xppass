@@ -9,9 +9,9 @@ class api{
 	}
 	
 	function verifySign($domain,$text,$sign){
-		require_once 'ToolManage.class.php';		
-		$toolManage = new ToolManage();
-		$client = $toolManage->getClientByDomain($domain);
+		require_once 'ToolModel.class.php';		
+		$ToolModel = new ToolModel();
+		$client = $ToolModel->getClientByDomain($domain);
 		$this->_private_key = $client['private_key'];
 		if (hmac($this->_private_key,$text,'sha1')==$sign) {
 			return true;	  
