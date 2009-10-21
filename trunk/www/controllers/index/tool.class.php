@@ -8,17 +8,5 @@ class tool {
 		
 	}
 	
-	function view_createclient(){
-		
-		$arr['domain'] = $_GET['domain'];
-		
-		$ToolModel = new ToolModel();
-		
-		$arr['key'] = $ToolModel->generateKey();
-		
-		$ToolModel->addNewClient($arr);
-	}
-	
-	
 }
 ?>

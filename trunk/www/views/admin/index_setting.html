@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Xppass Administrator's Control Panel</title>
+<LINK href="<?=$www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+</head>
+<body>
+
+<div class="container">
+
+			<div class="mainbox nomargin">
+			<form action="admin.php" method="post">
+				<input type="hidden" name="action" value="index">
+				<input type="hidden" name="op" value="updatesetting">
+				<table class="opt">
+					<tr>
+						<th colspan="2"><?=lang('sso_mode')?>:</th>
+					</tr>
+					<tr>
+						<td>
+							<label><input type="radio" name="ssomode" value="cookie" <? if($ssomode=='cookie') echo 'checked';?>> Cookie</label>
+		<label><input type="radio" name="ssomode" value="session" <? if($ssomode=='session') echo 'checked';?>> Session</label>
+		<label><input type="radio" name="ssomode" value="ticket" <? if($ssomode=='ticket') echo 'checked';?>> Ticket</label>
+						</td>
+						<td><?=lang('ssomode_label')?></td>
+					</tr>
+					
+				</table>
+				<div class="opt"><input type="submit" name="submit" value=" 提 交 " class="button" tabindex="3" /></div>
+			</form>
+		</div>
+
+	</div>
+
+
+</body>
+</html>

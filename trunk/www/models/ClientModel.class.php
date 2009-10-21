@@ -1,19 +1,15 @@
 <?php
-class UserModel extends Model {
+class ClientModel extends Model {
 	function __construct(){
 		$this->db = parent::dbConnect($GLOBALS ["gDataBase"] ["db"]);
 	}
 	function getItems($con,$pageCount){
 		$select =$this->db->select();
-		$select->from ( " user_index ","*");
+		$select->from ( " client ","*");
 		
 		//
 		if(isset($con['order'])) $select->order ( $con['order']." desc" );
-		if(isset($con['user']) && !empty($con['user'])) $select->where ( " user = '".$con['user']."'" );
-		if(isset($con['user_id']) && !empty($con['user_id'])) $select->where ( " user_id = '".$con['user_id']."'" );
-		if(isset($con['user_nickname']) && !empty($con['user_nickname'])) $select->where ( " user_nickname like '".$con['user_nickname']."%'" );
-		if(isset($con['user_reg_time']) && !empty($con['user_reg_time'])) $select->where ( " user_reg_time >= '".strtotime($con['user_reg_time'])."'" );
-		if(isset($con['user_reg_time1'])&& !empty($con['user_reg_time1'])) $select->where ( " user_reg_time < '".strtotime($con['user_reg_time1'])."'" );
+		if(isset($con['domain']) && !empty($con['domain'])) $select->where ( " domain like '%".$con['domain']."%'" );
 		
 		$list = array();
 		$offset = '';
@@ -38,6 +34,23 @@ class UserModel extends Model {
 		return (array) $list;
 	}
 	
+	public function generateKey(){
+		$tmp = array_merge(range(0, 9), range('A', 'Z'));
+	    $key = '';
+	    for ($i = 0; $i < 16; $i++) {
+	        $key .= $tmp[mt_rand(0, 35)];
+	    }
+	    return md5($key);    
+	}
+	
+	public function addNewClient($arr){
+		$sql = "insert into `client` (`domain`, `private_key`) values (?,?)";
+		return $this->db->execute($sql,array($arr['domain'],$arr['key']));
+	}
+	public function deleteClient($client_id){
+		$sql = "delete from client where client_id=?";
+		return $this->db->execute($sql,array($client_id));
+	}
 }
 
 ?>
