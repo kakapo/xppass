@@ -471,7 +471,7 @@ function send_email($from="no-reply@guodong.com",  $to, $subject, $message)
 	$message= mb_convert_encoding($message,"gb2312","utf-8");
 
 	$smtpServer = $GLOBALS['gEmail']['smtp_host']; //ip accepted as well
-	$port = "25"; // should be 25 by default
+	$port = isset($GLOBALS['gEmail']['smtp_port'])?$GLOBALS['gEmail']['smtp_port']:25; // should be 25 by default
 	$timeout = "30"; //typical timeout. try 45 for slow servers
 	$username = $GLOBALS['gEmail']['smtp_account'];//"no-reply@guodong.com"; //the login for your smtp
 	$password = $GLOBALS['gEmail']['smtp_pass'];//"tsong-0810"; //the pass for your smtp

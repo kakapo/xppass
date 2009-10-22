@@ -535,12 +535,20 @@ function write_file($content,$path,$mode='wb')
 		@create_dir(dirname($path));
 	}
 
-	if(!($file = fopen($path,$mode)))
+	if(!($fp = fopen($path,$mode)))
 	{
 		return false;
 	}
-
-	file_put_contents($path,$content,LOCK_EX);
+	if (flock($fp, LOCK_EX)) { // 进行排它型锁定
+	    fwrite($fp, $content);
+	    flock($fp, LOCK_UN); // 释放锁定
+	} else {
+		fclose($fp);
+	    return false;
+	}
+	
+	fclose($fp);
+	//file_put_contents($path,$content,LOCK_EX);
 	return true;
 }
 
