@@ -3,7 +3,7 @@ BODY {
 }
 em, cite, th{ font-style:normal; font-weight:normal; }
 
-INPUT.textfield{border:1px solid #ccc; color:#777; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px; padding:.25em .2em; 
+TEXTAREA.textfield, INPUT.textfield{border:1px solid #ccc; color:#777; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px; padding:.25em .2em; 
 width:200px; margin:0 0 .25em}
 INPUT.button{border:1px outset #ccc; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px; padding:.25em .2em; margin:0 0 .25em}
 #header{background:#fcfcfc url(images/header_bg.png) 0 100% repeat-x;height:6.82em;min-width:75em;border-bottom:1px solid #ccc}
@@ -53,8 +53,13 @@ a{text-decoration:underline;color:black}
 	.datalist .bigarea { width: 500px; height: 80px; }
 .fixwidth{ width: 100%; }
 .mainbox{ margin:10px 0; }
+.nomargin{ margin:0; }
 
 .container{ padding:20px; text-align:left; background:url(bg_repx_hb.gif) repeat-x; }
+.note{ margin:5px 0; padding:5px; width:680px; border:1px solid #CCC; background:#efefef; }
+.i{ padding-left:22px; line-height:19px; background:url(bg_repno.gif) no-repeat -275px -100px; }
+.i a{ text-decoration:underline; }
+.i a:hover{ text-decoration:none; }
 
 .hastabmenu{ position:relative; height:90px; width: 100%;}
 .tabmenu{ position:absolute; z-index:80; list-style:none; margin:-8px 0 0 0; *margin:-8px 0;padding:0}

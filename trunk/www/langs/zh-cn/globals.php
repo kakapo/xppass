@@ -205,7 +205,7 @@ $GLOBALS['gLang']['insertpwd'] = "输入密码！";
 $GLOBALS['gLang']['insertemail'] = "请输入有效邮箱！";
 $GLOBALS['gLang']['usernamerule'] = "用户名只能由3-15位字母(a-z)、数字(0-9)或下划线(_)构成,  并且只能以字母开头！";
 $GLOBALS['gLang']['pwdnotsame'] = "两个密码不一致！";
-$GLOBALS['gLang']['nicknamerule'] = "昵称不能为空，长度在2-8个字";
+$GLOBALS['gLang']['nicknamerule'] = "昵称不能为空，长度在2-16个字";
 $GLOBALS['gLang']['sexrule'] = "请选择性别！";
 $GLOBALS['gLang']['submit'] = "提交";
 $GLOBALS['gLang']['registered'] = "祝贺！您已经成功注册！";
@@ -238,6 +238,7 @@ $GLOBALS['gLang']['selectlanguage'] = '选择语言';
 $GLOBALS['gLang']['zh-cn'] = '简体中文';
 $GLOBALS['gLang']['zh-tw'] = '繁体中文';
 $GLOBALS['gLang']['en'] = '英文';
+$GLOBALS['gLang']['nicknameexist'] = '此昵称已存在，请换一个！';
 
 
 ?>

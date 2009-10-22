@@ -1,3 +1,10 @@
+DROP TABLE IF EXISTS `setting`;
+CREATE TABLE IF NOT EXISTS `setting` (
+  `k` varchar(32) NOT NULL default '',
+  `v` text NOT NULL,
+  PRIMARY KEY  (`k`)
+) ENGINE=MyISAM;
+
 DROP TABLE IF EXISTS `client`;
 CREATE TABLE IF NOT EXISTS `client` (
   `client_id` tinyint(4) NOT NULL auto_increment,
@@ -30,12 +37,6 @@ CREATE TABLE IF NOT EXISTS `onlineuser` (
   UNIQUE KEY `user` (`user`)
 ) ENGINE=MyISAM;
 
--- --------------------------------------------------------
-
-DROP TABLE IF EXISTS `user_blockword`;
-CREATE TABLE IF NOT EXISTS `user_blockword` (
-  `word` text character set utf8 NOT NULL
-) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -47,6 +48,7 @@ CREATE TABLE IF NOT EXISTS `user_index` (
   `user_reg_time` int(11) unsigned NOT NULL,
   PRIMARY KEY  (`user_id`),
   UNIQUE `user` (`user`),
+  INDEX `user_nickname` (`user_nickname`),
   KEY `user_reg_time` (`user_reg_time`)
 ) ENGINE=MyISAM;
 

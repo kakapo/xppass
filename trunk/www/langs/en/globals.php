@@ -48,7 +48,7 @@ $GLOBALS['gLang']['insertpwd'] = "Please insert password!";
 $GLOBALS['gLang']['insertemail'] = "Please insert a available email!";
 $GLOBALS['gLang']['usernamerule'] = "The username consist of 3-15 characters(a-z), numbers(0-9) or (_). Begin with only characters!";
 $GLOBALS['gLang']['pwdnotsame'] = "Two passwords are not the same!";
-$GLOBALS['gLang']['nicknamerule'] = "The nickname is empty! Its length should be more than 2 characters, less than 8 characters!";
+$GLOBALS['gLang']['nicknamerule'] = "The nickname is empty! Its length should be more than 2 characters, less than 16 characters!";
 $GLOBALS['gLang']['sexrule'] = "Please choose the sex!";
 $GLOBALS['gLang']['submit'] = "Submit";
 $GLOBALS['gLang']['registered'] = "Congratulations! You have successfully registered";
@@ -81,4 +81,5 @@ $GLOBALS['gLang']['selectlanguage'] = 'Select Language';
 $GLOBALS['gLang']['zh-cn'] = 'Chinese (Simplified)';
 $GLOBALS['gLang']['zh-tw'] = 'Chinese (Traditional)';
 $GLOBALS['gLang']['en'] = 'English';
+$GLOBALS['gLang']['nicknameexist'] = 'The nickname exist! Please change another.';
 ?>

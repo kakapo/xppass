@@ -41,37 +41,5 @@ class index{
 		$this->tpl->assign('magic_quote_gpc', $magic_quote_gpc);
 		$this->tpl->assign('allow_url_fopen', $allow_url_fopen);
     }
-
-    function view_setting(){
-    	$this->tpl->assign('ssomode',SSO_MODE);
-    }
-    function op_updatesetting(){
-    	
-    	$config = "<?php \r\ndefine('SSO_MODE', '{$_POST['ssomode']}');\r\n";
-		$config .= "define('MULTI_TABLE', '".MULTI_TABLE."');\r\n";
-		$config .= '$GLOBALS ["gDataBase"] ["db"] = array (
-	  "dbname" => "'.$GLOBALS ["gDataBase"] ["db"]['dbname'].'",
-	  "type" => "'.$GLOBALS ["gDataBase"] ["db"]['type'].'",
-	  "host" => "'.$GLOBALS ["gDataBase"] ["db"]['host'].'",
-	  "port" => "'.$GLOBALS ["gDataBase"] ["db"]['port'].'",
-	  "user" => "'.$GLOBALS ["gDataBase"] ["db"]['user'].'",
-	  "passwd" => "'.$GLOBALS ["gDataBase"] ["db"]['passwd'].'",
-	  "charset"=> "'.$GLOBALS ["gDataBase"] ["db"]['charset'].'",
-	);
-	?>';
-		try{
-			$fp = fopen(APP_DIR.'/config/install.ini.php', 'w');
-			fwrite($fp, $config);
-			fclose($fp);
-			show_message_goback(lang('success'));
-		}catch (Exception $e){
-			
-		}
-		
-    }
-	
-    function view_regreset(){
-    	
-    }
 }
 ?>

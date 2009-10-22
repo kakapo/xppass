@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Xppass Administrator's Control Panel</title>
+<LINK href="<?=$www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+</head>
+<body>
+
+<div class="container">
+
+			<div id="msg"></div>
+			<div class="mainbox nomargin">
+			<form action="admin.php" method="post">
+				<input type="hidden" name="action" value="setting">
+				<input type="hidden" name="op" value="regset">
+				<table class="opt">
+					<tr>
+						<th colspan="2">是否允许昵称重复:</th>
+					</tr>
+
+					<tr>
+						<td>
+							<input type="radio" id="yes" class="radio" name="doublenick" value="1" <? if(isset($doublenick) && $doublenick==1) echo "checked";?> /><label for="yes">是</label>
+							<input type="radio" id="no" class="radio" name="doublenick" value="0"  <? if(isset($doublenick) && $doublenick==0) echo "checked";?>/><label for="no">否</label>
+						</td>
+					</tr>
+					
+					<tr>
+						<th colspan="2">禁止的 Email 地址:</th>
+
+					</tr>
+					<tr>
+						<td><textarea class="textfield" name="banemail" rows="4" style="width:300px"><? if(isset($banemail)) echo $banemail;?></textarea></td>
+						<td valign="top">禁止使用这些域名结尾的 Email 地址注册。<br>只需填写 Email 的域名部分，每行一个域名，例如 @hotmail.com</td>
+					</tr>
+					<tr>
+						<th colspan="2">禁止的用户名:</th>
+
+					</tr>
+					<tr>
+						<td><textarea class="textfield" name="banusername" rows="4" style="width:300px"><? if(isset($banusername)) echo $banusername;?></textarea></td>
+						<td valign="top">可以设置通配符，每个关键字一行，可使用通配符 "*" 如 "*admin*"(不含引号)。</td>
+					</tr>
+				</table>
+				<div class="opt"><input type="submit" name="submit" value=" 提 交 " class="button" tabindex="3" /></div>
+			</form>
+
+		</div>
+	</div>
+
+
+</body>
+</html>

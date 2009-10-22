@@ -17,11 +17,18 @@ class PassportModel extends Model {
 	private function _getBlockword() {
 		$allblockwords = array ();
 		
-		$sql = "select word From user_blockword";
-		$result = $this->db->getOne ( $sql );
-		$arr = explode ( '|', $result );
+		$sql = "select v from setting where k='banusername'";
+		$result = $this->db->getOne ( $sql,'', 3600 ,'banusername');
+		$arr = explode ( "\n", $result );
 		foreach ( $arr as $row ) {
-			$allblockwords [] = $row;
+			$allblockwords [] = trim($row);
+		}		
+		
+		$sql = "select v From setting where k='banemail'";
+		$result = $this->db->getOne ( $sql,'', 3600 ,'banemail');
+		$arr = explode ( "\n", $result );
+		foreach ( $arr as $row ) {
+			$allblockwords [] = trim($row);
 		}
 		return $allblockwords;
 	}
@@ -34,6 +41,16 @@ class PassportModel extends Model {
 
 	public function checkUser($user) {	
 		return $this->db->getOne ( "select user_id from user_index where user = '{$user}'" );
+	}	
+	
+	public function checkNickname($nickname) {	
+		$sql = "select v from setting where k='doublenick'";
+		$result = $this->db->getOne ( $sql,'', 3600 ,'doublenick');
+		if($result){
+			return $this->db->getOne ( "select user_id from user_index where user_nickname = '{$nickname}'" );
+		}else{
+			return 0;
+		}
 	}
 
 	public function updateUser($item,$user_id,$user){
@@ -59,27 +76,34 @@ class PassportModel extends Model {
 	 **/
 	public function isBlockword($newword) {
 		$allblockwords = $this->_getBlockword ();
-		//print_r($allblockwords);
 		$n = 0;
 		for($i = 0, $c = count ( $allblockwords ); $i < $c; $i ++) {
 			//如果有*号表示要匹配查询
 			if (empty ( $allblockwords [$i] ))
 				break;
 			$res = strpos ( $allblockwords [$i], "*" );
+			$res1 = strpos ( $allblockwords [$i], "@" );
 			if ($res !== false) {
 				//$res = strripos($newword, $blockword);
 				$blockword = str_replace ( "*", "(.*?)", $allblockwords [$i] );
-				$pattern = "/" . $blockword . "/i";
+				$pattern = "/^" . $blockword . "/i";
 
 				if (preg_match ( $pattern, $newword )) {
 					$n ++;
 				}
+			}elseif($res1 !== false){
+				
+				if (false!==strpos (  $newword ,$allblockwords [$i])) {
+					$n ++;
+				}
+				
 			} else {
 				if ($newword == $allblockwords [$i]) {
 					$n ++;
 				}
 			}
 		}
+		
 		if ($n > 0)
 			return true;
 		else

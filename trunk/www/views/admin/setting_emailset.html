@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Xppass Administrator's Control Panel</title>
+<LINK href="<?=$www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+</head>
+<body>
+<div class="container">
+
+				<div class="mainbox nomargin">
+			<form action="admin.php" method="post">
+				<input type="hidden" name="action" value="setting">
+				<input type="hidden" name="op" value="emailset">
+				<table class="opt">
+					<tr>
+						<th colspan="2">邮件来源地址:</th>
+					</tr>
+					<tr>
+
+						<td><input name="smtp_from" value="<?=$smtp_from?>" type="text" class="textfield"></td>
+						<td>当发送邮件不指定邮件来源时，默认使用此地址作为邮件来源</td>
+					
+					<tbody id="hidden1">
+					<tr>
+						<td colspan="2">SMTP 服务器:</td>
+
+					</tr>
+					<tr>
+						<td>
+							<input name="smtp_host" value="<?=$smtp_host?>" class="textfield" type="text">
+						</td>
+						<td valign="top">设置 SMTP 服务器的地址</td>
+					</tr>
+					<tr>
+
+						<td colspan="2">SMTP 端口:</td>
+					</tr>
+					<tr>
+						<td>
+							<input name="smtp_port" value="<?=$smtp_port?>" type="text" class="textfield">
+						</td>
+						<td valign="top">设置 SMTP 服务器的端口，默认为 25</td>
+					</tr>
+
+					</tbody>
+					<tbody id="hidden2">
+					
+					<tr>
+
+						<td colspan="2">SMTP 身份验证用户名:</td>
+					</tr>
+					<tr>
+						<td>
+							<input name="smtp_account" value="<?=$smtp_account?>" type="text" class="textfield">
+						</td>
+						<td valign="top"></td>
+					</tr>
+
+					<tr>
+						<td colspan="2">SMTP 身份验证密码:</td>
+					</tr>
+					<tr>
+						<td>
+							<input name="smtp_pass" value="<?=$smtp_pass?>" type="password" class="textfield">
+						</td>
+						<td valign="top"></td>
+
+					</tr>
+					</tbody>
+					
+				</table>
+				<div class="opt"><input type="submit" name="submit" value=" 提 交 " class="button" tabindex="3" /></div>
+			</form>
+
+		</div>
+	</div>
+
+
+</body>
+</html>
