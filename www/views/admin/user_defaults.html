@@ -115,7 +115,8 @@ function viewUser(user,user_id){
 		</div>
 
 		<p>&nbsp;</p>
-		<h3>用户列表</h3>
+		<h3>用户列表 </h3><div style="padding-left:20px">用户总数:<?=$total?></div>
+		
 		<div class="mainbox">
 				<form action="admin.php" onsubmit="return confirm('该操作不可恢复，您确认要删除这些用户吗？');" method="post">
 				<input type="hidden" name="action" value="user">

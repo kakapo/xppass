@@ -31,7 +31,7 @@ class user{
 		$con['user_reg_time1'] = $user_reg_time1;
 		
 		$users = $userModel->getItems($con,2);
-
+		$this->tpl->assign('total',$users['page']->total);
 		$this->tpl->assign('users',$users);
 		$this->tpl->assign('con',$con);
     }   
@@ -79,8 +79,13 @@ class user{
 		include_once("PassportModel.class.php");
 		$passmod = new PassportModel();
 	
+		if($passmod->checkNickname($_POST ['nickname'])){
+			$msg = array('s'=> 400,'m'=>lang('nicknameexist'),'d'=>'');				
+			exit(json_output($msg));
+		}
+		
 		if($reg_type=='email'){
-			 if($passmod->checkUser ( $_POST ['email'] )) {
+			 if($passmod->checkUser ( $_POST ['email'] ) || $passmod->isBlockword($_POST ['email'])) {
 				$msg = lang('userexist');
 				$msg = array('s'=> 400,'m'=>lang('userexist'),'d'=>'');				
 				exit(json_output($msg));

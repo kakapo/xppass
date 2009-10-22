@@ -62,6 +62,7 @@ $env_items = array
 
 $dirfile_items = array
 (
+	'config' => array('type' => 'file', 'path' => './config/config.ini.php'),
 	'config' => array('type' => 'dir', 'path' => './config'),
 	'tmp' => array('type' => 'dir', 'path' => './tmp')
 );

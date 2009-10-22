@@ -373,6 +373,8 @@ class passport {
 			$msg = array('s'=> 400,'m'=>lang('nicknamerule'),'d'=>'');				
 			exit(json_output($msg));
 		}
+
+		
 		$_POST ['sex'] = intval($_POST ['sex']);
 		if (empty($_POST ['sex'])) {
 			$msg = array('s'=> 400,'m'=>lang('sexrule'),'d'=>'');				
@@ -382,9 +384,12 @@ class passport {
 
 		include_once("PassportModel.class.php");
 		$passmod = new PassportModel();
-
+		if($passmod->checkNickname($_POST ['nickname'])){
+			$msg = array('s'=> 400,'m'=>lang('nicknameexist'),'d'=>'');				
+			exit(json_output($msg));
+		}
 		if($reg_type=='username' ) {
-			if($passmod->checkUser ( $_POST ['username'] )){
+			if($passmod->checkUser ( $_POST ['username'] ) || $passmod->isBlockword($_POST ['username']) ){
 				$msg = array('s'=> 400,'m'=>lang('userexist'),'d'=>'');				
 				exit(json_output($msg));
 			}
@@ -395,7 +400,7 @@ class passport {
 			$user['user_answer'] = isset($_POST ['answer'])?$_POST ['answer']:'';
 		}		
 		if($reg_type=='email'){
-			 if($passmod->checkUser ( $_POST ['email'] )) {
+			 if($passmod->checkUser ( $_POST ['email'] ) || $passmod->isBlockword($_POST ['email'])) {
 				$msg = lang('userexist');
 				$msg = array('s'=> 400,'m'=>lang('userexist'),'d'=>'');				
 				exit(json_output($msg));

@@ -23,6 +23,7 @@
 //////////////////////////////////////////////////////		
 		
 	$GLOBALS ["gEmail"] ["smtp_host"] =  "smtp.163.com";
+	$GLOBALS ["gEmail"] ["smtp_port"] =  "25";
 	$GLOBALS ["gEmail"] ["smtp_account"] =  "cuckoolaugh@163.com";
 	$GLOBALS ["gEmail"] ["smtp_pass"] =  "810600";
 	$GLOBALS ["gEmail"] ["smtp_from"] =  "cuckoolaugh@163.com";

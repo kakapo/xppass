@@ -27,7 +27,7 @@ $pageObject->setLinkStyle ( $pagerStyle );
 -------------------------------------------------------------------------*/
 class Pager {
 	//总条数
-	private $total;
+	public $total;
 	//每页显示条数
 	private $pageitem;
 	//显示页码数
