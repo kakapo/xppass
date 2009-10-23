@@ -15,11 +15,13 @@ function checkOnSubmit(formName) {
 	var url = "<?=$www_site_url?>/admin.php";
 	var params = mini.form.serialize($(formName));
 	mini.ajax.post(url, function(r){
+		
 		var r = eval('(' + r + ')');   
 		if(r.s==200){
 			window.location.href = r.d;
 		}
 		if(r.s==400){
+			alert
 			$('msg').innerHTML = r.m;			
 		}
 	}, params);
@@ -49,8 +51,8 @@ function checkOnSubmit(formName) {
 	<div class="container">
 			<div class="hastabmenu">
 				<ul class="tabmenu">
-					<li id="srchuserbtn" class="tabcurrent"><a href="#" onclick="switchbtn('srch')">搜索域名</a></li>
-					<li id="adddomainbtn"><a href="#" onclick="switchbtn('add')">添加域名</a></li>
+					<li id="srchuserbtn" class="tabcurrent"><a href="#" onclick="switchbtn('srch')"><?=lang('search_domain')?></a></li>
+					<li id="adddomainbtn"><a href="#" onclick="switchbtn('add')"><?=lang('add_domain')?></a></li>
 	
 				</ul>
 			<div id="adddomaindiv" class="tabcontent" style="display:none;">
@@ -59,8 +61,8 @@ function checkOnSubmit(formName) {
 				<input type="hidden" name="op" value="addclient">
 				<table width="100%">
 					<tr>
-						<td>新域名:</td>
-						<td><input type="text" name="adddomain" class="textfield" /> <input type="submit" value="提 交" class="button"/></td>										
+						<td><?=lang('new_domain')?>:</td>
+						<td><input type="text" name="adddomain" class="textfield" /> <input type="submit" value="<?=lang('submit')?>" class="button"/></td>										
 					</tr>
 				</table>
 				</form>
@@ -71,8 +73,8 @@ function checkOnSubmit(formName) {
 								
 				<table width="100%">
 					<tr>
-						<td>域名:</td>
-						<td><input type="text" name="domain" value="<?=$con['domain']?>" class="textfield" /> <input type="submit" value="提 交" class="button" /></td>						
+						<td><?=lang('domain')?>:</td>
+						<td><input type="text" name="domain" value="<?=$con['domain']?>" class="textfield" /> <input type="submit" value="<?=lang('submit')?>" class="button" /></td>						
 					</tr>
 				</table>
 				</form>
@@ -81,18 +83,18 @@ function checkOnSubmit(formName) {
 		</div>
 
 		
-		<h3>域名列表</h3>
+		<h3><?=lang('domain_list')?></h3>
 		<div class="mainbox">
-				<form action="admin.php" onsubmit="return confirm('该操作不可恢复，您确认要删除这些域名吗？');" method="post">
+				<form action="admin.php" onsubmit="return confirm('<?=lang('domain_delete_comfirm')?>');" method="post">
 				<input type="hidden" name="action" value="client">
 				<input type="hidden" name="op" value="delclient">
 				<table class="datalist fixwidth" onmouseover="addMouseEvent(this);" >
 
 					<tr>
-						<th><input type="checkbox" name="chkall" id="chkall" onclick="checkall('delete[]')" class="checkbox" /><label for="chkall">删除</label></th>
+						<th><input type="checkbox" name="chkall" id="chkall" onclick="checkall('delete[]')" class="checkbox" /><label for="chkall"><?=lang('delete')?></label></th>
 						<th>ID</th>
-						<th>域名</th>
-						<th>密钥</th>
+						<th><?=lang('domain')?></th>
+						<th><?=lang('domain_password')?></th>
 
 						
 					</tr>
@@ -109,7 +111,7 @@ function checkOnSubmit(formName) {
 						<? }
 						}?>
 						<tr class="nobg">
-						<td><input type="submit" value="提 交" class="button" /></td>
+						<td><input type="submit" value="<?=lang('submit')?>" class="button" /></td>
 						<td class="tdpage" colspan="7" align="right"><?=$clients['page_array']['pagebar']?></td>
 					</tr>
 				</table>

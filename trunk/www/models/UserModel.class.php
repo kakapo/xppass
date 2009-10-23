@@ -25,6 +25,8 @@ class UserModel extends Model {
 		//$pagerStyle = array ('firstPage' => '', 'prePage' => 'gray4_12b none', 'nextPage' => 'gray4_12b none', 'totalPage' => '', 'numBar' => 'yellowf3_12b none', 'numBarMain' => 'gray4_12 none' );                      //翻页条的样式
 		//$list ['page']->setLinkStyle ( $pagerStyle );
 		//$list ['page']->setLinkScript("gotopage(@PAGE@)");
+		$label = array('first_page'=>lang('first_page'),'last_page'=>lang('last_page'),'next_page'=>lang('next_page'),'pre_page'=>lang('pre_page'),'next_group'=>lang('next_group'),'pre_group'=>lang('pre_group'));	
+		$list ['page']->setLabelName($label);
 		$list ['page_array'] ['pagebar'] = $list ['page']->wholeNumBar();
 		
 		$select->limit ( $list['page']->offset(), $pageCount );

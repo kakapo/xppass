@@ -13,7 +13,19 @@ class setting{
 		
 	}
     function view_basicset(){
+    	include_once("SettingModel.class.php");
+		$settingModel = new SettingModel();
+		$sets = $settingModel->getAllSettings();
+		foreach ($sets as $k=>$v){
+			$$v['k'] = $v['v'];			
+		}
+		
+		$timezoneset = isset($timezone)?$timezone:date_default_timezone_get();
+    	
+    	$this->tpl->assign('timezoneset',$timezoneset);
     	$this->tpl->assign('ssomode',SSO_MODE);
+    	$this->tpl->assign('app_status',APP_STATUS);
+    	$this->tpl->assign('timezonelist',timezone_identifiers_list());
     }
     function op_basicset(){
     	
@@ -29,14 +41,26 @@ class setting{
 	  "charset"=> "'.$GLOBALS ["gDataBase"] ["db"]['charset'].'",
 	);
 	?>';
-		try{
-			$fp = fopen(APP_DIR.'/config/install.ini.php', 'w');
-			fwrite($fp, $config);
-			fclose($fp);
+		$r1 = write_file($config,APP_DIR.'/config/install.ini.php');
+		
+		if(isset($_POST['app_status'])) $upate['app_status'] = $_POST['app_status'];
+    	if(isset($_POST['timezone'])) $upate['timezone'] = $_POST['timezone'];
+    	if(isset($_POST['ssomode'])) $upate['ssomode'] = $_POST['ssomode'];
+    	include_once("SettingModel.class.php");
+		$settingModel = new SettingModel();
+		$r2 = $settingModel->updateSettings($upate);
+		
+		
+		$config_content = file_get_contents(APP_DIR."/config/config.ini.php");
+		$config_content= preg_replace('/("APP_STATUS"\s*,\s*)(.*?)(\);)/ism','\\1"'.$_POST['app_status'].'"\\3',$config_content);
+		$config_content= preg_replace('/(date_default_timezone_set\()(.*?)(\);)/ism','\\1"'.$_POST['timezone'].'"\\3',$config_content);
+		$r3 = write_file($config_content,APP_DIR."/config/config.ini.php");
+	
+		
+		if($r1 && $r2 && $r3)
 			show_message_goback(lang('success'));
-		}catch (Exception $e){
-			
-		}
+		else 
+			show_message_goback(lang('failed'));
 		
     }
 	
@@ -58,8 +82,11 @@ class setting{
     	include_once("SettingModel.class.php");
 		$settingModel = new SettingModel();
 		$r = $settingModel->updateSettings($upate);
-			$settingModel->clearCache();
-		if($r) show_message_goback(lang('success'));
+		$settingModel->clearCache();
+		if($r) 
+			show_message_goback(lang('success'));
+		else 
+			show_message_goback(lang('failed'));
     }
     
     function view_emailset(){
@@ -91,9 +118,12 @@ class setting{
 		$config_content= preg_replace('/(\["smtp_account"\]\s*=\s*)(.*?)(;)/ism','\\1"'.$upate['smtp_account'].'"\\3',$config_content);
 		$config_content= preg_replace('/(\["smtp_pass"\]\s*=\s*)(.*?)(;)/ism','\\1"'.$upate['smtp_pass'].'"\\3',$config_content);
 		$config_content= preg_replace('/(\["smtp_from"\]\s*=\s*)(.*?)(;)/ism','\\1"'.$upate['smtp_from'].'"\\3',$config_content);
-		$res = write_file($config_content,APP_DIR."/config/config.ini.php");
+		$r1 = write_file($config_content,APP_DIR."/config/config.ini.php");
 		
-		if($r&&$res) show_message_goback(lang('success'));
+		if($r && $r1) 
+			show_message_goback(lang('success'));
+		else 
+			show_message_goback(lang('failed'));
     }
 }
 ?>

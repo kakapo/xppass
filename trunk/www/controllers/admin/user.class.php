@@ -30,7 +30,7 @@ class user{
 		$con['user_reg_time'] = $user_reg_time;
 		$con['user_reg_time1'] = $user_reg_time1;
 		
-		$users = $userModel->getItems($con,2);
+		$users = $userModel->getItems($con,10);
 		$this->tpl->assign('total',$users['page']->total);
 		$this->tpl->assign('users',$users);
 		$this->tpl->assign('con',$con);

@@ -16,34 +16,34 @@
 				<input type="hidden" name="op" value="regset">
 				<table class="opt">
 					<tr>
-						<th colspan="2">是否允许昵称重复:</th>
+						<th colspan="2"><?=lang('double_nickname')?>:</th>
 					</tr>
 
 					<tr>
 						<td>
-							<input type="radio" id="yes" class="radio" name="doublenick" value="1" <? if(isset($doublenick) && $doublenick==1) echo "checked";?> /><label for="yes">是</label>
-							<input type="radio" id="no" class="radio" name="doublenick" value="0"  <? if(isset($doublenick) && $doublenick==0) echo "checked";?>/><label for="no">否</label>
+							<input type="radio" id="yes" class="radio" name="doublenick" value="1" <? if(isset($doublenick) && $doublenick==1) echo "checked";?> /><label for="yes"><?=lang('yes')?></label>
+							<input type="radio" id="no" class="radio" name="doublenick" value="0"  <? if(isset($doublenick) && $doublenick==0) echo "checked";?>/><label for="no"><?=lang('no')?></label>
 						</td>
 					</tr>
 					
 					<tr>
-						<th colspan="2">禁止的 Email 地址:</th>
+						<th colspan="2"><?=lang('ban_email')?>:</th>
 
 					</tr>
 					<tr>
 						<td><textarea class="textfield" name="banemail" rows="4" style="width:300px"><? if(isset($banemail)) echo $banemail;?></textarea></td>
-						<td valign="top">禁止使用这些域名结尾的 Email 地址注册。<br>只需填写 Email 的域名部分，每行一个域名，例如 @hotmail.com</td>
+						<td valign="top"><?=lang('ban_email_label')?></td>
 					</tr>
 					<tr>
-						<th colspan="2">禁止的用户名:</th>
+						<th colspan="2"><?=lang('ban_username')?>:</th>
 
 					</tr>
 					<tr>
 						<td><textarea class="textfield" name="banusername" rows="4" style="width:300px"><? if(isset($banusername)) echo $banusername;?></textarea></td>
-						<td valign="top">可以设置通配符，每个关键字一行，可使用通配符 "*" 如 "*admin*"(不含引号)。</td>
+						<td valign="top"><?=lang('ban_username_label')?></td>
 					</tr>
 				</table>
-				<div class="opt"><input type="submit" name="submit" value=" 提 交 " class="button" tabindex="3" /></div>
+				<div class="opt"><input type="submit" name="submit" value="<?=lang('submit')?>" class="button" tabindex="3" /></div>
 			</form>
 
 		</div>

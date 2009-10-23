@@ -8,16 +8,16 @@
 <body>
 <div class="container">
 	
-	<h3>系统信息</h3>
+	<h3><?=lang('system_info')?></h3>
 
 	<ul class="memlist">
-		<li><em>操作系统及 PHP:</em><?=$serverinfo?></li>
-		<li><em>服务器软件:</em><?=$_SERVER['SERVER_SOFTWARE']?></li>
-		<li><em>MySQL 版本:</em><?=$dbversion?></li>
+		<li><em><?=lang('os_php')?>:</em><?=$serverinfo?></li>
+		<li><em><?=lang('webserver')?>:</em><?=$_SERVER['SERVER_SOFTWARE']?></li>
+		<li><em><?=lang('mysql_version')?>:</em><?=$dbversion?></li>
 
-		<li><em>上传许可:</em><?=$fileupload?></li>
-		<li><em>当前数据库尺寸:</em><?=$dbsize?></li>		
-		<li><em>主机名:</em><?=$_SERVER['SERVER_NAME'].' ('.$_SERVER['SERVER_ADDR'].':'.$_SERVER['SERVER_PORT'].')'?></li>
+		<li><em><?=lang('upload_size')?>:</em><?=$fileupload?></li>
+		<li><em><?=lang('mysql_datasize')?>:</em><?=$dbsize?></li>		
+		<li><em><?=lang('hostname')?>:</em><?=$_SERVER['SERVER_NAME'].' ('.$_SERVER['SERVER_ADDR'].':'.$_SERVER['SERVER_PORT'].')'?></li>
 		<li><em>magic_quote_gpc:</em><?=$magic_quote_gpc?></li>
 		<li><em>allow_url_fopen:</em><?=$allow_url_fopen?></li>		
 	</ul>

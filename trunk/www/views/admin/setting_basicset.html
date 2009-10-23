@@ -15,6 +15,16 @@
 				<input type="hidden" name="op" value="basicset">
 				<table class="opt">
 					<tr>
+						<th colspan="2"><?=lang('run_mode')?>:</th>
+					</tr>
+					<tr>
+						<td>
+							<label><input type="radio" name="app_status" value="dev" <? if($app_status=='dev') echo 'checked';?>> <?=lang('dev_status')?></label>
+							<label><input type="radio" name="app_status" value="online" <? if($app_status=='online') echo 'checked';?>> <?=lang('online_status')?></label>
+						</td>
+						<td><?=lang('app_status_label')?></td>
+					</tr
+					<tr>
 						<th colspan="2"><?=lang('sso_mode')?>:</th>
 					</tr>
 					<tr>
@@ -24,10 +34,23 @@
 		<label><input type="radio" name="ssomode" value="ticket" <? if($ssomode=='ticket') echo 'checked';?>> Ticket</label>
 						</td>
 						<td><?=lang('ssomode_label')?></td>
+					</tr>					
+					<tr>
+						<th colspan="2"><?=lang('timezone')?>:</th>
+					</tr>
+					<tr>
+						<td>
+							<select  name="timezone">
+  <?php foreach($timezonelist as $v){?>
+  <option value="<?=$v?>" <? if($v==$timezoneset) echo 'selected';?> ><?=$v?></option>
+<? }?>
+</select>
+						</td>
+						<td><?=lang('timezone_label')?></td>
 					</tr>
 					
 				</table>
-				<div class="opt"><input type="submit" name="submit" value=" 提 交 " class="button" tabindex="3" /></div>
+				<div class="opt"><input type="submit" name="submit" value="<?=lang('submit')?>" class="button" tabindex="3" /></div>
 			</form>
 		</div>
 

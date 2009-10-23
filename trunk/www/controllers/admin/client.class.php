@@ -31,9 +31,15 @@ class client{
 		include_once("ClientModel.class.php");
 		$clientModel = new ClientModel();
 		
+		if($row = $clientModel->getClientByName($arr['domain'])){
+			$msg = array('s'=> 400,'m'=>lang('domainexist'),'d'=>'');				
+			exit(json_output($msg));
+		}
+		
 		$arr['key'] = $clientModel->generateKey();
 		
 		$r = $clientModel->addNewClient($arr);
+		
 		if($r){
 			$msg = array('s'=> 200,'m'=>lang('success'),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/client/defaults");				
 			exit(json_output($msg));
@@ -49,12 +55,9 @@ class client{
     		include_once("ClientModel.class.php");
     		$clientModel = new ClientModel();
     		foreach ($_POST['delete'] as $u){
-    			
     			$t *= $clientModel->deleteClient($u);
-    			
     		}
-    		
-    		if($t) show_message_goback('ok');
+    		if($t) show_message_goback(lang('success'));
     	}
     	show_message(lang('selectone'));
     	goback();
