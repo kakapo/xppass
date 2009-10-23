@@ -294,7 +294,7 @@ function error_live_handler($errno, $errmsg, $filename, $linenum, $vars)
 						<span style='color: #FF1111;'> $errortype[$errno] </span>
 						&nbsp;
 						\"" . htmlspecialchars($errmsg) . "\" in file $filename (on line $linenum)<br />
-						<span style='color: #FF1111;'> URL: </span> \"" . VIRTUAL_URL . "\"
+						<span style='color: #FF1111;'> URL: </span> \"" . BASE_URL . "\"
 						</p>";
 			$backtrace_msg = "
 						<span id=\"$errNum\"> " ."<br>". fetch_backtrace() . "<br />" . get_misc_error_info() . "
