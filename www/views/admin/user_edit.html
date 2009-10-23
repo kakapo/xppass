@@ -28,10 +28,10 @@ function checkOnSubmit(formName) {
 <body>
 <div id="msg" style="color:red;text-align:center"></div>
 	<div class="container">
-		<h3>编辑用户资料
+		<h3><?=lang('edituser')?>
 							
 					</h3>
-					<div class="note"><p class="i">密码留空，保持不变。</p></div>
+					
 				<div class="mainbox">
 			<form id="edituserform" name="edituserform" action="admin.php" method="post" onsubmit="return checkOnSubmit('edituserform')">
 
@@ -42,31 +42,31 @@ function checkOnSubmit(formName) {
 			<input type="hidden" name="user" value="<?=$userinfo['user']?>" />
 				<table class="opt">
 					<tr>
-						<th>帐号:</th>
+						<th><?=lang('user')?>:</th>
 					</tr>
 					<tr>
 						<td>
-							<input type="text" name="newusername" value="<?=$userinfo['user']?>" class="textfield" readonly/>	Read Only						
+							<input type="text" name="newusername" value="<?=$userinfo['user']?>" class="textfield" readonly/>	<?=lang('user_label')?>						
 						</td>
 					</tr>
 					<tr>
-						<th>密　码:</th>
+						<th><?=lang('pwd')?>:</th>
 					</tr>
 					<tr>
 						<td>
-							<input type="password" name="password" value="" class="textfield" />
+							<input type="password" name="password" value="" class="textfield" /> <?=lang('pwd_label')?>
 						</td>
 					</tr>
 				
 					<tr>
-						<th>Email:</th>
+						<th><?=lang('email')?>:</th>
 					</tr>
 					<tr>
 						<td>
 							<input type="text" name="email" value="<?=$userinfo['user_email']?>" class="textfield" />
 						</td>
 					</tr>					<tr>
-						<th>昵称:</th>
+						<th><?=lang('nickname')?>:</th>
 					</tr>
 					<tr>
 						<td>
@@ -74,16 +74,16 @@ function checkOnSubmit(formName) {
 						</td>
 					</tr>					
 					<tr>
-						<th>性别:</th>
+						<th><?=lang('sex')?>:</th>
 					</tr>
 					<tr>
 						<td>
-							<input type="radio" name="sex" value="1" <? if($userinfo['user_sex']==1) echo 'checked';?>/>男 &nbsp;&nbsp;<input type="radio" name="sex" value="2" <? if($userinfo['user_sex']==2) echo 'checked';?>/>女
+							<input type="radio" name="sex" value="1" <? if($userinfo['user_sex']==1) echo 'checked';?>/><?=lang('boy')?> &nbsp;&nbsp;<input type="radio" name="sex" value="2" <? if($userinfo['user_sex']==2) echo 'checked';?>/><?=lang('girl')?>
 						</td>
 					</tr>
 				</table>
 
-				<div class="opt"><input type="submit" name="submit" value=" 提 交 " class="button"/> <input type="button" class="button" onclick="javascript:history.back(-1)" value="返回用户列表"></div>
+				<div class="opt"><input type="submit" name="submit" value="<?=lang('submit')?>" class="button"/> <input type="button" class="button" onclick="javascript:history.back(-1)" value="<?=lang('backtouserlist')?>"></div>
 			</form>
 		</div>
 	</div>

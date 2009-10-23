@@ -42,6 +42,7 @@ class Pager {
 	private $linkhead;
 	//链接样色
 	private $linkStyle;
+	private $labelName = array('first_page'=>'首页','last_page'=>'尾页','next_page'=>'下一页','pre_page'=>'上一页','next_group'=>'下一组','pre_group'=>'上一组');
 	//连接脚本代码
 	private $linkScript;
 
@@ -78,6 +79,9 @@ class Pager {
 		$this->linkScript = $func;
 	}
 
+	public function setLabelName($label){
+		$this->labelName = $label;
+	}
 	private function _getLinkScript($num) {
 		return str_replace ( "@PAGE@", $num, $this->linkScript );
 	}
@@ -87,17 +91,17 @@ class Pager {
 	}
 
 	public function firstPage() {
-		return $this->_returnLinkCode('首页',1,$this->linkStyle['firstPage'],'第一页');
+		return $this->_returnLinkCode($this->labelName['first_page'],1,$this->linkStyle['firstPage'],$this->labelName['first_page']);
 	}
 
 	public function lastPage() {		
-		return $this->_returnLinkCode('尾页',$this->totalPage,$this->linkStyle['totalPage'],'最后一页');
+		return $this->_returnLinkCode($this->labelName['last_page'],$this->totalPage,$this->linkStyle['totalPage'],$this->labelName['last_page']);
 	}
 
 	public function prePage() {
 		if ($this->page > 1) {
 			$prePage = $this->page - 1;
-			return $this->_returnLinkCode('[<]',$prePage,$this->linkStyle['prePage'],'上一页');
+			return $this->_returnLinkCode('[<]',$prePage,$this->linkStyle['prePage'],$this->labelName['pre_page']);
 		} else {
 			return '';
 		}
@@ -107,7 +111,7 @@ class Pager {
 
 		if ($this->page < $this->totalPage) {
 			$nextPage = $this->page + 1;
-			return $this->_returnLinkCode('[>]',$nextPage,$this->linkStyle['nextPage'],'下一页');
+			return $this->_returnLinkCode('[>]',$nextPage,$this->linkStyle['nextPage'],$this->labelName['next_page']);
 
 		} else {
 			return '';
@@ -131,9 +135,9 @@ class Pager {
 		for($i = $minpage; $i <= $maxpage; $i ++) {
 			$char = $left . $i . $right;
 			if ($i == $this->page) {
-				$linkbar .= $this->_returnLinkCode($char,$i,$this->linkStyle['numBar'],"第".$i."页");
+				$linkbar .= $this->_returnLinkCode($char,$i,$this->linkStyle['numBar'],$i);
 			}else{
-				$linkbar .= $this->_returnLinkCode($char,$i,$this->linkStyle['numBarMain'],"第".$i."页");
+				$linkbar .= $this->_returnLinkCode($char,$i,$this->linkStyle['numBarMain'],$i);
 			}
 		}
 		return $linkbar;
@@ -144,7 +148,7 @@ class Pager {
 		$mid = floor ( $this->num / 2 );
 		$minpage = (($this->page - $mid) < 1) ? 1 : ($this->page - $mid);
 		$pgpagecount = ($minpage > $this->num) ? $minpage - $mid : 1;
-		return $this->_returnLinkCode("[..]",$pgpagecount,$this->linkStyle['preGroup'],'上一组');
+		return $this->_returnLinkCode("[..]",$pgpagecount,$this->linkStyle['preGroup'],$this->labelName['pre_group']);
 	}
 
 	public function nextGroup() {
@@ -157,7 +161,7 @@ class Pager {
 			$maxpage = $this->totalPage;
 		}
 		$ngpagecount = ($this->totalPage > $maxpage + $last) ? $maxpage + $mid : $this->totalPage;
-		return $this->_returnLinkCode("[..]" ,$ngpagecount,$this->linkStyle['nextGroup'],'下一组');
+		return $this->_returnLinkCode("[..]" ,$ngpagecount,$this->linkStyle['nextGroup'],$this->labelName['next_group']);
 	}
 
 	public function wholeNumBar($num = '') {

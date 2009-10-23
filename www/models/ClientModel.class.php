@@ -14,13 +14,15 @@ class ClientModel extends Model {
 		$list = array();
 		$offset = '';
 		
-		$total = $select->count (); //获得查询到的记录数
+		$total = $select->count (); 
 		include_once("Pager.class.php");
-	    $list ['page'] = new Pager ( $total, $pageCount ); //创建分页对象
-		$offset = $list ['page']->offset ();               //获得记录偏移量
-		//$pagerStyle = array ('firstPage' => '', 'prePage' => 'gray4_12b none', 'nextPage' => 'gray4_12b none', 'totalPage' => '', 'numBar' => 'yellowf3_12b none', 'numBarMain' => 'gray4_12 none' );                      //翻页条的样式
+	    $list ['page'] = new Pager ( $total, $pageCount ); 
+		$offset = $list ['page']->offset ();               
+		//$pagerStyle = array ('firstPage' => '', 'prePage' => 'gray4_12b none', 'nextPage' => 'gray4_12b none', 'totalPage' => '', 'numBar' => 'yellowf3_12b none', 'numBarMain' => 'gray4_12 none' ); 
 		//$list ['page']->setLinkStyle ( $pagerStyle );
 		//$list ['page']->setLinkScript("gotopage(@PAGE@)");
+		$label = array('first_page'=>lang('first_page'),'last_page'=>lang('last_page'),'next_page'=>lang('next_page'),'pre_page'=>lang('pre_page'),'next_group'=>lang('next_group'),'pre_group'=>lang('pre_group'));	
+		$list ['page']->setLabelName($label);
 		$list ['page_array'] ['pagebar'] = $list ['page']->wholeNumBar();
 		
 		$select->limit ( $list['page']->offset(), $pageCount );
@@ -46,6 +48,10 @@ class ClientModel extends Model {
 	public function addNewClient($arr){
 		$sql = "insert into `client` (`domain`, `private_key`) values (?,?)";
 		return $this->db->execute($sql,array($arr['domain'],$arr['key']));
+	}
+	
+	public function getClientByName($domain){
+		return $this->db->getRow("select * from client where domain='{$domain}'");
 	}
 	public function deleteClient($client_id){
 		$sql = "delete from client where client_id=?";

@@ -65,7 +65,7 @@ $GLOBALS['gLang'] = array(
 	'tablepre_comment' => '同一数据库运行多个论坛时，请修改前缀',
 	'forceinstall_check_label' => '我要删除数据，强制安装 !!!',
 
-	'sso_mode' => '解决方案',
+	'sso_mode' => '单点登录解决方案',
 	'ssomode_label' => '在线用户数据存储和共享方式',
 	'ssomode_invalid' => '选择一种方案，可修改。',
 	'multitable' => '是否分表',
@@ -239,6 +239,81 @@ $GLOBALS['gLang']['zh-cn'] = '简体中文';
 $GLOBALS['gLang']['zh-tw'] = '繁体中文';
 $GLOBALS['gLang']['en'] = '英文';
 $GLOBALS['gLang']['nicknameexist'] = '此昵称已存在，请换一个！';
+
+$GLOBALS['gLang']['run_mode'] = '应用运行状态';
+$GLOBALS['gLang']['app_status_label'] = '遇到错误出现时，开发状态下输出全部错误信息；生产状态下只提示错误编号，并发送通知邮件。';
+$GLOBALS['gLang']['timezone'] = '时区';
+$GLOBALS['gLang']['timezone_label'] = '默认为系统时区';
+$GLOBALS['gLang']['dev_status'] = '开发状态';
+$GLOBALS['gLang']['online_status'] = '生产状态';
+$GLOBALS['gLang']['menu_basicset'] = '基本设置';
+$GLOBALS['gLang']['menu_regset'] = '注册设置';
+$GLOBALS['gLang']['menu_emailset'] = '邮件设置';
+$GLOBALS['gLang']['menu_client'] = '客户端管理';
+$GLOBALS['gLang']['menu_user'] = '用户管理';
+
+$GLOBALS['gLang']['system_info'] = '系统信息';
+$GLOBALS['gLang']['os_php'] = '操作系统及 PHP';
+$GLOBALS['gLang']['webserver'] = '服务器软件';
+$GLOBALS['gLang']['mysql_version'] = 'MySQL 版本';
+$GLOBALS['gLang']['upload_size'] = '上传许可';
+$GLOBALS['gLang']['mysql_datasize'] = '当前数据库尺寸';
+$GLOBALS['gLang']['hostname'] = '主机名';
+$GLOBALS['gLang']['double_nickname'] = '是否允许昵称重复';
+$GLOBALS['gLang']['yes'] = '是';
+$GLOBALS['gLang']['no'] = '否';
+$GLOBALS['gLang']['ban_email'] = '禁止的 Email 地址';
+$GLOBALS['gLang']['ban_email_label'] = '禁止使用这些域名结尾的 Email 地址注册。<br>只需填写 Email 的域名部分，每行一个域名，例如 @hotmail.com';
+$GLOBALS['gLang']['ban_username'] = '禁止的用户名';
+$GLOBALS['gLang']['ban_username_label'] = '可以设置通配符，每个关键字一行，如 "*admin*"(不含引号)。';
+$GLOBALS['gLang']['email_from'] = '邮件来源地址';
+$GLOBALS['gLang']['email_from_label'] = '当发送邮件不指定邮件来源时，默认使用此地址作为邮件来源';
+$GLOBALS['gLang']['smtp_server'] = 'SMTP 服务器';
+$GLOBALS['gLang']['smtp_server_label'] = '设置 SMTP 服务器的地址';
+$GLOBALS['gLang']['smtp_port'] = 'SMTP 端口';
+$GLOBALS['gLang']['smtp_port_label'] = '设置 SMTP 服务器的端口，默认为 25';
+$GLOBALS['gLang']['smtp_account'] = 'SMTP 身份验证用户名';
+$GLOBALS['gLang']['smtp_password'] = 'SMTP 身份验证密码';
+$GLOBALS['gLang']['search_domain'] = '搜索域名';
+$GLOBALS['gLang']['add_domain'] = '添加域名';
+$GLOBALS['gLang']['new_domain'] = '新域名';
+$GLOBALS['gLang']['domain'] = '域名';
+$GLOBALS['gLang']['domain_list'] = '域名列表';
+$GLOBALS['gLang']['domain_delete_comfirm'] = '该操作不可恢复，您确认要删除吗？';
+$GLOBALS['gLang']['domain_password'] = '密钥';
+$GLOBALS['gLang']['delete'] = '删除';
+$GLOBALS['gLang']['domainexist'] = '此域名已经存在。';
+
+$GLOBALS['gLang']['first_page'] = '首页';
+$GLOBALS['gLang']['last_page'] = '尾页';
+$GLOBALS['gLang']['next_page'] = '下一页';
+$GLOBALS['gLang']['next_page'] = '上一页';
+$GLOBALS['gLang']['next_group'] = '下一组';
+$GLOBALS['gLang']['pre_group'] = '上一组';
+$GLOBALS['gLang']['success'] = '操作成功';
+$GLOBALS['gLang']['failed'] = '操作失败';
+$GLOBALS['gLang']['selectone'] = '请选择一个';
+$GLOBALS['gLang']['invaliddomain'] = '无效的域名';
+
+$GLOBALS['gLang']['search_user'] = '搜索用户';
+$GLOBALS['gLang']['add_user'] = '添加用户';
+$GLOBALS['gLang']['reg_date'] = '注册日期';
+$GLOBALS['gLang']['to'] = '到';
+$GLOBALS['gLang']['user_list'] = '用户列表';
+$GLOBALS['gLang']['user_total'] = '用户总数';
+$GLOBALS['gLang']['more'] = '更多';
+$GLOBALS['gLang']['edit'] = '编辑';
+$GLOBALS['gLang']['view'] = '查看';
+$GLOBALS['gLang']['admin_remind'] = '* administrator 不能被删除';
+$GLOBALS['gLang']['lastlogin'] = '最后登录';
+$GLOBALS['gLang']['edituser'] = '编辑用户资料';
+$GLOBALS['gLang']['pwd_label'] = '密码留空，保持不变。';
+$GLOBALS['gLang']['user_label'] = '不能修改';
+$GLOBALS['gLang']['backtouserlist'] = '返回用户列表';
+$GLOBALS['gLang']['user_center'] = '用户管理中心';
+
+
+
 
 
 ?>
