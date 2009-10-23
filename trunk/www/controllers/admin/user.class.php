@@ -123,9 +123,9 @@ class user{
     			
     		}
     		
-    		if($t) show_message_goback('ok');
+    		if($t) show_message_goback(lang('success'));
     	}
-    	show_message(lang('selectoneuser'));
+    	show_message(lang('selectone'));
     	goback();
     }
     function view_detail(){
