@@ -310,4 +310,48 @@ $GLOBALS['gLang']['pwd_label'] = '密碼留空，保持不變。';
 $GLOBALS['gLang']['user_label'] = '不能修改';
 $GLOBALS['gLang']['backtouserlist'] = '返回用戶列表';
 $GLOBALS['gLang']['user_center'] = '用戶管理中心';
+$GLOBALS['gLang']['index_name'] = 'PHP開源 SSO系統--Xppass';
+$GLOBALS['gLang']['feature'] = '主要特點';
+$GLOBALS['gLang']['feature_1'] = '1、提供三種解決方案Cookie方案、Session方案和Ticket方案，根據需求任選其一。';
+$GLOBALS['gLang']['feature_2'] = '2、可采用哈希分表設計，支持億萬級別的用戶數據量存儲。';
+$GLOBALS['gLang']['feature_3'] = '3、提供用戶名和電子郵箱兩種互補注冊方式。';
+$GLOBALS['gLang']['feature_4'] = '4、實現安全登錄技術，采用密碼MD5加密傳輸和Hmac身份驗證。';
+$GLOBALS['gLang']['feature_5'] = '5、提供自動安裝程序。';
+$GLOBALS['gLang']['feature_6'] = '6、支持多語言版本。';
+$GLOBALS['gLang']['cookie_solution'] = '非跨域名Cookie方案';
+$GLOBALS['gLang']['session_solution'] = '非跨域名Session方案';
+$GLOBALS['gLang']['ticket_solution'] = '跨域名Ticket方案';
+$GLOBALS['gLang']['mentality'] = '思路';
+$GLOBALS['gLang']['advantage'] = '優點';
+$GLOBALS['gLang']['disadvantage'] = '缺點';
+$GLOBALS['gLang']['cookie_mentality'] = '<ul><li>采用瀏覽器客戶端的cookie存儲在線用戶信息數據</li>
+<li>用戶信息數據加密存儲和傳輸</li>
+<li>子域名應用程序共享解密方法和密碼</li>
+</ul>';
+$GLOBALS['gLang']['session_mentality'] = '<ul>
+<li>采用服務器端存儲在線用戶信息數據</li>
+<li>子域名共享根域名的session id.</li>
+<li>用戶數據無需加密。</li>
+<li>web集群服務器需通過數據庫或者memcached共享用戶數據。</li>
+</ul>';
+$GLOBALS['gLang']['ticket_mentality'] = '<ul>
+	<li>用戶訪問應用服務SP，SP判斷用戶是否在本地已經登錄，未登錄則調用sso client api訪問 sso server，帶上數字簽名signature，user_name 和 domain信息。
+</li>
+<li>sso server 接收到來自client的信息后，先認證client是否合法，即簽名校驗。然后從本機session判斷user_name是否存在，存在則返回session id，即票證ticket；ticket不存在就轉跳到登錄界面。
+</li>
+<li>用戶在身份認證中心登錄成功后，sso server在session中保存用戶信息。然后轉跳回應用服務SP，URL帶上ticket(session id)。
+</li>
+<li>應用服務SP通過SSO client 插件,再次帶上ticket，domain和signature(此時signature由 ticket加密得到)訪問 SSO Server，SSO Server先進行授權判斷，然后返回加密的用戶token數據。
+</li>
+<li>用戶信息數據是加密傳輸，SSO client 插件通過private key解密token數據。
+</li>
+<li>如果用戶已經在步驟 3 登錄過了，則跳過此步驟。</li>
+<ul>';
+
+$GLOBALS['gLang']['cookie_advantage'] = '機制簡單，避免了webserver集群造成的會話數據同步問題。有一定的安全性。';
+$GLOBALS['gLang']['session_advantage'] = '安全性高。能解決webserver集群造成的會話數據共享問題。';
+$GLOBALS['gLang']['ticket_advantage'] = '實現跨越，安全性高。';
+$GLOBALS['gLang']['cookie_disadvantage'] = 'cookie存取的數據量有限。無法跨域。';
+$GLOBALS['gLang']['session_disadvantage'] = '無法跨域。稍微復雜，采用數據庫有瓶頸問題，采用memcached需要部署memcached伺服器。';
+$GLOBALS['gLang']['ticket_disadvantage'] = '復雜，需要開發客戶端插件。';
 ?>
