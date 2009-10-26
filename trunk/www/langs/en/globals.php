@@ -19,141 +19,149 @@ $GLOBALS['gLang'] = array(
 	'old_step' => 'Previout Step',
 	'new_step' => 'Next Step',
 	
-	'database_errno_2003' => '无法连接数据库，请检查数据库是否启动，数据库服务器地址是否正确',
-	'database_errno_1044' => '无法创建新的数据库，请检查数据库名称填写是否正确',
-	'database_errno_1045' => '无法连接数据库，请检查数据库用户名或者密码是否正确',
-	'database_connect_error' => '数据库连接错误',
-	'database_errno_1064' => 'SQL 语法错误',
+	'database_errno_2003' => 'Error in connecting database. Please check the server address.',
+	'database_errno_1044' => 'Error in connecting database. Please check the database name.',
+	'database_errno_1045' => 'Error in connecting database. Please check the username and password.',
+	'database_connect_error' => 'database connecting errors.',
+	'database_errno_1064' => 'SQL spell errors',
 
-	'dbpriv_createtable' => '没有CREATE TABLE权限，无法继续安装',
-	'dbpriv_insert' => '没有INSERT权限，无法继续安装',
-	'dbpriv_select' => '没有SELECT权限，无法继续安装',
-	'dbpriv_update' => '没有UPDATE权限，无法继续安装',
-	'dbpriv_delete' => '没有DELETE权限，无法继续安装',
-	'dbpriv_droptable' => '没有DROP TABLE权限，无法安装',
-	'db_not_null' => '数据库中已经安装过 Xppass, 继续安装会清空原有数据。',
-	'db_drop_table_confirm' => '继续安装会清空全部原有数据，您确定要继续吗?',
+	'dbpriv_createtable' => 'No CREATE TABLE privilege..',
+	'dbpriv_insert' => 'No INSERT privilege.',
+	'dbpriv_select' => 'No  SELECT privilege',
+	'dbpriv_update' => 'No UPDATE privilege',
+	'dbpriv_delete' => 'No DELETE privilege',
+	'dbpriv_droptable' => 'No DROP TABLE privilege',
+	'db_not_null' => 'The database exists. Please empty the database.',
+	'db_drop_table_confirm' => 'The database will be empty, do you comfirm?',
 
 
-	'step_env_check_title' => '开始安装',
-	'step_env_check_desc' => '环境以及文件目录权限检查',
-	'step_db_init_title' => '安装数据库',
-	'step_db_init_desc' => '正在执行数据库安装',
+	'step_env_check_title' => 'Start Checking',
+	'step_env_check_desc' => 'Checking directory, file privilege',
+	'step_db_init_title' => 'Database Installation',
+	'step_db_init_desc' => 'Installing Database',
 	
-	'step1_file' => '目录文件',
-	'step1_need_status' => '所需状态',
-	'step1_status' => '当前状态',
-	'not_continue' => '请将以上红叉部分修正再试',
+	'step1_file' => 'Directory',
+	'step1_need_status' => 'Need Status',
+	'step1_status' => 'Current Status',
+	'not_continue' => 'Please recorrect all above in red color.',
 
-	'tips_dbinfo' => '填写数据库信息',
+	'tips_dbinfo' => 'Please insert database information.',
 	'tips_dbinfo_comment' => '',
-	'tips_admininfo' => '填写管理员信息',
-	'step_install_check_title' => '安装成功',
-	'step_install_check_desc' => '点击进入登陆',
+	'tips_admininfo' => 'Please insert administrator information',
+	'step_install_check_title' => 'Installed successfully!',
+	'step_install_check_desc' => 'Go to Login',
 
-	'ext_info_succ' => '安装成功',
-	'install_locked' => '安装锁定，已经安装过了，如果您确定要重新安装，请到服务器上删除<br />/tmp/install.lock ',
-	'error_quit_msg' => '您必须解决以上问题，安装才可以继续',
+	'ext_info_succ' => 'Installed successfully!',
+	'install_locked' => 'It is locked. You had installed Xppass. If you need to reinstall, please delete the file <br />/tmp/install.lock ',
+	'error_quit_msg' => 'Please fix all the problems above and continue!',
 
-	'step_set_params_title' => '设置运行环境',
-	'step_set_params_desc' => '设置 Xppass',
+	'step_set_params_title' => 'Setting run environment',
+	'step_set_params_desc' => 'Setting Xppass',
 
-	'click_to_back' => '点击返回上一步',
-	'adminemail' => '系统信箱 Email',
-	'adminemail_comment' => '用于发送程序错误报告',
-	'dbhost_comment' => '数据库服务器地址, 一般为 localhost',
-	'tablepre_comment' => '同一数据库运行多个论坛时，请修改前缀',
-	'forceinstall_check_label' => '我要删除数据，强制安装 !!!',
+	'click_to_back' => 'Go Back',
+	'adminemail' => 'Administrator Email',
+	'adminemail_comment' => 'use to send error message report',
+	'dbhost_comment' => 'server address, defaults localhost',
 
 	'sso_mode' => 'Single Sign-On Solution',
 	'ssomode_label' => 'Online user data storage and share mode',
-	'ssomode_invalid' => '选择一种方案，可修改。',
-	'multitable' => '是否分表',
-	'multitable_label' => '将用户数据分散存储，默认数256个',
+	'ssomode_invalid' => 'Please select one solution, you can change it after installation',
+	'multitable' => 'multi-table for user table?',
+	'multitable_label' => 'Hash store user data, defaults table number is 256',
 	'multitable_invalid' => '',
 
-	'dbinfo_dbhost_invalid' => '数据库服务器为空，或者格式错误，请检查',
-	'dbinfo_dbname_invalid' => '数据库名为空，或者格式错误，请检查',
-	'dbinfo_dbuser_invalid' => '数据库用户名为空，或者格式错误，请检查',
-	'dbinfo_dbpw_invalid' => '数据库密码为空，或者格式错误，请检查',
+	'dbinfo_dbhost_invalid' => 'The database server is empty or wrong formated',
+	'dbinfo_dbname_invalid' => 'The database name is empty.',
+	'dbinfo_dbuser_invalid' => 'The database username is empty.',
+	'dbinfo_dbpw_invalid' => 'he database password is empty',
 
-	'admininfo_invalid' => '管理员信息不完整，请检查管理员账号，密码，邮箱',
-	'dbname_invalid' => '数据库名为空，请填写数据库名称',
+	'admininfo_invalid' => 'The administrator information is not complete.',
+	'dbname_invalid' => 'The database name is empty.',
 
-	'admin_invalid' => '您的信息管理员信息没有填写完整，请仔细填写每个项目',
-	'admininfo_founderpw_invalid' => '管理员密码不能为空，并且不能少于6位',
-	'admininfo_founderpw2_invalid' => '两次密码不一致，请检查',
-	'admininfo_founderemail_invalid' => '创始人邮箱地址格式错误，请检查',
+	'admin_invalid' => 'Your information is not complete.',
+	'admininfo_founderpw_invalid' => 'The password can be null, and should be more than 6 charactor',
+	'admininfo_founderpw2_invalid' => 'Two password are not the same',
+	'admininfo_founderemail_invalid' => 'The email address is wrong!',
 
-	'install_in_processed' => '正在安装...',
-	'install_succeed' => '数据安装成功，下一步',
+	'install_in_processed' => 'Installing...',
+	'install_succeed' => 'Database installing finished，Next',
 
 	'license' => '<div class="license">
-	<h1>Xppass 安装许可证</h1>
-
-<h3>感谢您选择 Xppass 单点登录系统。</h3>
-
-<p>Copyright (c) 2009 著作权由吴仲深(kakapowu@gmail.com)所有。著作权人保留一切权利。</p>
-
-<p>这份授权条款，在使用者符合以下三条件的情形下，授予使用者使用及再散播本软件原代码及二进位代码的权利，无论此包装是否经改作皆然：<p>
+	<h1>Xppass Installation Permission</h1>
+ <p>Copyright (c) 2009, Regents of Zhongshen Wu (kakapowu@gmail.com)
+ All rights reserved.</p>
+ <p>Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:</p>
 <ol>
-<li> 对于本软件源代码的再散播，必须保留上述的版权宣告、此三条件表列，以及下述的免责声明。</li>
-<li> 对于本套件二进位可执行形式的再散播，必须连带以文件以及／或者其他附于散播包装中的媒介方式，重制上述之版权宣告、此三条件表列，以及下述的免责声明。</li>
-<li> 未获事前取得书面许可，不得使用柏克莱加州大学或本软件贡献者之名称，来为本软件之衍生物做任何表示支持、认可或推广、促销之行为。</li>
+      <li>Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.</li>
+     <li> Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.</li>
+     <li> Neither the name of the University of California, Berkeley nor the
+       names of its contributors may be used to endorse or promote products
+       derived from this software without specific prior written permission.</li>
 </ol>
-<p>
-免责声明：本软件是由本软件之贡献者以现状（"as is"）提供，本软件包装不负任何明示或默示之担保责任，包括但不限于就适售性以及特定目的的适用性为默示性担保。本软件之贡献者，无论任何条件、无论成因或任何责任、无论此责任为因合约关系、无过失责任或因非违约之侵权（包括过失或其他原因等）而起，对于任何因使用本软件包装所产生的任何直接性、间接性、偶发性、特殊性、惩罚性或任何结果的损害（包括但不限于替代商品或劳务之购用、使用损失、资料损失、利益损失、业务中断等等），不负任何责任，即在该种使用已获事前告知可能会造成此类损害的情形下亦然。
-</p>
+  <p>THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS "AS IS" AND ANY
+ EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE REGENTS AND CONTRIBUTORS BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 </div>',
 
-	'i_agree' => '我已仔细阅读，并同意上述条款中的所有内容',
-	'supportted' => '支持',
-	'unsupportted' => '不支持',
-	'max_size' => '支持/最大尺寸',
-	'project' => '项目',
-	'XPpass_required' => 'Xppass 所需配置',
-	'XPpass_best' => 'Xppass 最佳',
-	'curr_server' => '当前服务器',
-	'env_check' => '环境检查',
-	'os' => '操作系统',
-	'php' => 'PHP 版本',
-	'attachmentupload' => '附件上传',
-	'unlimit' => '不限制',
-	'version' => '版本',
-	'gdversion' => 'GD 库',
-	'allow' => '允许',
-	'unix' => '类Unix',
-	'diskspace' => '磁盘空间',
-	'priv_check' => '目录、文件权限检查',
-	'func_depend' => '函数对象依赖性检查',
-	'func_name' => '函数/扩展名称',
-	'check_result' => '检查结果',
-	'suggestion' => '建议',
-	'advice_pdo' => '请检查 pdo 模块是否正确加载',
-	'advice_pdo_mysql' => '请检查 pdo_mysql 模块是否正确加载',
-	'advice_fopen' => '该函数需要 php.ini 中 allow_url_fopen 选项开启。请联系空间商，确定开启了此项功能',
-	'advice_file_get_contents' => '该函数需要 php.ini 中 allow_url_fopen 选项开启。请联系空间商，确定开启了此项功能',
-	'advice_file_put_contents' => '该函数需要 php.ini 中 allow_url_fopen 选项开启。请联系空间商，确定开启了此项功能',
-	'advice_fsockopen' => '该函数需要 php.ini 中 allow_url_fopen 选项开启。请联系空间商，确定开启了此项功能',
-	'advice_json' => '请检查 json 模块是否正确加载',
-	'advice_mbstring' => '请检查 mbstring 模块是否正确加载',
-	'advice_memcache' => '请检查 memcache 模块是否正确加载',
-	'none' => '无',
+	'i_agree' => 'I have read and agree with all above.',
+	'supportted' => 'Supported',
+	'unsupportted' => 'Not Supported',
+	'max_size' => 'Max Sizes',
+	'project' => 'Project',
+	'XPpass_required' => 'Xppass basic settings',
+	'XPpass_best' => 'Xppass best settings',
+	'curr_server' => 'Current server',
+	'env_check' => 'Checking environment',
+	'os' => 'Operating System',
+	'php' => 'PHP Version',
+	'attachmentupload' => 'Upload attachments',
+	'unlimit' => 'Not Limited',
+	'version' => 'Version',
+	'gdversion' => 'GD Library',
+	'allow' => 'Allowed',
+	'unix' => 'Likes Unix',
+	'diskspace' => 'Disk Space',
+	'priv_check' => 'Checking directory, file privilege',
+	'func_depend' => 'Checking function dependency',
+	'func_name' => 'Function/ Extended',
+	'check_result' => 'Checking Result',
+	'suggestion' => 'Suggestion',
+	'advice_pdo' => 'Please check if pdo module is loaded?',
+	'advice_pdo_mysql' => 'Please check if pdo_mysql is loaded',
+	'advice_fopen' => 'The allow_url_fopen should be opened in php.ini file.',
+	'advice_file_get_contents' => 'The allow_url_fopen should be opened in php.ini file.',
+	'advice_file_put_contents' => 'The allow_url_fopen should be opened in php.ini file.',
+	'advice_fsockopen' => 'The allow_url_fopen should be opened in php.ini file.',
+	'advice_json' => 'Please check if json module is loaded?',
+	'advice_mbstring' => 'Please check if mbstring module is loaded?',
+	'advice_memcache' => 'Please check if  memcache module is loaded?',
+	'none' => 'Null',
 
-	'dbhost' => '数据库服务器',
-	'dbuser' => '数据库用户名',
-	'dbpw' => '数据库密码',
-	'dbname' => '数据库名',
+	'dbhost' => 'Database Server',
+	'dbuser' => 'Database User',
+	'dbpw' => 'Database Password',
+	'dbname' => 'Database Name',
 
-	'founderemail' => '创始人电子邮箱',
-	'founderpw' => '创始人密码',
-	'founderpw2' => '重复创始人密码',
+	'founderemail' => 'Administrator email',
+	'founderpw' => 'Administrator password',
+	'founderpw2' => 'Repeated password',
 
-	'create_table' => '建立数据表',
-	'succeed' => '成功',
+	'create_table' => 'Building Database',
+	'succeed' => 'Successfully!',
 
-	'method_undefined' => '未定义方法',
-	'database_nonexistence' => '数据库操作对象不存在',
+	'method_undefined' => 'Undefined function',
+	'database_nonexistence' => 'The database object not exists.',
 );
 $GLOBALS['gLang']['user'] = 'Passport';
 $GLOBALS['gLang']['pwd'] = 'Password';
@@ -312,4 +320,53 @@ $GLOBALS['gLang']['pwd_label'] = 'Password not change if it is blank.';
 $GLOBALS['gLang']['user_label'] = 'Read Only';
 $GLOBALS['gLang']['backtouserlist'] = 'Back to User List';
 $GLOBALS['gLang']['user_center'] = 'User Center';
+$GLOBALS['gLang']['index_name'] = 'PHP OpenSource SSO software--Xppass';
+$GLOBALS['gLang']['feature'] = 'Features';
+$GLOBALS['gLang']['feature_1'] = '1. Provide three solutions: Cookie、Session and Ticket, choose one according to requirement.';
+$GLOBALS['gLang']['feature_2'] = '2. Use hash multi-table designment, support billions of users data storage.';
+$GLOBALS['gLang']['feature_3'] = '3、Support Username or Email registration.';
+$GLOBALS['gLang']['feature_4'] = '4、Safe Login, use md5 to crypt password and use hmac to authenticate.';
+$GLOBALS['gLang']['feature_5'] = '5. Auto Installation Program.';
+$GLOBALS['gLang']['feature_6'] = '6. Support multi-languages.';
+$GLOBALS['gLang']['cookie_solution'] = 'Non-Cross-Domain Cookie Solution';
+$GLOBALS['gLang']['session_solution'] = 'Non-Cross-Domain Session solution';
+$GLOBALS['gLang']['ticket_solution'] = 'Cross-Domain Ticket solution';
+$GLOBALS['gLang']['mentality'] = 'Mentality';
+$GLOBALS['gLang']['advantage'] = 'Advantage';
+$GLOBALS['gLang']['disadvantage'] = 'Disadvantage';
+$GLOBALS['gLang']['cookie_mentality'] = '<ul><li>Store user data in client cookie.</li>
+<li>User data transfer and storage in encryption</li>
+<li>Share the same decrypt arithmetic and password.</li>
+</ul>';
+$GLOBALS['gLang']['session_mentality'] = '<ul>
+<li>Store user data in server.</li>
+<li>Session id share under root domain.</li>
+<li>User data no encrypt。</li>
+<li>Use database or memcached to share use data.</li>
+</ul>';
+$GLOBALS['gLang']['ticket_mentality'] = '<ul>
+	<li>When the user visit Application Service (AS), AS determine whether the user has logged locally. If yes, AS call sso client api to access sso server, taking a digital signature, user_name, and domain information.
+</li>
+<li>When sso server receives the information from the client, it certified the legality of the signature verification first, 
+and then determine whether user_name exists in session. If yes, it return session id as ticket, or redirecting to login page.
+</li>
+<li>	
+After the user logged in successfully at authentication center, sso server saved user data in session. Then jump back to application service, URL belt with ticket (session id).
+</li>
+<li>	
+The SSO client plug-in, take ticket, domain, and signature (the signature encrypted by the ticket) to visited the SSO Server. SSO Server first authorized, and then return the encrypted data named as user token.
+</li>
+<li>	
+User information data is encrypted by transmission. SSO client plug-in use the private key to decrypt the token data.
+</li>
+<li>	
+If the user has been logged in step 3, and then skip this step.</li>
+<ul>';
+
+$GLOBALS['gLang']['cookie_advantage'] = 'Simple, Safe, Avoid webserver cluster problem, such as share data';
+$GLOBALS['gLang']['session_advantage'] = 'Very Safe, be able to resolve problem of webserver cluster.';
+$GLOBALS['gLang']['ticket_advantage'] = 'Cross-domain,　very Safe.';
+$GLOBALS['gLang']['cookie_disadvantage'] = 'non-cross-domain, cookie data is limited.';
+$GLOBALS['gLang']['session_disadvantage'] = 'non-cross-domain, a little complicated.';
+$GLOBALS['gLang']['ticket_disadvantage'] = 'comlicated, need develop clients';
 ?>
