@@ -220,5 +220,9 @@ class PassportModel extends Model {
 	public function getDataByTicket($ticket){
 		return $this->db->getOne("select data from onlineuser where ticket='$ticket' and expiry>UNIX_TIMESTAMP()");
 	}
+	
+	public static function packTicket($ticket,$user){
+		return $ticket.md5($ticket.$user).uniqid();
+	}
 }
 ?>

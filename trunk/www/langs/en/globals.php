@@ -87,31 +87,16 @@ $GLOBALS['gLang'] = array(
 	'install_succeed' => 'Database installing finished，Next',
 
 	'license' => '<div class="license">
-	<h1>Xppass Installation Permission</h1>
- <p>Copyright (c) 2009, Regents of Zhongshen Wu (kakapowu@gmail.com)
+	<h1>Xppass Installation Permission (The BSD License)</h1>
+ <p>Copyright (c) 2009, Zhongshen Wu (kakapowu@gmail.com)
  All rights reserved.</p>
- <p>Redistribution and use in source and binary forms, with or without
- modification, are permitted provided that the following conditions are met:</p>
+ <p>Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p>
 <ol>
-      <li>Redistributions of source code must retain the above copyright
-       notice, this list of conditions and the following disclaimer.</li>
-     <li> Redistributions in binary form must reproduce the above copyright
-       notice, this list of conditions and the following disclaimer in the
-       documentation and/or other materials provided with the distribution.</li>
-     <li> Neither the name of the University of California, Berkeley nor the
-       names of its contributors may be used to endorse or promote products
-       derived from this software without specific prior written permission.</li>
+      <li>Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.</li>
+     <li> Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.</li>
+     <li> Neither the name of the <ORGANIZATION> nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.</li>
 </ol>
-  <p>THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS "AS IS" AND ANY
- EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- DISCLAIMED. IN NO EVENT SHALL THE REGENTS AND CONTRIBUTORS BE LIABLE FOR ANY
- DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+  <p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 </div>',
 
 	'i_agree' => 'I have read and agree with all above.',
@@ -323,50 +308,50 @@ $GLOBALS['gLang']['user_center'] = 'User Center';
 $GLOBALS['gLang']['index_name'] = 'PHP OpenSource SSO software--Xppass';
 $GLOBALS['gLang']['feature'] = 'Features';
 $GLOBALS['gLang']['feature_1'] = '1. Provide three solutions: Cookie、Session and Ticket, choose one according to requirement.';
-$GLOBALS['gLang']['feature_2'] = '2. Use hash multi-table designment, support billions of users data storage.';
-$GLOBALS['gLang']['feature_3'] = '3、Support Username or Email registration.';
-$GLOBALS['gLang']['feature_4'] = '4、Safe Login, use md5 to crypt password and use hmac to authenticate.';
-$GLOBALS['gLang']['feature_5'] = '5. Auto Installation Program.';
-$GLOBALS['gLang']['feature_6'] = '6. Support multi-languages.';
-$GLOBALS['gLang']['cookie_solution'] = 'Non-Cross-Domain Cookie Solution';
-$GLOBALS['gLang']['session_solution'] = 'Non-Cross-Domain Session solution';
-$GLOBALS['gLang']['ticket_solution'] = 'Cross-Domain Ticket solution';
+$GLOBALS['gLang']['feature_2'] = '2. Use hash multi-table designment in supporting hundreds of millions of user data storage.';
+$GLOBALS['gLang']['feature_3'] = '3. Provides two ways to register: user name and email.';
+$GLOBALS['gLang']['feature_4'] = '4. To achieve security sign-on technology, using MD5 encrypted password in transmission and hmac authentication.';
+$GLOBALS['gLang']['feature_5'] = '5. Automated installation program.';
+$GLOBALS['gLang']['feature_6'] = '6. Supports multi-language versions.';
+$GLOBALS['gLang']['cookie_solution'] = 'Cookie Solution';
+$GLOBALS['gLang']['session_solution'] = 'Session solution';
+$GLOBALS['gLang']['ticket_solution'] = 'Ticket solution';
 $GLOBALS['gLang']['mentality'] = 'Mentality';
 $GLOBALS['gLang']['advantage'] = 'Advantage';
 $GLOBALS['gLang']['disadvantage'] = 'Disadvantage';
-$GLOBALS['gLang']['cookie_mentality'] = '<ul><li>Store user data in client cookie.</li>
-<li>User data transfer and storage in encryption</li>
-<li>Share the same decrypt arithmetic and password.</li>
+$GLOBALS['gLang']['cookie_mentality'] = '<ul><li>Online user data stored in the browser cookie.</li>
+<li>User data transmission and storage using encryption</li>
+<li>Sub-domain sharing decrypt arithmetic and password.</li>
 </ul>';
 $GLOBALS['gLang']['session_mentality'] = '<ul>
-<li>Store user data in server.</li>
-<li>Session id share under root domain.</li>
-<li>User data no encrypt。</li>
-<li>Use database or memcached to share use data.</li>
+<li>Online users data stored in the server side.</li>
+<li>Sub-domain application sharing the session id of root domain.</li>
+<li>User data without encryption.</li>
+<li>Webserver cluster use the database or memcached to share user data.</li>
 </ul>';
 $GLOBALS['gLang']['ticket_mentality'] = '<ul>
-	<li>When the user visit Application Service (AS), AS determine whether the user has logged locally. If yes, AS call sso client api to access sso server, taking a digital signature, user_name, and domain information.
+	<li>When the user visit Application Service (AS), AS determine whether the user has logged locally. If no, AS call SSO client api to access sso server, taking a digital signature, user_name, and domain information.
 </li>
-<li>When sso server receives the information from the client, it certified the legality of the signature verification first, 
-and then determine whether user_name exists in session. If yes, it return session id as ticket, or redirecting to login page.
-</li>
-<li>	
-After the user logged in successfully at authentication center, sso server saved user data in session. Then jump back to application service, URL belt with ticket (session id).
+<li>When SSO server receives the information from the client, it certified the legality of the signature verification first, 
+and then determine whether user_name exists in session. If yes, it return session id (as ticket), or redirecting to login page.
 </li>
 <li>	
-The SSO client plug-in, take ticket, domain, and signature (the signature encrypted by the ticket) to visited the SSO Server. SSO Server first authorized, and then return the encrypted data named as user token.
+After the user logged in successfully at authentication center, SSO server saved user data in session. Then jump back to application service, URL belt with ticket (session id).
 </li>
 <li>	
-User information data is encrypted by transmission. SSO client plug-in use the private key to decrypt the token data.
+The SSO client, take ticket, domain, and signature (the signature encrypted by the ticket) to visited the SSO Server. SSO Server authorizes first, and then returns the encrypted data named as user token.
+</li>
+<li>	
+User data is encrypted in transmission. SSO client uses the private key to decrypt the token data.
 </li>
 <li>	
 If the user has been logged in step 3, and then skip this step.</li>
 <ul>';
 
-$GLOBALS['gLang']['cookie_advantage'] = 'Simple, Safe, Avoid webserver cluster problem, such as share data';
-$GLOBALS['gLang']['session_advantage'] = 'Very Safe, be able to resolve problem of webserver cluster.';
+$GLOBALS['gLang']['cookie_advantage'] = 'Simple, Safe, to avoid webserver cluster problem, such as sharing user data';
+$GLOBALS['gLang']['session_advantage'] = 'Very Safe, be able to resolve webserver cluster problem.';
 $GLOBALS['gLang']['ticket_advantage'] = 'Cross-domain,　very Safe.';
-$GLOBALS['gLang']['cookie_disadvantage'] = 'non-cross-domain, cookie data is limited.';
-$GLOBALS['gLang']['session_disadvantage'] = 'non-cross-domain, a little complicated.';
-$GLOBALS['gLang']['ticket_disadvantage'] = 'comlicated, need develop clients';
+$GLOBALS['gLang']['cookie_disadvantage'] = 'Non-cross-domain,the size of cookie data is limited.';
+$GLOBALS['gLang']['session_disadvantage'] = 'Non-cross-domain, a little complicated.';
+$GLOBALS['gLang']['ticket_disadvantage'] = 'Complicated, need clients';
 ?>

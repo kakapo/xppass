@@ -71,7 +71,7 @@ class passport {
 					if(!empty($forward)){
 						$forward .= (strpos($forward,'?')!==false)?"&":"?";
 						$forward = preg_replace("/(.*?)(&+)/i","\\1&",$forward);
-						$forward .= "ticket=".session_id();
+						$forward .= "ticket=".PassportModel::packTicket(session_id(),$user);
 						$msg = array('s'=> 200,'m'=>"ok",'d'=>$forward);				
 						exit(json_output($msg));
 						
