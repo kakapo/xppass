@@ -13,44 +13,17 @@
 </p>
 <h2><?=lang('index_name')?></h2>
 
-
-<p><?=lang('feature')?>:</p>
+<div style="float:left">
+<p><b><?=lang('feature')?>:</b></p>
 <p><?=lang('feature_1')?></p>
 <p><?=lang('feature_2')?></p>
 <p><?=lang('feature_3')?></p>
 <p><?=lang('feature_4')?></p>
 <p><?=lang('feature_5')?></p>
 <p><?=lang('feature_6')?></p>
-<TABLE width="90%" border=0 cellspacing="1" cellpadding="2" style="border:1px #ccc solid">
-  <TR>
-	<TD height="30px"></TD>
-	<TD><?=lang('cookie_solution')?></TD>
-	<TD><?=lang('session_solution')?></TD>
-	<TD><?=lang('ticket_solution')?></TD>
-  </TR>
-  <TR valign="top">
-	<TD width="50px"><?=lang('mentality')?></TD>
-	<TD ><?=lang('cookie_mentality')?></TD>
-	<TD>
-	<?=lang('session_mentality')?>
-	</TD>
-	<TD>
-	<?=lang('ticket_mentality')?>
-</TD>
-  </TR>
-  <TR valign="top">
-	<TD ><?=lang('advantage')?></TD>
-	<TD><?=lang('cookie_advantage')?></TD>
-	<TD><?=lang('session_advantage')?></TD>
-	<TD><?=lang('ticket_advantage')?></TD>
-  </TR>
-  <TR valign="top">
-	<TD><?=lang('disadvantage')?></TD>
-	<TD><?=lang('cookie_disadvantage')?></TD>
-	<TD><?=lang('session_disadvantage')?></TD>
-	<TD><?=lang('ticket_disadvantage')?></TD>
-  </TR>
-  </TABLE>
+</div>
+<div style="float:left;margin:30px"><a href="<?=$www_site_url?>/public/images/ticket_chart.gif" target="_blank"><img width="60%" src="<?=$www_site_url?>/public/images/ticket_chart.gif" border="0"></a></div>
+<div style="clear:both"></div>
 <? include_once("footer.html")?>
 </body>
 </html>

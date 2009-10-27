@@ -61,7 +61,14 @@ class XPassClient{
 		
 		return $url;
 	}
-	
+	private function _verifyTicket($ticket,$user){
+		return true;
+		$ticket32 = substr($ticket,0,32);
+		if($ticket32.md5($ticket32.$user)==$ticket) 
+			return true;
+		else  
+			return false;
+	}
 	/**
 	 * isLogin 
 	 * @param string $user
@@ -69,8 +76,9 @@ class XPassClient{
 	 * @return array
 	 **/
 	public function isLogin($user,$redirect=false){
+		
+		if(isset($_GET['ticket']) && !empty($_GET['ticket']) && $this->_verifyTicket($_GET['ticket'],$user)){
 			
-		if(isset($_GET['ticket']) && !empty($_GET['ticket'])){
 			return array('s'=>200,'m'=>'success','d'=>$_GET['ticket']);
 		}
 		
@@ -100,7 +108,7 @@ class XPassClient{
 		global $server_url;
 		
 		$domain = $_SERVER['HTTP_HOST'];
-		
+				
 		$sign = $this->_createSign(md5($ticket.$domain));
 	
 		$url = $server_url."/index.php?action=api&view=getuser&ticket=".$ticket."&domain=$domain&sign=".$sign;

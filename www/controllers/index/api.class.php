@@ -7,17 +7,42 @@ class api{
 		print_r($user);
 	
 	}
-	
+	private function _createSign($text,$key)
+	{	
+		return hmac($key,$text,'sha1');
+	}
 	function verifySign($domain,$text,$sign){
-		require_once 'ToolModel.class.php';		
-		$ToolModel = new ToolModel();
-		$client = $ToolModel->getClientByDomain($domain);
+		include_once(KFL_DIR.'/Libs/Cache.class.php');
+		 $filename = $domain.".txt";
+		 $cache = new Cache(86400*300,0); 
+		 $cache->setCacheStore("file");// or memcache
+		 $cache->setCacheDir(APP_TEMP_DIR);
+		 $cache->setCacheFile($filename);
+		 if($cache->isCached()){
+		 	$client = unserialize($cache->fetch());
+		 }else{
+		 	require_once 'ClientModel.class.php';		
+			$ClientModel = new ClientModel();
+			$client = $ClientModel->getClientByName($domain);
+			if($client){
+		 		$cache->save(serialize($client));
+			}else{
+				return false;
+			}
+		 }
+		
 		$this->_private_key = $client['private_key'];
 		if (hmac($this->_private_key,$text,'sha1')==$sign) {
 			return true;	  
 		}else{
 			return false;
 		}
+	}
+	function packTicket($ticket,$user){
+		return $ticket.md5($ticket.$user).uniqid();
+	}
+	function unpackTicket($ticket){
+		return substr($ticket,0,32);
 	}
 	function encryptToken($data){
 		return encrypt($data,$this->_private_key);
@@ -35,10 +60,11 @@ class api{
 				$userinfo = authenticate();				
 				if($userinfo && $userinfo['user']==$user){
 					if(strpos($return,'?')!==false) {
-						$return .= '&ticket='.$userinfo['ticket'];
+						$return .= '&ticket='.$this->packTicket($userinfo['ticket'],$user);
 					}else{
-						$return .= '?ticket='.$userinfo['ticket'];
+						$return .= '?ticket='.$this->packTicket($userinfo['ticket'],$user);
 					}
+					//echo $return;die;
 					header("Location:".$return);
 				}else{
 					header("Location:".$GLOBALS ["gSiteInfo"]['www_site_url']."/index.php?action=passport&view=login&forward=".urlencode($return));
@@ -58,7 +84,7 @@ class api{
 				if($ticket){
 					$msg['s'] = 200; 
 				    $msg['m'] = "success!"; 
-				    $msg['d'] = $ticket; 
+				    $msg['d'] = $this->packTicket($ticket,$user).'ddddddd'; 
 				}else{
 					 $msg['s'] = 300; 
 					 $msg['m'] = "Not Login!"; 
@@ -78,14 +104,18 @@ class api{
 	}
 	
 	function view_getuser(){
-		$ticket = $_GET['ticket'];
+		
+		//$ticket = $this->unpackTicket($_GET['ticket']);	
+		$ticket = 	$_GET['ticket'];
 		$sign = $_GET['sign'];
 		$domain = $_GET['domain'];
 		
 		if($this->verifySign($domain,md5($ticket.$domain),$sign)){
 			require_once 'PassportModel.class.php';
 			$pass = new PassportModel();
+			$ticket = $this->unpackTicket($_GET['ticket']);	
 			$data = $pass->getDataByTicket($ticket);
+		
 			if($data){
 				$msg['s'] = 200; 
 			    $msg['m'] = "success!"; 
@@ -98,7 +128,7 @@ class api{
 			
 		}else{
 		   $msg['s'] = 400; 
-		   $msg['m'] = "Signature Invalid!"; 
+		   $msg['m'] = "Signature Invalid!".$ticket; 
 		   $msg['d'] = ''; 
 		}
 		

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title><?=$web_title?></title>
+<LINK href="<?=$www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+
+</head>
+<body>
+<? include_once("header.html")?>
+<TABLE width="90%" border=0 cellspacing="1" cellpadding="2" style="border:1px #ccc solid">
+  <TR>
+	<TD height="30px"></TD>
+	<TD><?=lang('cookie_solution')?></TD>
+	<TD><?=lang('session_solution')?></TD>
+	<TD><?=lang('ticket_solution')?></TD>
+  </TR>
+  <TR valign="top">
+	<TD width="50px"><?=lang('mentality')?></TD>
+	<TD ><?=lang('cookie_mentality')?></TD>
+	<TD>
+	<?=lang('session_mentality')?>
+	</TD>
+	<TD>
+	<?=lang('ticket_mentality')?>
+</TD>
+  </TR>
+  <TR valign="top">
+	<TD ><?=lang('advantage')?></TD>
+	<TD><?=lang('cookie_advantage')?></TD>
+	<TD><?=lang('session_advantage')?></TD>
+	<TD><?=lang('ticket_advantage')?></TD>
+  </TR>
+  <TR valign="top">
+	<TD><?=lang('disadvantage')?></TD>
+	<TD><?=lang('cookie_disadvantage')?></TD>
+	<TD><?=lang('session_disadvantage')?></TD>
+	<TD><?=lang('ticket_disadvantage')?></TD>
+  </TR>
+  </TABLE>
+  
+  <? include_once("footer.html")?>
+</body>
+</html>
