@@ -210,7 +210,10 @@ class user{
     }
     
     function view_online(){
-    	if(SSO_MODE!='ticket') exit(lang('module_ban'));
+    	if(SSO_MODE!='ticket') {
+    		show_message(lang('module_ban'));
+    		die;
+    	}
     	$cur_sort = !empty($_GET['sort'])?$_GET['sort']:'ticket';
 		$user = !empty($_GET['user'])?$_GET['user']:'';
 		
@@ -228,7 +231,10 @@ class user{
 		$this->tpl->assign('con',$con);
     }
     function op_delonlineuser(){
-    	if(SSO_MODE!='ticket') exit(lang('module_ban'));
+    	if(SSO_MODE!='ticket') {
+    		show_message(lang('module_ban'));
+    		die;
+    	}
     	$t = true;
     	if(isset($_POST['delete']) && is_array($_POST['delete'])){
     		
