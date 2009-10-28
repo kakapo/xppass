@@ -6,9 +6,7 @@ $res = $xpc->isLogin();
 //var_dump($xpc->isUserLogin('reroot'));
 if($res['s']==200){
 	$ticket = $res['d'];
-	//echo $ticket;
 	$res = $xpc->getLoginUser($ticket);
-	//print_r($res);
 	if($res['s']==200) {
 		echo "<pre>";
 		print_r(json_decode($res['d'],true));
