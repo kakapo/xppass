@@ -50,7 +50,7 @@ class XPassClient{
 		}
 	}
 	
-	private function _getLoginUrl($user){
+	private function _getLoginUrl($user=''){
 		global $server_url;
 		
 		$domain = $_SERVER['HTTP_HOST'];
@@ -61,43 +61,48 @@ class XPassClient{
 		
 		return $url;
 	}
-	private function _verifyTicket($ticket,$user){
-		return true;
-		$ticket32 = substr($ticket,0,32);
-		if($ticket32.md5($ticket32.$user)==$ticket) 
+	
+	private function _verifyTicket($ticket){
+		$body = substr($ticket,0,-32);
+		$checksum = substr($ticket,-32,32);
+		if($checksum==md5($body)) 
 			return true;
 		else  
 			return false;
 	}
 	/**
-	 * isLogin 
-	 * @param string $user
-	 * @param boolen $redirect
+	 * isLogin
 	 * @return array
 	 **/
-	public function isLogin($user,$redirect=false){
+	public function isLogin(){
 		
-		if(isset($_GET['ticket']) && !empty($_GET['ticket']) && $this->_verifyTicket($_GET['ticket'],$user)){
-			
-			return array('s'=>200,'m'=>'success','d'=>$_GET['ticket']);
+		if(isset($_GET['ticket']) && !empty($_GET['ticket'])){
+			if($this->_verifyTicket($_GET['ticket'])) 
+				return array('s'=>200,'m'=>'success','d'=>$_GET['ticket']);
+			else 
+				exit('invalid ticket');
 		}
+		$url = $this->_getLoginUrl();
 		
+		header("Location: ".$url."&redirect=1&return=".urlencode(selfURL()));
+		die;
+	
+
+	}
+	/**
+	 * isUserLogin 
+	 * @param string $user
+	 * @return boolen
+	 **/
+	public function isUserLogin($user){
 		$url = $this->_getLoginUrl($user);
-		
-		if($redirect) {
-			header("Location: ".$url."&redirect=1&return=".urlencode(selfURL()));
-			die;
-		}
-		
 		$res = $this->_xpassServer($url);
-		
 		list($head,$body) = explode("\r\n\r\n",$res);
-		
 		$msg = json_decode($body,true);
-		if($msg['s']==300) {
-			$msg['d'] .= '&forward='.urlencode(selfURL());
+		if($msg['s']==200) {
+			return true;
 		}
-		return $msg;
+		return false;
 	}
 	/**
 	 * getLoginUser 

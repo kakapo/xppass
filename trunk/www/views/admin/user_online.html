@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Xppass Administrator's Control Panel</title>
+<LINK href="<?=$www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+<script src="<?=$www_site_url?>/public/js/common.js" type="text/javascript"></script>
+<script src="<?=$www_site_url?>/public/js/calendar.js" type="text/javascript"></script>
+<script src="<?=$www_site_url?>/public/js/ajax.js" type="text/javascript"></script>
+
+
+<script>
+function checkOnSubmit(formName) {
+  	
+	var url = "<?=$www_site_url?>/admin.php";
+	var params = mini.form.serialize($(formName));
+	mini.ajax.post(url, function(r){
+		
+		var r = eval('(' + r + ')');   
+		if(r.s==200){
+			window.location.href = r.d;
+		}
+		if(r.s==400){
+			alert
+			$('msg').innerHTML = r.m;			
+		}
+	}, params);
+	
+	return false;
+       
+}
+
+</script>
+</head>
+<body><div id="append"></div>
+<div id="msg" style="color:red;text-align:center"></div>
+
+	<div class="container">
+			<div class="hastabmenu">
+				<ul class="tabmenu">
+					<li id="srchuserbtn" class="tabcurrent"><a href="#"><?=lang('search_user')?></a></li>	
+				</ul>
+
+			<div id="srchuserdiv" class="tabcontentcur">
+				<form action="/admin.php" method="GET">
+				<input type="hidden" name="action" value="user">				
+				<input type="hidden" name="view" value="online">				
+				<table width="100%">
+					<tr>
+						<td><?=lang('user')?>:</td>
+						<td><input type="text" name="user" value="<?=$con['user']?>" class="textfield" /> <input type="submit" value="<?=lang('submit')?>" class="button" /></td>						
+					</tr>
+				</table>
+				</form>
+			</div>
+
+		</div>
+
+		
+		<h3><?=lang('user_list')?></h3>
+		<div class="mainbox">
+				<form action="admin.php" onsubmit="return confirm('<?=lang('domain_delete_comfirm')?>');" method="post">
+				<input type="hidden" name="action" value="user">
+				<input type="hidden" name="op" value="delonlineuser">
+				<table class="datalist fixwidth" onmouseover="addMouseEvent(this);" >
+
+					<tr>
+						<th><input type="checkbox" name="chkall" id="chkall" onclick="checkall('delete[]')" class="checkbox" /><label for="chkall"><?=lang('delete')?></label></th>
+						<th>Ticket</th>
+						<th><?=lang('user')?></th>
+						<th><?=lang('online_length')?></th>
+
+						
+					</tr>
+						<? if(isset($users['records']) && is_array($users['records'])){
+							foreach ($users['records'] as $v){?>	
+						<tr>
+							<td class="option"><input type="checkbox" name="delete[]" value="<?=$v['ticket']?>" class="checkbox" /></td>
+							<td><?=$v['ticket']?></td>
+							<td><strong><?=$v['user']?></strong></td>
+							<td><?=second_convert($v['expiry']-time())?></td>
+						</tr>
+					
+						
+						<? }
+						}?>
+						<tr class="nobg">
+						<td><input type="submit" value="<?=lang('submit')?>" class="button" /></td>
+						<td class="tdpage" colspan="7" align="right"><?=$users['page_array']['pagebar']?></td>
+					</tr>
+				</table>
+
+				</form>
+					</div>
+					
+	</div>
+
+</body>
+</html>

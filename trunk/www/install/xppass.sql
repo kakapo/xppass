@@ -31,7 +31,7 @@ DROP TABLE IF EXISTS `onlineuser`;
 CREATE TABLE IF NOT EXISTS `onlineuser` (
   `ticket` char(32) character set utf8 NOT NULL,
   `user` varchar(64) character set utf8 NOT NULL,
-  `expiry` int(11) NOT NULL,
+  `expiry` int(11) unsigned NOT NULL,
   `data` text character set utf8 NOT NULL,
   UNIQUE KEY `session_id` (`ticket`),
   UNIQUE KEY `user` (`user`)

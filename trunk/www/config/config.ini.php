@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////
 //					Application	Settings			//
 //////////////////////////////////////////////////////
-	define("APP_STATUS", "online");
+	define("APP_STATUS", "dev");
 	define("APP_LANG", "zh-cn");
 	define("KFL_DIR", APP_DIR."/../KFL");
 	define("APP_TEMP_DIR", APP_DIR."/tmp/");

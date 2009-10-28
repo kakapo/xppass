@@ -203,6 +203,7 @@ class PassportModel extends Model {
 		$this->db->execute ( $sq1 );
 	}
 
+	//about ticket
 	public function addTicket($arr){		
 		return $this->db->execute("replace into onlineuser (`ticket`,`user`,`data`,`expiry`) values (?,?,?,(UNIX_TIMESTAMP()+1440))",array($arr['ticket'],$arr['user'],$arr['data']));
 	}
@@ -211,7 +212,7 @@ class PassportModel extends Model {
        	$this->db->execute('OPTIMIZE TABLE onlineuser');
 	}
 	public function deleteTicketById($ticket){
-		$this->db->execute("delete from onlineuser where ticket='$ticket'");
+		return $this->db->execute("delete from onlineuser where ticket='$ticket'");
 	}
 	public function getTicketByUser($user){
 //		/echo "select ticket from onlineuser where user='$user' and expiry>UNIX_TIMESTAMP()";
@@ -219,10 +220,11 @@ class PassportModel extends Model {
 	}
 	public function getDataByTicket($ticket){
 		return $this->db->getOne("select data from onlineuser where ticket='$ticket' and expiry>UNIX_TIMESTAMP()");
-	}
-	
+	}	
 	public static function packTicket($ticket,$user){
-		return $ticket.md5($ticket.$user).uniqid();
+		$t = $ticket.md5($ticket.$user).uniqid();
+		$t .= md5($t);
+		return $t;
 	}
 }
 ?>

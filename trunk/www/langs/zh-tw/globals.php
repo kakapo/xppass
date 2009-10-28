@@ -354,4 +354,7 @@ $GLOBALS['gLang']['ticket_advantage'] = '實現跨越，安全性高。';
 $GLOBALS['gLang']['cookie_disadvantage'] = 'cookie存取的數據量有限。無法跨域。';
 $GLOBALS['gLang']['session_disadvantage'] = '無法跨域。稍微復雜，采用數據庫有瓶頸問題，采用memcached需要部署memcached伺服器。';
 $GLOBALS['gLang']['ticket_disadvantage'] = '復雜，需要開發客戶端插件。';
+$GLOBALS['gLang']['menu_onlineuser'] = '在線用戶';
+$GLOBALS['gLang']['online_length'] = '過期時間';
+$GLOBALS['gLang']['module_ban'] = '該功能只在Ticket方案下啟用。';
 ?>
