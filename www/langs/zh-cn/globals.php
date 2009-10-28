@@ -355,6 +355,9 @@ $GLOBALS['gLang']['ticket_advantage'] = '实现跨域，安全性高。';
 $GLOBALS['gLang']['cookie_disadvantage'] = 'cookie存取的数据量有限。无法跨域。';
 $GLOBALS['gLang']['session_disadvantage'] = '无法跨域。稍微复杂，采用数据库有瓶颈问题要解决，采用memcached需要部署memcached服务器。';
 $GLOBALS['gLang']['ticket_disadvantage'] = '复杂，需要开发客户端插件。';
+$GLOBALS['gLang']['menu_onlineuser'] = '在线用户';
+$GLOBALS['gLang']['online_length'] = '过期时间';
+$GLOBALS['gLang']['module_ban'] = '此功能只在Ticket方案下使用。';
 
 
 

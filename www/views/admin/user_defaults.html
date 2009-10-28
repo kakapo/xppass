@@ -89,8 +89,9 @@ function viewUser(user,user_id){
 
 			</div>
 			<div id="srchuserdiv" class="tabcontentcur">
-				<form action="admin.php?action=user&view=defaults" method="GET">
-								
+				<form action="/admin.php" method="GET">
+				<input type="hidden" name="action" value="user">				
+				<input type="hidden" name="view" value="defaults">					
 				<table width="100%">
 					<tr>
 						<td><?=lang('user')?>:</td>

@@ -208,5 +208,40 @@ class user{
 			exit(json_output($msg));
 		}
     }
+    
+    function view_online(){
+    	if(SSO_MODE!='ticket') exit(lang('module_ban'));
+    	$cur_sort = !empty($_GET['sort'])?$_GET['sort']:'ticket';
+		$user = !empty($_GET['user'])?$_GET['user']:'';
+		
+		
+		include_once("UserModel.class.php");
+		$userModel = new UserModel();
+		
+		$con['order'] = $cur_sort;
+		$con['user'] = $user;
+		
+		$items = $userModel->getOnlineUsers($con,10);
+
+		$this->tpl->assign('users',$items);
+		$this->tpl->assign('total',$items['page']->total);
+		$this->tpl->assign('con',$con);
+    }
+    function op_delonlineuser(){
+    	if(SSO_MODE!='ticket') exit(lang('module_ban'));
+    	$t = true;
+    	if(isset($_POST['delete']) && is_array($_POST['delete'])){
+    		
+    		include_once("PassportModel.class.php");
+    		$passport = new PassportModel();
+    		foreach ($_POST['delete'] as $ticket){
+    			$t *= $passport->deleteTicketById($ticket);
+    		}
+    		
+    		if($t) show_message_goback(lang('success'));
+    	}
+    	show_message(lang('selectone'));
+    	goback();
+    }
 }
 ?>

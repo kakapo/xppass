@@ -354,4 +354,8 @@ $GLOBALS['gLang']['ticket_advantage'] = 'Cross-domain,　very Safe.';
 $GLOBALS['gLang']['cookie_disadvantage'] = 'Non-cross-domain,the size of cookie data is limited.';
 $GLOBALS['gLang']['session_disadvantage'] = 'Non-cross-domain, a little complicated.';
 $GLOBALS['gLang']['ticket_disadvantage'] = 'Complicated, need clients';
+
+$GLOBALS['gLang']['menu_onlineuser'] = 'Online Users';
+$GLOBALS['gLang']['online_length'] = 'Expiry Time';
+$GLOBALS['gLang']['module_ban'] = 'This module is only active under ticket solution.';
 ?>
