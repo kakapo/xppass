@@ -30,7 +30,7 @@ yav.addHelp('user', '<?=lang('helpmsg1')?>');
 </head>
 <body onload="yav.init('forgetpwdform', rules);">
 <? include_once("header.html")?>
-<FORM name="forgetpwdform" method="POST" onsubmit="return checkOnSubmit('forgetpwdform', rules);" >
+<FORM name="forgetpwdform" method="POST" action="<?=$www_site_url?>/index.php" onsubmit="return checkOnSubmit('forgetpwdform', rules);" >
 <input type="hidden" name="action" value="passport">
 <input type="hidden" name="op" value="emailpwd">
 <TABLE valign=top>

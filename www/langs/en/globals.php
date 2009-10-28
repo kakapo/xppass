@@ -252,7 +252,7 @@ $GLOBALS['gLang']['upload_size'] = 'Max Upload Sizes';
 $GLOBALS['gLang']['mysql_datasize'] = 'Current Database Sizes';
 $GLOBALS['gLang']['hostname'] = 'Host Name';
 
-$GLOBALS['gLang']['double_nickname'] = 'Whether to allow duplicate nickname';
+$GLOBALS['gLang']['double_nickname'] = 'Whether to prohibit duplicate nickname';
 $GLOBALS['gLang']['yes'] = 'Yes';
 $GLOBALS['gLang']['no'] = 'No';
 $GLOBALS['gLang']['ban_email'] = 'Email address prohibited';

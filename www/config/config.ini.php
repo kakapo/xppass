@@ -1,5 +1,5 @@
 <?php
-	if(file_exists(dirname(__FILE__).'/install.ini.php')) include_once('install.ini.php'); else header("location: /install/index.php");
+	if(file_exists(dirname(__FILE__).'/install.ini.php')) include_once('install.ini.php'); else header("location: install/index.php");
 //////////////////////////////////////////////////////
 //					Application	Settings			//
 //////////////////////////////////////////////////////

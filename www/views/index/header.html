@@ -9,24 +9,24 @@
 <div id="menu"> 
 <ul>
 <li>
-  <a <? if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='index' && ($_GET['view']=='defaults' or $_GET['view']=='')) echo "class='active'";?> href="/index.php/index"><?=lang('menu1')?></a>
+  <a <? if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='index' && ($_GET['view']=='defaults' or $_GET['view']=='')) echo "class='active'";?> href="<?=$www_site_url?>/index.php/index"><?=lang('menu1')?></a>
 </li><li>
-  <a <? if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='passport' && $_GET['view']=='login') echo "class='active'";?> href="/index.php/passport/login"><?=lang('menu2')?></a>
+  <a <? if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='passport' && $_GET['view']=='login') echo "class='active'";?> href="<?=$www_site_url?>/index.php/passport/login"><?=lang('menu2')?></a>
 </li>
 <li>
-  <a <? if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='passport' && $_GET['view']=='reg') echo "class='active'";?> href="/index.php/passport/reg"><?=lang('menu3')?></a> 
+  <a <? if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='passport' && $_GET['view']=='reg') echo "class='active'";?> href="<?=$www_site_url?>/index.php/passport/reg"><?=lang('menu3')?></a> 
 </li>
 <? if(isset($user['user_id'])&&$user['user_id']=='1'){?>
 <li>    
-  <a href="/admin.php"><?=lang('menu4')?></a>
+  <a href="<?=$www_site_url?>/admin.php"><?=lang('menu4')?></a>
 </li>
 <?}?>
 <li>    
-  <a href="/index.php/index/help"><?=lang('menu5')?></a>
+  <a href="<?=$www_site_url?>/index.php/index/help"><?=lang('menu5')?></a>
 </li>
 <? if(isset($user) && $user['user']){?>
 <li>    
-  <a href="/index.php/passport/logout"><?=lang('menu6')?></a>
+  <a href="<?=$www_site_url?>/index.php/passport/logout"><?=lang('menu6')?></a>
 </li>
 <? }?>
 </ul>  

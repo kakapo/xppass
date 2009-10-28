@@ -93,7 +93,7 @@ function changeCode() {
 	var num = 	new Date().getTime();
 	var rand = Math.round(Math.random() * 10000);
 	num = num + rand;
-	document.getElementById("codeimg").src = "/index.php/identifycode/generate/" + num;
+	document.getElementById("codeimg").src = "<?=$www_site_url?>/index.php/identifycode/generate/" + num;
 	return false;
 }
 </SCRIPT>

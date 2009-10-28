@@ -1,7 +1,7 @@
 <div id="header" style="height:10%">
 	<img src="<?=$www_site_url?>/public/images/xppass.gif"><?=lang('user_center')?>
 	<div id="language">
-	<span>Hello! <?=$user['user_nickname']?>. [<a href="/index.php/passport/logout"><?=lang('menu6')?></a>]</span>
+	<span>Hello! <?=$user['user_nickname']?>. [<a href="<?=$www_site_url?>/index.php/passport/logout"><?=lang('menu6')?></a>]</span>
 	<?=lang('selectlanguage')?>:<select name="select_lang" onchange="window.location.href='<?=$www_site_url?>/index.php/index/setlang/'+this.options[this.selectedIndex].value">
 	<option value="zh-cn" <?if($selected_lang=='zh-cn') echo "selected"; ?>><?=lang('zh-cn')?></option>
 	<option value="zh-tw" <?if($selected_lang=='zh-tw') echo "selected"; ?>><?=lang('zh-tw')?></option>

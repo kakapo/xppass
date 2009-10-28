@@ -56,7 +56,7 @@ function checkOnSubmit(formName) {
 	
 				</ul>
 			<div id="adddomaindiv" class="tabcontent" style="display:none;">
-				<form id="adddomainform" name="adddomainform" action="admin.php" method="post" onsubmit="return checkOnSubmit('adddomainform');" >
+				<form id="adddomainform" name="adddomainform" action="<?=$www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('adddomainform');" >
 				<input type="hidden" name="action" value="client">
 				<input type="hidden" name="op" value="addclient">
 				<table width="100%">
@@ -69,8 +69,9 @@ function checkOnSubmit(formName) {
 
 			</div>
 			<div id="srchuserdiv" class="tabcontentcur">
-				<form action="admin.php?action=user&view=defaults" method="GET">
-								
+				<form action="<?=$www_site_url?>/admin.php" method="GET">
+				<input type="hidden" name="action" value="client">
+				<input type="hidden" name="view" value="defaults">				
 				<table width="100%">
 					<tr>
 						<td><?=lang('domain')?>:</td>
@@ -85,7 +86,7 @@ function checkOnSubmit(formName) {
 		
 		<h3><?=lang('domain_list')?></h3>
 		<div class="mainbox">
-				<form action="admin.php" onsubmit="return confirm('<?=lang('domain_delete_comfirm')?>');" method="post">
+				<form action="<?=$www_site_url?>/admin.php" onsubmit="return confirm('<?=lang('domain_delete_comfirm')?>');" method="post">
 				<input type="hidden" name="action" value="client">
 				<input type="hidden" name="op" value="delclient">
 				<table class="datalist fixwidth" onmouseover="addMouseEvent(this);" >

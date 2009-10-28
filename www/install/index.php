@@ -710,7 +710,7 @@ function install_check(){
 	} else {
 		@touch($lockfile);
 		session_destroy();
-		echo '<div class="btnbox marginbot"><input type="button" name="submit" value="'.lang('step_install_check_desc').'" style="height: 25" onclick="window.location.href=\'/index.php/passport/login\'"></div>';
+		echo '<div class="btnbox marginbot"><input type="button" name="submit" value="'.lang('step_install_check_desc').'" style="height: 25" onclick="window.location.href=\'../index.php/passport/login\'"></div>';
 		//echo '<script>window.location.href="/index.php";</script>';
 	}
 		
@@ -727,12 +727,12 @@ function show_header(){
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Xppass <?=lang('install_wizard')?></title>
 
-<LINK href="/install/style.css" type=text/css rel=stylesheet>
+<LINK href="style.css" type=text/css rel=stylesheet>
 
 </head>
 <body>
 <div id="header">
-<img src="/public/images/xppass.png"><span style="font-size:16px"><b><?=lang('install_wizard')?></b></span> 
+<img src="../public/images/xppass.png"><span style="font-size:16px"><b><?=lang('install_wizard')?></b></span> 
 
 </div>
 <?php 
