@@ -148,7 +148,7 @@ class passport {
 						
 						$user_info = $passmod->getUserById($userindex['user_id'],$user);
 
-						if ($user_info ['user_password'] == PassportModel::encryptpwd ($pwd_md5,$user,1)) {
+						if ($user_info ['user_password'] == $pwd_md5) {
 							if ($user_info ['user_state'] == 1) {
 			
 								$updates['user_lastlogin_time'] = time();
