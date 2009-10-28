@@ -33,7 +33,7 @@ function checkOnSubmit(formName) {
 					</h3>
 					
 				<div class="mainbox">
-			<form id="edituserform" name="edituserform" action="admin.php" method="post" onsubmit="return checkOnSubmit('edituserform')">
+			<form id="edituserform" name="edituserform" action="<?=$www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('edituserform')">
 
 			<input type="hidden" name="action" value="user">
 			<input type="hidden" name="op" value="updateuser">

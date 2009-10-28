@@ -36,7 +36,7 @@ yav.addHelp('new1', '<?=lang('insertyouranswer')?>');
 </head>
 <body onload="yav.init('resetpwdform', rules);">
 <? include_once("header.html")?>
-<FORM name="resetpwdform" method="POST" onsubmit="return checkOnSubmit('resetpwdform', rules);" >
+<FORM name="resetpwdform" method="POST" action="<?=$www_site_url?>/index.php" onsubmit="return checkOnSubmit('resetpwdform', rules);" >
 <input type="hidden" name="action" value="passport">
 <input type="hidden" name="op" value="resetpwd">
 <input type="hidden" name="code" value="<?=$code?>">

@@ -164,7 +164,7 @@ class passport {
 								if(!empty($forward)){
 									header("location: ".$forward);
 								}else{
-									header("location: /index.php");
+									header("location: ".$GLOBALS ['gSiteInfo'] ['www_site_url']."/index.php");
 									die;
 								}
 
