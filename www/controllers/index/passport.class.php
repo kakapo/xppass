@@ -191,11 +191,12 @@ class passport {
 		goback();
 	}
 	function view_logout() {
+		//echo COOKIE_DOMAIN;
+		setcookie ( 'Xppass_IC_CARD', '', time () - 3600, '/', COOKIE_DOMAIN );
 		if(SSO_MODE=='cookie'){
 			setcookie ( 'Xppass_INFO', '', time () - 3600, '/', COOKIE_DOMAIN );
 			setcookie ( 'Xppass_TOKEN', '', time () - 3600, '/', COOKIE_DOMAIN );
-			setcookie ( 'Xppass_STATE', '', time () - 3600, '/', COOKIE_DOMAIN );
-			setcookie ( 'Xppass_IC_CARD', '', time () - 3600, '/', COOKIE_DOMAIN );
+			setcookie ( 'Xppass_STATE', '', time () - 3600, '/', COOKIE_DOMAIN );	
 		}
 		if(SSO_MODE=='session'){		
 			unset($_SESSION['_XppassOnlineUser']);		
@@ -243,9 +244,11 @@ class passport {
 			setcookie ( 'XPPASS_INFO', $enc_info, 0, '/', COOKIE_DOMAIN );
 			setcookie ( 'XPPASS_USERNAME' ,$user ['user'], time () + 3600 * 24 * 365 * 10, '/', COOKIE_DOMAIN);
 			setcookie ( 'XPPASS_NICKNAME' ,urlencode($user ['user_nickname']), time () + 3600 * 24 * 365 * 10, '/', COOKIE_DOMAIN);
-			if ($user ['autologin'] == 1) {			
-				$this->set_iccard($user);
-			}
+			
+		}
+		
+		if ($user ['autologin'] == 1) {			
+			$this->set_iccard($user);
 		}
 	}
 	function set_session($user){
