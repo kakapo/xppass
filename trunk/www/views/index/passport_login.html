@@ -41,7 +41,7 @@ function changeCode() {
 	var num = 	new Date().getTime();
 	var rand = Math.round(Math.random() * 10000);
 	num = num + rand;
-	document.getElementById("codeimg").src = "/index.php/identifycode/generate/" + num;
+	document.getElementById("codeimg").src = "<?=$www_site_url?>/index.php/identifycode/generate/" + num;
 	return false;
 }
 var rules=new Array();
@@ -82,8 +82,8 @@ yav.addHelp('password', '');
 <TR><TD>&nbsp;</TD><TD><INPUT  class="checkbox" type="checkbox" name="remember" value="1"/> <?=lang('autologin')?>&nbsp;&nbsp;<span id="errorsDiv_remember"></span></TD></TR>
 
 <TR><TD colspan="2"><INPUT class="button" type=submit value="<?=lang('signon')?>" /> 
-<INPUT class="button" type="button" value="<?=lang('signup')?>" onclick="window.location.href='/index.php/passport/reg'" /> 
-<INPUT class="button" type="button" value="<?=lang('forgetpwd')?>" onclick="window.location.href='/index.php/passport/forget'" /></TD><TD></TD></TR>
+<INPUT class="button" type="button" value="<?=lang('signup')?>" onclick="window.location.href='<?=$www_site_url?>/index.php/passport/reg'" /> 
+<INPUT class="button" type="button" value="<?=lang('forgetpwd')?>" onclick="window.location.href='<?=$www_site_url?>/index.php/passport/forget'" /></TD><TD></TD></TR>
 </TABLE>
 </form>
 <? include_once("footer.html")?>
