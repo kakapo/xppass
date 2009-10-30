@@ -63,8 +63,10 @@ $env_items = array
 $dirfile_items = array
 (
 	'config.ini.php' => array('type' => 'file', 'path' => './config/config.ini.php'),
+	'ignore_repeated_errors.txt' => array('type' => 'file', 'path' => './tmp/logs/ignore_repeated_errors.txt'),
 	'config' => array('type' => 'dir', 'path' => './config'),
-	'tmp' => array('type' => 'dir', 'path' => './tmp')
+	'tmp' => array('type' => 'dir', 'path' => './tmp'),
+	'logs' => array('type' => 'dir', 'path' => './tmp/logs'),
 );
 
 
