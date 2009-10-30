@@ -145,8 +145,8 @@ class KFL
 		$this->mCache->setCacheServer($this->mCacheRule['cacheserver']);
 		
 		$this->mCache->setCacheDir($this->mCacheRule['cachedir']);
-		
-		$cache_file = 'KFL_'.md5($_SERVER['REQUEST_URI']).'.cache';
+		$selected_lang = !empty($_COOKIE['_Selected_Language'])?$_COOKIE['_Selected_Language']:APP_LANG;
+		$cache_file = 'KFL_'.md5($_SERVER['REQUEST_URI'].$selected_lang).'.cache';
 		$this->mCache->setCacheFile($cache_file);
 		if($this->mCache->isCached()){
 		 	$this->mCache->output();
