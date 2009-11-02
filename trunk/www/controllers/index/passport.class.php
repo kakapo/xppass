@@ -76,7 +76,7 @@ class passport {
 						exit(json_output($msg));
 						
 					}else{		
-						$msg = array('s'=> 200,'m'=>"ok",'d'=>$GLOBALS ['gSiteInfo'] ['stats_site_url']."/index.php");				
+						$msg = array('s'=> 200,'m'=>"ok",'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/index.php");				
 						exit(json_output($msg));
 					}
 									
