@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////
 //					Application	Settings			//
 //////////////////////////////////////////////////////
-	define("APP_STATUS", "dev");
+	define("APP_STATUS", "online");
 	define("APP_LANG", "zh-cn");
 	define("KFL_DIR", APP_DIR."/../KFL");
 	define("APP_TEMP_DIR", APP_DIR."/tmp/");
@@ -15,7 +15,7 @@
 		
 	$GLOBALS ["gSiteInfo"] ["web_charset"] =  "UTF-8";
 	$GLOBALS ["gSiteInfo"] ["web_keyword"] =  "Xppass";
-	$GLOBALS ["gSiteInfo"] ["web_description"] =  "KFL是一个轻快的、友好的、MVC模式的PHP开发框架，试图在应用层解决Webserver集群带来的系列问题。 ";
+	$GLOBALS ["gSiteInfo"] ["web_description"] =  "PHP开源 SSO系统--Xppass";
 	$GLOBALS ["gSiteInfo"] ["web_title"] =  "欢迎使用&quot;Xppass&quot;单点登录系统";
 	
 //////////////////////////////////////////////////////
@@ -24,9 +24,9 @@
 		
 	$GLOBALS ["gEmail"] ["smtp_host"] =  "smtp.163.com";
 	$GLOBALS ["gEmail"] ["smtp_port"] =  "25";
-	$GLOBALS ["gEmail"] ["smtp_account"] =  "cuckoolaugh@163.com";
-	$GLOBALS ["gEmail"] ["smtp_pass"] =  "810600";
-	$GLOBALS ["gEmail"] ["smtp_from"] =  "cuckoolaugh@163.com";
+	$GLOBALS ["gEmail"] ["smtp_account"] =  "xppass@163.com";
+	$GLOBALS ["gEmail"] ["smtp_pass"] =  "111111";
+	$GLOBALS ["gEmail"] ["smtp_from"] =  "xppass@163.com";
 	$GLOBALS ["gEmail"] ["pop3_host"] =  "pop3.163.com";
 	
 //////////////////////////////////////////////////////
