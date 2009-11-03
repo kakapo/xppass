@@ -14,6 +14,13 @@ class index{
 		$tpl->assign("msg",$msg);
     }
     function view_help(){
+    	global $tpl;	
+    	$test_file = APP_DIR. "/client/test.php";
+    	$code = '';
+    	if (file_exists($test_file)) {
+    		$code = highlight_file($test_file,true);
+    	}
+    	$tpl->assign('code',$code);
     	
     }
     function view_setlang(){
