@@ -221,10 +221,13 @@ class KFL
 		$exec_time = (getmicrotime ()-$GLOBALS['gAppStartTime']);
 		$memused = memory_get_usage();
 		if($exec_time>$GLOBALS ['gLog'] ['maxExecTime'] || $memused>$GLOBALS ['gLog'] ['maxMemUsed']){
-			$db = Model::dbConnect($GLOBALS ['gDataBase'] ['db_setting.db3']);
-			$datetime = date("Y-m-d H:i:s");
-			$db->execute("replace into eventlog (url,visit,exec_time,memuse) values ('".addslashes(WEB_URL)."','$datetime','$exec_time','$memused')");
+			if(isset($GLOBALS ['gDataBase'] ['db_setting.db3'])){
+				$db = Model::dbConnect($GLOBALS ['gDataBase'] ['db_setting.db3']);
+				$datetime = date("Y-m-d H:i:s");
+				$db->execute("replace into eventlog (url,visit,exec_time,memuse) values ('".addslashes(WEB_URL)."','$datetime','$exec_time','$memused')");
+			}
 		}
+		
 		//exit("<!-- execute time :".$exec_time."-->");
 	}
 
@@ -350,11 +353,13 @@ class Model
 				$dsn = $options['type'].":host=".$options['host'].";port=".$options['port'].";dbname=".$options['dbname'];
 				$user = $options['user'];
 				$passwd = $options['passwd'];
-			}
-			if('sqlite'== $options['type']||'sqlite2'== $options['type']) {
+			}elseif('sqlite'== $options['type']||'sqlite2'== $options['type']) {
 				$dsn = $options['type'].":".$options['path']."/".$options['dbname'];
 				$user = '';
 				$passwd = '';
+			}else{
+				trigger_error("please use mysql or sqlite db engine!".$e->getMessage(),E_USER_ERROR);
+				die();
 			}
 			try{
 				$GLOBALS[$db_resource] = new Database($dsn,$user,$passwd,array(PDO::ATTR_PERSISTENT => false));

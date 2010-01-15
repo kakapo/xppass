@@ -480,7 +480,7 @@ function show_step($step) {
 		<p>$comment</p>
 	
 	<table style="margin:10px 10px;width:500px" border="1"><tr><td>
-	<table style="border:0"><tr><td style="width:{$cur}px;height:10px;" bgcolor="#ccc"></td></tr></table>
+	<table style="border:0"><tr><td style="width:{$cur}px;height:10px;" bgcolor="#cccccc"></td></tr></table>
 	</td></tr></table>
 	</div>
 EOT;
@@ -799,9 +799,10 @@ function show_param_table(){?>
 		</td>
 	</tr>
 </table>
-<table class="tb2">
 <input type="hidden" name="step" value="2">
 <div class="desc"><b><?=lang('tips_dbinfo')?></b></div>
+<table class="tb2">
+
 <tr><th class="tbopt">&nbsp;<?=lang('dbhost')?>:</th>
 <td><input type="text" name="dbinfo[dbhost]" value="localhost" size="35" class="txt"></td>
 <td>&nbsp;<?=lang('dbhost_comment')?></td>
