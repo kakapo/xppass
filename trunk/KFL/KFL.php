@@ -31,7 +31,9 @@ if(PHP_OS=='Linux'){
 }elseif(PHP_OS=='WINNT'){
 	ini_set('include_path', KFL_DIR. "/;". APP_DIR_M."/;". ini_get('include_path')); // FOR WINDOWS
 }
+require_once("Common/utils.php");
 require_once("Common/common.php");
+
 
 /**
 * @abstract KFL: Kindly Fast Light, a light fast MVC framework, kindly to be used.
@@ -76,7 +78,6 @@ class KFL
 	public function KFL()
 	{
 		$this->useCache();
-		include_once("Common/utils.php");
 	}
 
 	/**
@@ -372,7 +373,9 @@ class Model
 				die();
 			}
 			if('mysql'== $options['type']) $GLOBALS[$db_resource] -> query("SET NAMES ".$options['charset']);
-			//echo 1;
+			//if('mysql'== $options['type']) $GLOBALS[$db_resource] -> query("set character_set_database latin1");
+            //if('mysql'== $options['type']) $GLOBALS[$db_resource] -> query("set character_set_server latin1");
+                        
 	    }
 
     	return $GLOBALS[$db_resource];

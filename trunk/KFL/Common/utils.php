@@ -7,16 +7,45 @@ function getmicrotime() {
 }
 function show_message($msg=''){
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />';
-	echo "<div style='width:300px; padding:3px; font-size:12px;color:#000; background:#FFF repeat-x left top'>".$msg."</div>";
+	echo "<script>
+	window.alert('".$msg."');
+	</script>";
+//	echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />';
+//	//echo "<div style='width:300px; padding:3px; font-size:12px;color:#000; background:#FFF repeat-x left top'>".$msg."</div>";
+//	echo '<link rel="stylesheet" href="/public/css/reset.css" type="text/css"  />';
+//	echo '<link rel="stylesheet" href="/public/css/style.css" type="text/css" media="screen" />';
+//	echo '<style type="text/css">';
+//	echo '	body{text-align:center;}';
+//	echo '	#errorInfo{width:400px;margin:0 auto;text-align:left;margin-top:100px;border:1px solid #336699;background:white;}';
+//	echo '	.title{height:40px;background:#6699cc url(/public/images/logo.png) no-repeat 10px 3px;border-bottom:1px solid #336699; }';
+//	echo '	.body{padding-bottom:20px;}';
+//	echo '	.body h1{font-size:14px;font-weight:bold;line-height:30px;text-indent:10px;margin-top:10px;}';
+//	echo '	.body p{padding:10px;}';
+//	echo '</style>';
+//	echo '</head>';
+//	echo '<body>
+//		<div id="errorInfo">
+//			<div class="title">
+//			</div>
+//			<div class="body">
+//				<h1>提示信息：</h1>
+//				<p>';
+//	echo			$msg;
+//	echo '			</p>
+//				<p class="action"><a href="javascript:void(0);" onclick="history.go(-1);">返回上一页</a>  <a href="/">返回首页</a></p>
+//			</div>
+//		</div>
+//	</body>';
+	
 
 }
 
 function show_message_goback($msg=''){
 	show_message($msg);
-	goback();
+	goback(0);
 }
 
-function goback($delay='1000') {
+function goback($delay='6000') {
 	echo "<SCRIPT>";
 	echo 'setTimeout("history.go(-1)",'.$delay.');';
 	echo "</SCRIPT>";
@@ -90,8 +119,8 @@ function authenticate(){
 		}
 	}
 	if(SSO_MODE=='session' || SSO_MODE=='ticket'){
-		if(isset($_SESSION['_XppassOnlineUser'])) 
-			return $_SESSION['_XppassOnlineUser'];
+		if(isset($_SESSION['_OnlineUser'])) 
+			return $_SESSION['_OnlineUser'];
 		else 
 			return false;
 	}
