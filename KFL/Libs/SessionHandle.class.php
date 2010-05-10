@@ -2,8 +2,11 @@
 class SessionHandle
 {
 	function __construct($setting){
-		if($setting['sessionHandle']=='file'){			
-			ini_set("session.cookie_domain", isset($_SERVER['HTTP_HOST'])?strstr($_SERVER['HTTP_HOST'],"."):'');
+		if($setting['sessionHandle']=='file'){	
+			$host = isset($_SERVER['HTTP_HOST'])?$_SERVER['HTTP_HOST']:"";
+			if($host && !preg_match("/\d+\.\d+.\d+.\d+/",$host)){		
+				ini_set("session.cookie_domain", strstr($host,"."));
+			}
 			session_start();
 		}elseif($setting['sessionHandle']=='database'){
 			SessionHandleMySQL::Init($setting);
@@ -18,13 +21,13 @@ class SessionHandle
 			  $_SERVER['REQUEST_URI'] .= '?' . $_SERVER['QUERY_STRING'];
 			}
 		}
-//		if(!isset($_SESSION['UserTrack'])) $_SESSION['UserTrack'] = array();
-//		if($_SERVER['REQUEST_METHOD']=='GET'){
-//			array_unshift($_SESSION['UserTrack'],$_SERVER['REQUEST_URI']);
-//			if(count($_SESSION['UserTrack'])>5){
-//				array_pop($_SESSION['UserTrack']);
-//			}
-//		}
+		if(!isset($_SESSION['UserTrack'])) $_SESSION['UserTrack'] = array();
+		if($_SERVER['REQUEST_METHOD']=='GET'){
+			array_unshift($_SESSION['UserTrack'],$_SERVER['REQUEST_URI']);
+			if(count($_SESSION['UserTrack'])>5){
+				array_pop($_SESSION['UserTrack']);
+			}
+		}
 	}
 }
 
@@ -36,8 +39,10 @@ class SessionHandleMySQL extends Model
     {
     	self::$set = $setting;
     	self::$db_static = parent::dbConnect (self::$set['database']);
-
-        $domain = strstr($_SERVER['HTTP_HOST'],".");
+		$host = isset($_SERVER['HTTP_HOST'])?$_SERVER['HTTP_HOST']:"";
+		if($host && !preg_match("/\d+\.\d+.\d+.\d+/",$host)){		
+			ini_set("session.cookie_domain", strstr($host,"."));
+		}
         //不使用 GET/POST 变量方式
         ini_set('session.use_trans_sid',    0);
         //设置垃圾回收最大生存时间
@@ -47,7 +52,6 @@ class SessionHandleMySQL extends Model
         ini_set('session.use_cookies',      1);
         ini_set('session.cookie_path',      '/');
         //多主机共享保存 SESSION ID 的 COOKIE
-        ini_set('session.cookie_domain',    $domain);
 
         //将 session.save_handler 设置为 user，而不是默认的 files
         session_module_name('user');

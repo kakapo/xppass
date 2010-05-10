@@ -1,6 +1,6 @@
 <?php
 //****************KFL全局变量|静态变量设置*************************/
-if($_SERVER["SERVER_PORT"] == 443)
+if(isset($_SERVER["SERVER_PORT"]) && $_SERVER["SERVER_PORT"] == 443)
 {
 	$preht = "https://";
 }
@@ -11,15 +11,21 @@ else
 
 $dir_name = dirname($_SERVER["SCRIPT_NAME"]);
 if($dir_name=="\\" || $dir_name=='/') $dir_name ='';
-define("BASE_URL", $preht . $_SERVER["HTTP_HOST"] . $dir_name);
-list(,$plast,$last) = explode(".",$_SERVER["HTTP_HOST"]);
-$cookie_domain = '.'.$plast.'.'.$last;
-define('COOKIE_DOMAIN',$cookie_domain);
+$http_host = isset($_SERVER["HTTP_HOST"])?$_SERVER["HTTP_HOST"]:'';
+
+define("BASE_URL", $preht . $http_host . $dir_name);
+
+$plast = $last = $cookie_domain='';
+if($http_host){
+	list(,$plast,$last) = explode(".",$http_host);
+	$cookie_domain = '.'.$plast.'.'.$last;
+	define('COOKIE_DOMAIN',$cookie_domain);
+}
 unset($plast);
 unset($last);
 unset($cookie_domain);
 
-define("HOST_URL", $preht . $_SERVER["HTTP_HOST"]);
+define("HOST_URL", $preht . $http_host);
 $GLOBALS ["gSiteInfo"] ["www_site_url"] = BASE_URL;
 
 //支持path_info
@@ -34,6 +40,7 @@ elseif (empty($_SERVER["PATH_INFO"]))
 }
 else
 {
+	
 	//	add a slash to the front if it's not already there
 	if(substr($_SERVER["PATH_INFO"],0,1) == "/")
 		$GLOBALS['KFL_PATH_INFO'] = $_SERVER["PATH_INFO"];
@@ -41,17 +48,22 @@ else
 		$GLOBALS['KFL_PATH_INFO'] = "/" . $_SERVER["PATH_INFO"];
 }
 $GLOBALS['KFL_PATHINFO_ARRAY'] = explode("/", $GLOBALS['KFL_PATH_INFO']);
+
 if(count($GLOBALS['KFL_PATHINFO_ARRAY'])>1){
 	$_GET['action'] = $GLOBALS['KFL_PATHINFO_ARRAY'][1];
 	$_GET['view'] = $GLOBALS['KFL_PATHINFO_ARRAY'][2];
 	foreach ($GLOBALS['KFL_PATHINFO_ARRAY'] as $key=>$value)
 	{
 		if($key>1){
-			$_GET[$value]=$GLOBALS['KFL_PATHINFO_ARRAY'][$key+1];
+			$_GET[$value]=isset($GLOBALS['KFL_PATHINFO_ARRAY'][$key+1])?$GLOBALS['KFL_PATHINFO_ARRAY'][$key+1]:'';
+
 		}
 	}
+	define("WEB_URL", $preht . $http_host . $_SERVER["SCRIPT_NAME"] . $GLOBALS['KFL_PATH_INFO']);
+}else{
+	define("WEB_URL", $preht . $http_host . $_SERVER['REQUEST_URI']);
 }
-define("WEB_URL", $preht . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"] . $GLOBALS['KFL_PATH_INFO']);
+
 
 //过滤post和get变量
 foreach ($_POST as $k=>$v){
@@ -70,9 +82,10 @@ foreach ($_GET as $k=>$v){
 
 
 // assign dispatcher
-if($_SERVER['REQUEST_METHOD']=='GET'){
+$request_method = isset($_SERVER['REQUEST_METHOD'])?$_SERVER['REQUEST_METHOD']:"";
+if($request_method=='GET'){
 	if(isset($_GET['action'])) $GLOBALS['gDispatcher'] = $_GET['action'];
-}elseif ($_SERVER['REQUEST_METHOD']=='POST'){
+}elseif ($request_method=='POST'){
 	if(isset($_POST['action'])) $GLOBALS['gDispatcher'] = $_POST['action'];
 }
 
@@ -464,7 +477,7 @@ function is_error_in_log($crcno)
 	return $flag ;
 }
 
-function send_email($from="no-reply@guodong.com",  $to, $subject, $message)
+function send_email($from,  $to, $subject, $message)
 {
 	/*  your configuration here  */
 	$subject= mb_convert_encoding($subject,"gb2312","utf-8");
@@ -475,6 +488,7 @@ function send_email($from="no-reply@guodong.com",  $to, $subject, $message)
 	$timeout = "30"; //typical timeout. try 45 for slow servers
 	$username = $GLOBALS['gEmail']['smtp_account'];//"no-reply@guodong.com"; //the login for your smtp
 	$password = $GLOBALS['gEmail']['smtp_pass'];//"tsong-0810"; //the pass for your smtp
+	$from = empty($from)?$GLOBALS ["gEmail"] ["smtp_from"]:$from;
 	$localhost = "127.0.0.1"; //this seems to work always
 	$newLine = "\r\n"; //var just for nelines in MS
 	$secure = 0; //change to 1 if you need a secure connect
@@ -576,6 +590,7 @@ function send_email($from="no-reply@guodong.com",  $to, $subject, $message)
 	$logArray['quitresponse'] = "$smtpResponse";
 	$logArray['quitcode'] = substr($smtpResponse,0,3);
 	@fclose($smtpConnect);
+	error_log(date("Y-m-d H:i:s")." To $to; ".json_encode($logArray)."\n", 3, LOG_FILE_DIR."/email_log_errors.txt");
 	//print_r($logArray);
 	//a return value of 221 in $retVal["quitcode"] is a success
 	return 1;
