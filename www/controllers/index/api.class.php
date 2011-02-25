@@ -38,11 +38,7 @@ class api{
 			return false;
 		}
 	}
-	private function _packTicket($ticket,$user){
-		$t = $ticket.md5($ticket.$user).uniqid();
-		$t .= md5($t);
-		return $t;
-	}
+
 	private function _verifyTicket($ticket){
 		$body = substr($ticket,0,-32);
 		$checksum = substr($ticket,-32,32);
@@ -51,9 +47,7 @@ class api{
 		else  
 			return false;
 	}
-	private function _unpackTicket($ticket){
-		return substr($ticket,0,32);
-	}
+
 	private function _encryptToken($data){
 		return encrypt($data,$this->_private_key);
 	}
@@ -64,15 +58,15 @@ class api{
 		$domain = $_GET['domain'];
 		$redirect = isset($_GET['redirect'])?$_GET['redirect']:0;
 		$return = isset($_GET['return'])?urldecode($_GET['return']):'';
-		
+		require_once 'PassportModel.class.php';
 		if($redirect){
 			if($this->_verifySign($domain,md5($user.$domain),$sign)){
 				$userinfo = authenticate();				
 				if($userinfo){
 					if(strpos($return,'?')!==false) {
-						$return .= '&ticket='.$this->_packTicket($userinfo['ticket'],$user);
+						$return .= '&ticket='.PassportModel::packTicket($userinfo['ticket'],$user);
 					}else{
-						$return .= '?ticket='.$this->_packTicket($userinfo['ticket'],$user);
+						$return .= '?ticket='.PassportModel::packTicket($userinfo['ticket'],$user);
 					}
 					//echo $return;die;
 					header("Location:".$return);
@@ -87,14 +81,14 @@ class api{
 		}else{
 						
 			if($this->_verifySign($domain,md5($user.$domain),$sign)){	
-				require_once 'PassportModel.class.php';
+				
 				$pass = new PassportModel();
 				$ticket = $pass->getTicketByUser($user);
 				
 				if($ticket){
 					$msg['s'] = 200; 
 				    $msg['m'] = "success!"; 
-				    $msg['d'] = $this->_packTicket($ticket,$user); 
+				    $msg['d'] = PassportModel::packTicket($ticket,$user); 
 				}else{
 					 $msg['s'] = 300; 
 					 $msg['m'] = "Not Login!"; 
@@ -120,8 +114,9 @@ class api{
 		if($this->_verifySign($domain,md5($ticket.$domain),$sign)){
 			
 			if($this->_verifyTicket($_GET['ticket'])){
-				$ticket = $this->_unpackTicket($_GET['ticket']);	
 				require_once 'PassportModel.class.php';
+				$ticket = PassportModel::unpackTicket($_GET['ticket']);	
+				
 				$pass = new PassportModel();
 				$data = $pass->getDataByTicket($ticket);
 			}

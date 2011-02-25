@@ -9,7 +9,7 @@
 <div id="menu"> 
 <ul>
 <li>
-  <a <? if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='index' && ($_GET['view']=='defaults' or $_GET['view']=='')) echo "class='active'";?> href="<?=$www_site_url?>/index.php/index"><?=lang('menu1')?></a>
+  <a <? if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='index' && ($_GET['view']=='defaults' or $_GET['view']=='')) echo "class='active'";?> href="<?=$www_site_url?>/index.php/index" ><?=lang('menu1')?></a>
 </li><li>
   <a <? if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='passport' && $_GET['view']=='login') echo "class='active'";?> href="<?=$www_site_url?>/index.php/passport/login"><?=lang('menu2')?></a>
 </li>
