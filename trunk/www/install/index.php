@@ -50,7 +50,7 @@ define('ERROR_UNKNOW_TYPE', 30);
 define('ENV_CHECK_ERROR', 31);
 define('UNDEFINE_FUNC', 32);
 define('LOCK_FILE_NOT_TOUCH', 34);
-$func_items = array( 'fopen','fsockopen', 'file_put_contents', 'file_get_contents', 'pdo','pdo_mysql','json','mbstring','memcache','mcrypt');
+$func_items = array( 'fopen','fsockopen', 'file_put_contents', 'file_get_contents', 'pdo','pdo_mysql','json','mbstring','mcrypt');
 
 $env_items = array
 (
@@ -282,8 +282,8 @@ function show_env_result(&$env_items, &$dirfile_items, &$func_items) {
 		echo "<table class=\"tb\" style=\"margin:20px 50px;\">\n";
 		echo "<tr>\n";
 		echo "\t<th>".lang('project')."</th>\n";
-		echo "\t<th class=\"padleft\">".lang('ucenter_required')."</th>\n";
-		echo "\t<th class=\"padleft\">".lang('ucenter_best')."</th>\n";
+		echo "\t<th class=\"padleft\">".lang('xppass_required')."</th>\n";
+		echo "\t<th class=\"padleft\">".lang('xppass_best')."</th>\n";
 		echo "\t<th class=\"padleft\">".lang('curr_server')."</th>\n";
 		echo "</tr>\n";
 		echo $env_str;

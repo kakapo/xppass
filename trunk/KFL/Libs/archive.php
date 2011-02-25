@@ -881,7 +881,7 @@ class unzip
 		}
 	}
 	
-	$this->total_files ++;
+	$this->total_files++;
 	//echo "<input name='dfile[]' type='checkbox' value='$to$header[filename]' checked> <a href='$to$header[filename]' target='_blank'>文件: $to$header[filename]</a><br>";
 
 	return true;

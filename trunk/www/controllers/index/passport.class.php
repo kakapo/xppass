@@ -71,7 +71,7 @@ class passport {
 					if(!empty($forward)){
 						$forward .= (strpos($forward,'?')!==false)?"&":"?";
 						$forward = preg_replace("/(.*?)(&+)/i","\\1&",$forward);
-						$forward .= "ticket=".PassportModel::packTicket(session_id(),$user);
+						$forward .= "ticket=".PassportModel::packTicket(PassportModel::generateTicket(),$user);
 						$msg = array('s'=> 200,'m'=>"ok",'d'=>$forward);				
 						exit(json_output($msg));
 						
@@ -205,7 +205,7 @@ class passport {
 			unset($_SESSION['_XppassOnlineUser']);
 			include_once("PassportModel.class.php");
 			$passmod = new PassportModel();
-			$passmod->deleteTicketById(session_id());
+			$passmod->deleteTicketById(PassportModel::generateTicket());
 		}
 		redirect($GLOBALS ['gSiteInfo'] ['www_site_url']."/index.php/passport/login");
 	}
@@ -213,12 +213,12 @@ class passport {
 	function save_online_user($user) {
 		
 		if(SSO_MODE=='ticket'){
-			$user['ticket'] = session_id();
+			$user['ticket'] = PassportModel::generateTicket();
 			$this->set_ticket($user);		
 			$this->set_session($user);
 			
 		}elseif(SSO_MODE=='session'){
-			$user['ticket'] = session_id();
+			$user['ticket'] = PassportModel::generateTicket();
 			$this->set_session($user);
 			
 		}else{

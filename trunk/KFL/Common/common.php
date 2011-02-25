@@ -318,9 +318,20 @@ function error_live_handler($errno, $errmsg, $filename, $linenum, $vars)
 		 	error_log($crcno."\n", 3, LOG_FILE_DIR."/ignore_repeated_errors.txt");
 		 	
 		 	// log error backtrace in database
-		 	if(isset($GLOBALS ['gDataBase'] ['db_setting.db3'])){
+		 	if(isset($GLOBALS ['gDataBase'] ['db_setting.db3']) && !empty($GLOBALS ['gDataBase'] ['db_setting.db3'])){
 		 		if(!class_exists("Database")) require_once("Libs/Database.class.php");
 			 	$db = Model::dbConnect($GLOBALS ['gDataBase'] ['db_setting.db3']);
+			 	$is_table_exists = $db->getOne("SELECT name FROM sqlite_master WHERE type='table' AND name='errorlog'");
+			 	if(!$is_table_exists){
+			 		$db->execute("CREATE TABLE errorlog (
+					  id             integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+					  error_no       varchar(32) NOT NULL,
+					  linenum        integer DEFAULT 6,
+					  filename       varchar DEFAULT 255,
+					  errmsg         varchar DEFAULT 255,
+					  backtrace_msg  text
+					)");
+			 	}
 			 	if(!$db->getOne("select error_no from errorlog where error_no='$errNum'")){
 			 		$db->execute("insert into errorlog (error_no,linenum,filename,errmsg,backtrace_msg) values ('$errNum','$linenum','$filename','".htmlspecialchars($errmsg,ENT_QUOTES)."','".htmlspecialchars($backtrace_msg,ENT_QUOTES)."')");
 			 	}

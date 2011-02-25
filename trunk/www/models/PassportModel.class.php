@@ -226,5 +226,11 @@ class PassportModel extends Model {
 		$t .= md5($t);
 		return $t;
 	}
+	public static function unpackTicket($ticket){
+		return substr($ticket,0,32);
+	}
+	public static function generateTicket(){
+		return md5(session_id());
+	}
 }
 ?>

@@ -142,9 +142,9 @@ class KFL
     	$this->mCache = new Cache($this->mCacheRule['cachetime'],$this->mCacheRule['compressed']);
     	
 	 	$this->mCache->setCacheStore($this->mCacheRule['cachestore']);
-	 	
-		$this->mCache->setCacheServer($this->mCacheRule['cacheserver']);
-		
+	 	if(isset($this->mCacheRule['cacheserver']) && !empty($this->mCacheRule['cacheserver'])){
+			$this->mCache->setCacheServer($this->mCacheRule['cacheserver']);
+	 	}
 		$this->mCache->setCacheDir($this->mCacheRule['cachedir']);
 		$selected_lang = !empty($_COOKIE['_Selected_Language'])?$_COOKIE['_Selected_Language']:APP_LANG;
 		$cache_file = 'KFL_'.md5($_SERVER['REQUEST_URI'].$selected_lang).'.cache';
@@ -222,10 +222,16 @@ class KFL
 		$exec_time = (getmicrotime ()-$GLOBALS['gAppStartTime']);
 		$memused = memory_get_usage();
 		if($exec_time>$GLOBALS ['gLog'] ['maxExecTime'] || $memused>$GLOBALS ['gLog'] ['maxMemUsed']){
-			if(isset($GLOBALS ['gDataBase'] ['db_setting.db3'])){
+			if(isset($GLOBALS ['gDataBase'] ['db_setting.db3']) && !empty($GLOBALS ['gDataBase'] ['db_setting.db3'])){
 				$db = Model::dbConnect($GLOBALS ['gDataBase'] ['db_setting.db3']);
 				$datetime = date("Y-m-d H:i:s");
-				$db->execute("replace into eventlog (url,visit,exec_time,memuse) values ('".addslashes(WEB_URL)."','$datetime','$exec_time','$memused')");
+				if(isset($db) && is_object($db)){
+					$is_table_exists = $db->getOne("SELECT name FROM sqlite_master WHERE type='table' AND name='eventlog'");
+			 		if(!$is_table_exists){
+						$db->execute("CREATE TABLE eventlog (eid INTEGER NOT NULL PRIMARY KEY,visit DATETIME,exec_time FLOAT,memuse DOUBLE,url VARCHAR(255) )");
+			 		}
+					$db->execute("replace into eventlog (url,visit,exec_time,memuse) values ('".addslashes(WEB_URL)."','$datetime','$exec_time','$memused')");
+				}
 			}
 		}
 		
@@ -365,7 +371,7 @@ class Model
 			try{
 				$GLOBALS[$db_resource] = new Database($dsn,$user,$passwd,array(PDO::ATTR_PERSISTENT => false));
 				$cache_setting = isset($GLOBALS ['gPacket'])?$GLOBALS ['gPacket']:'';
-				if($cache_setting) {
+				if($cache_setting && isset($GLOBALS[$db_resource]) && is_object($GLOBALS[$db_resource])) {
 					$GLOBALS[$db_resource]->setCache($cache_setting);
 				}
 			}catch (PDOException $e){
