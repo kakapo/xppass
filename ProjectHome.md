@@ -1,0 +1,14 @@
+<p>Features:</p>
+<p>1. Provide three solutions: Cookie、Session and Ticket, choose one according to requirement.</p>
+<p>2. Use hash multi-table designment in supporting hundreds of millions of user data storage.</p>
+<p>3. Provides two ways to register: user name and email.</p>
+<p>4. To achieve security sign-on technology, using MD5 encrypted password in transmission and hmac authentication.</p>
+<p>5. Automated installation program.</p>
+<p>6. Supports multi-language versions.</p>
+![http://xppass.googlecode.com/files/ticket_chart.gif](http://xppass.googlecode.com/files/ticket_chart.gif)
+
+|	|**Cookie Solution**|**Session solution**|**Ticket solution**|
+|:|:------------------|:-------------------|:------------------|
+|**Mentality** |<ul><li>Online user data stored in the browser cookie.</li><li>User data transmission and storage using encryption</li><li>Sub-domain sharing decrypt arithmetic and password.</li></ul>|<ul><li>Online users data stored in the server side.</li><li>Sub-domain application sharing the session id of root domain.</li><li>User data without encryption.</li><li>Webserver cluster use the database or memcached to share user data.</li></ul>|<ul><li>When the user visit Application Service (AS), AS determine whether the user has logged locally. If no, AS call SSO client api to access sso server, taking a digital signature, user_name, and domain information.</li><li>When SSO server receives the information from the client, it certified the legality of the signature verification first, and then determine whether user_name exists in session. If yes, it return session id (as ticket), or redirecting to login page.</li><li>After the user logged in successfully at authentication center, SSO server saved user data in session. Then jump back to application service, URL belt with ticket (session id).</li><li>The SSO client, take ticket, domain, and signature (the signature encrypted by the ticket) to visited the SSO Server. SSO Server authorizes first, and then returns the encrypted data named as user token.</li><li>User data is encrypted in transmission. SSO client uses the private key to decrypt the token data.</li><li>If the user has been logged in step 3, and then skip this step.</li><ul> <br>
+<tr><td><b>Advantage</b></td><td><b>Simple, Safe, to avoid webserver cluster problem, such as sharing user data.</b></td><td><b>cluster problem, such as sharing user data  	Very Safe, be able to resolve webserver cluster problem.</b></td><td><b>webserver cluster problem.  	Cross-domain,　very Safe.</b></td></tr>
+<tr><td><b>Disadvantage</b></td><td><b>Non-cross-domain,the size of cookie data is limited.</b></td><td><b>Non-cross-domain, a little complicated.</b></td><td><b>Complicated, need clients</b></td></tr>
